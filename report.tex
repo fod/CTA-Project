@@ -1,0 +1,100 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\parindent=0pt % disables indentation
+\parskip=12pt  % adds vertical space between paragraphs
+
+\title{CTA Project}
+\author{Fiachra O'Donoghue}
+
+\begin{document}
+    
+\section{Introduction}
+
+Formal definition of sorting and the property of being sorted\dots
+Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.
+
+
+If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
+
+To be sorted: Each item in the collection is less than or equal to its successor.
+
+Equal-valued elements must be contiguous; i.e. if A\textsubscript{i} = A\textsubscript{j} then there must be no k such that i < j < k and A\textsubscript{i} $\ne$ A\textsubscript{k}
+
+The contents of a collection, A, must be the same before and after searching; i.e. the sorted collection A must be a permuattion fo the pre-sorted collection A.
+
+<, =, $\ne$, and > can be interpreted in terms of mathematical equality or any othey arbtrary but well defined system of ordering. It should be possible to define a \emph{comparator function} which can take two elements, say \emph{a} and \emph{b}, and return a value based on whether \emph{a} < \emph{b}, \emph{a} > \emph{b}, or \emph{a} = \emph{b}.
+
+Sorting algorithms, in general, operate independently of the precise definitions of \emph{less than}, \emph{greater than}, and \emph{equal to} differing instead in how they go about making comparisons between pairs of elements with the goal of a completely sorted collection.
+
+The particular problem's defintion of equivalence is encoded in the comparator function and the precise nature of the comparator function is irrelevant to the sorting algorithm which merely requires a black box through which it can pass two values and which returns a codification of the equivalence of those values.
+
+More concretely; the following pseudocode demonstrates a comparator function which for comparing numerical values.
+
+\begin{algorithm}
+\caption{A function for comparing numerical values}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{Comparator}{a, b}
+\If {$a < b$} \Return -1
+\EndIf
+\If {$a = b$} \Return 0
+\EndIf
+\If {$a > b$} \Return 1
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Analysing algorithm complexity}
+
+Some algorithms can have good time complexity but are not practical for certain kinds of input data, e.g. insertion sort performs poorly on lage datasets but extemely well on smaller ones.
+
+\subsection{Sorting algorithm properties}
+
+\subsubsection{Stability}
+
+Stability is the property whereby two equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability is unlikely to be an important consideration when sorting a collection of simple objects such as numbers but, when there is satellite data, it can become important \cite[p. 170]{cormen01introduction}.
+
+\subsubsection{Time efficiency}
+
+\subsubsection{Memory efficiency}
+In-place sorting: Only a fixed amount of memory over the size of n (size of input) required, regardless of size of n. Non-in-place algorithms generally need an amount of memory that increases monotonically with n.
+
+\subsubsection{Suitability for a particular input}
+
+e.g. Size of input, degree of sorting, domain of input (e.g. integers from 1 to 1000), memory requirements, storage location (e.g. external?)
+
+\subsection{Comparison Sorts}
+
+Only uses comaprison operators to order elements. A comparison based sorting algorithm orders a collection by comparing pairs of elements until the collection is sorted.
+
+No comparison sorting algorithm can perform better than \emph{n log n} in the average or worst cases. Some non-comparison based sorting algorithms can, under certain circumstances, with better worst-case times than \emph{n log n}.
+
+\section{Sorting Algorithms}
+
+\subsection{Insertion sort}
+
+\subsection{Heapsort}
+
+\subsection{Quicksort}
+
+\subsection{Bucket sort}
+
+\subsection{Timsort}
+
+\section{Implementation \& Benchmarking}
+
+
+
+\bibliography{report}
+\bibliographystyle{apalike}
+
+\end{document}
