@@ -57,6 +57,8 @@ More concretely; the following pseudocode demonstrates a comparator function whi
 
 Some algorithms can have good time complexity but are not practical for certain kinds of input data, e.g. insertion sort performs poorly on lage datasets but extemely well on smaller ones.
 
+Where an implementation requires the use of nested loops, in most cases this will indicate O(n\textsuperscript{2}) complexity.
+
 \subsection{Sorting algorithm properties}
 
 \subsubsection{Stability}
@@ -82,11 +84,22 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
 
 \subsection{Insertion sort}
 
+Good for small lists and ones which are almost sorted because the inner loop only needs to iterate until it finds the insertion point. Running time in the case of an already sorted list is $\Omega$(n) because the inner loop will not have to run at all.
+
+Often used in hybrid sorting algotrithms for its efficiency with small inputs.
+
 \subsection{Heapsort}
 
+A heap structure is a nearly complete binary tree (\cite[p. 128]{cormen01introduction}). The indices of the parent, left child, and right chaild can be calculated as parent = i/2, left child = 2i, and right child = 2i+1, where i is the index of the element. These can quickly be calculated by shifting bits (\cite[p. 128]{cormen01introduction})
+
+Uses max heap -- at most a node is the value of its parent
 \subsection{Quicksort}
 
-\subsection{Bucket sort}
+Can perform badly if pivot consistently chosen which puts all or almost all elements in one or other of the sub arrays. For instance if 1st or last ais chosen and array is already nearly sorted. Median mgiht be better because best case is if the two sublists are roughly equal at each iteration.
+
+Usual options: first, last, random, median
+
+\subsection{Radix sort}
 
 \subsection{Timsort}
 
@@ -95,6 +108,6 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
 
 
 \bibliography{report}
-\bibliographystyle{apalike}
+\bibliographystyle{ieeetr}
 
 \end{document}
