@@ -2,6 +2,9 @@
 # CTA-Project sorting algorithms
 # Author: Fiachra O' Donoghue
 
+import time
+import numpy as np
+
 def insertion_sort(arr):
     """Insertion sort. 
 
@@ -31,23 +34,9 @@ def insertion_sort(arr):
     # return a reference to the sorted array
     return arr
 
-def quicksort(arr, start_idx, pivot_idx):
-    """Quicksort. Based on pseudocode found in 
-    Cormen et al., 2001, p. 146; Introduction to Algorithms, 2nd Ed.
 
-    Args:
-        list of comparables: A list of elements which are 
-                             comparable using <, >, =; i.e.
-                             implement __lt__, __gt__, and __eq__
-
-        int: The index of the start of the first partition
-
-        int: The index of the pivot value
-    """
-
-    def partition(arr, start_idx, pivot_idx):
-    # A nested function which performs the list partitioning for quicksort
-        
+def partition(arr, start_idx, pivot_idx):
+    # Performs the list partitioning for quicksort and introsort
 
         # The pivot value
         pivot = arr[pivot_idx]
@@ -77,7 +66,22 @@ def quicksort(arr, start_idx, pivot_idx):
         # The value to the right of the end index will be the pivot for that sublist
         return end_idx + 1
 
-    # Tha base condition - if start_idx = pivot_idx the sublist must
+
+def quicksort(arr, start_idx, pivot_idx):
+    """Quicksort. Based on pseudocode found in 
+    Cormen et al., 2001, p. 146; Introduction to Algorithms, 2nd Ed.
+
+    Args:
+        list of comparables: A list of elements which are 
+                             comparable using <, >, =; i.e.
+                             implement __lt__, __gt__, and __eq__
+
+        int: The index of the start of the first partition
+
+        int: The index of the pivot value
+    """
+
+    # The base condition - if start_idx = pivot_idx the sublist must
     # only be one element long
     if start_idx <= pivot_idx:
 
@@ -140,19 +144,32 @@ def heapsort(arr):
 
         arr[0], arr[i] = arr[i], arr[0]
         hs -= 1
-        print(arr, hs)
         max_heapify(arr, hs, 0)
 
     return(arr)
 
 
 def counting_sort(arr, k):
+    """Counting sort. Implementation based on pseudocode found in 
+       Cormen et al., 2001, p. 168; Introduction to Algorithms, 2nd Ed.
+    Args:
+        arr (list of positive integers: The list to be sorted
+        k (int): The maximum value in arr. Intended to be invoked as
+                 counting_sort(arr, max(arr))
 
+    Returns:
+        list of integers: The sorted list
+    """
+
+    # output list and list for counting values; both filled with zeroes
     output = [0] * len(arr)
     counter = [0] * (k + 1)
 
+    # Increment the values in the counter list at indices 
+    # matching the numbers encountered in the input list
     for i in range(len(arr)):
         counter[arr[i]] = counter[arr[i]] + 1
+
 
     for i in range(1, k + 1):
         counter[i] = counter[i] + counter[i-1]
@@ -165,15 +182,51 @@ def counting_sort(arr, k):
     return output
 
 
+# https://www.sanfoundry.com/python-program-implement-introsort/
+def introsort(arr):
+    maxdepth = (len(arr).bit_length() - 1)*2
+    introsort_helper(arr, 0, len(arr), maxdepth)
+ 
+def introsort_helper(arr, start, end, maxdepth):
+    if end - start <= 1:
+        return
+
+    # https://aquarchitect.github.io/swift-algorithm-club/Introsort/
+    elif end - start <= 20:
+        insertion_sort(arr[start:end])
+    elif maxdepth == 0:
+        heapsort(arr[start:end])
+    else:
+        p = partition(arr, start, end - 1)
+        introsort_helper(arr, start, p, maxdepth - 1)
+        introsort_helper(arr, p, end, maxdepth - 1)
+
+
+
+
+
+
 def main():
     a=[2,8,7,1,3,5,6,4]
     b=[8,1,9,2,10,16]
     c=[12,11,13,5,6,7]
     d=[2,5,3,0,2,3,0,3]
     #print(heapsort(a))
-    counting_sort(d, max(d))
+    #counting_sort(d, max(d))
     #print(b)
     #print(quicksort(a, 0, len(a)-1))
+    np.random.seed(1)
+    e = np.random.choice(500000, 500000, replace=False)
+    print(e[:30])
+    start_time = time.time()
+    introsort(e)
+    end_time = time.time()
+    time_elapsed = end_time  - start_time
+    print(time_elapsed)
+    
+    #print(e[:30])
+    
+
 
 if __name__ == "__main__":
     main()

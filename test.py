@@ -31,3 +31,34 @@ if __name__ == '__main__':
     else:
         print("No")
 
+    def partition(arr, start_idx, pivot_idx):
+    # A nested function which performs the list partitioning for quicksort
+        
+
+        # The pivot value
+        pivot = arr[pivot_idx]
+
+        # The partition end boundary - starts outside the partition
+        end_idx = start_idx - 1
+
+        # Iterate through list (or sub-list) from the start to the end 
+        # of the current partition
+        for i in range(start_idx, pivot_idx):
+
+            # If the current value is less than or equal to the pivot value...
+            if arr[i] <= pivot:
+                
+                # move the end index to the right
+                end_idx += 1
+
+                # the swap the value at the end index and the current value so that 
+                # everything to the left of the end index is less than the pivot
+                arr[end_idx], arr[i] = arr[i], arr[end_idx]
+
+        # Finally, swap the value to the right of the end index with the
+        # pivot so the pivot sits between the sub list of values less than it 
+        # and the sublist of values greater than it
+        arr[end_idx + 1], arr[pivot_idx] = arr[pivot_idx], arr[end_idx + 1]
+
+        # The value to the right of the end index will be the pivot for that sublist
+        return end_idx + 1
