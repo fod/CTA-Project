@@ -2,8 +2,9 @@
 # CTA-Project sorting algorithms
 # Author: Fiachra O' Donoghue
 
+from random import randint
 import time
-import numpy as np
+from tabulate import tabulate
 
 def insertion_sort(arr):
     """Insertion sort. 
@@ -67,7 +68,7 @@ def partition(arr, start_idx, pivot_idx):
         return end_idx + 1
 
 
-def quicksort(arr, start_idx, pivot_idx):
+def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
     """Quicksort. Based on pseudocode found in 
     Cormen et al., 2001, p. 146; Introduction to Algorithms, 2nd Ed.
 
@@ -81,6 +82,9 @@ def quicksort(arr, start_idx, pivot_idx):
         int: The index of the pivot value
     """
 
+    if first_run:
+        pivot_idx = len(arr) - 1
+
     # The base condition - if start_idx = pivot_idx the sublist must
     # only be one element long
     if start_idx <= pivot_idx:
@@ -89,8 +93,8 @@ def quicksort(arr, start_idx, pivot_idx):
         new_pivot_idx = partition(arr, start_idx, pivot_idx)
 
         # Recursively call quicksort on the two sublists produced from the last partition
-        quicksort(arr, start_idx, new_pivot_idx - 1)
-        quicksort(arr, new_pivot_idx + 1, pivot_idx)
+        quicksort(arr, start_idx, new_pivot_idx - 1, first_run=False)
+        quicksort(arr, new_pivot_idx + 1, pivot_idx, first_run=False)
         
     return arr
 
@@ -149,7 +153,7 @@ def heapsort(arr):
     return(arr)
 
 
-def counting_sort(arr, k):
+def counting_sort(arr, k=0):
     """Counting sort. Implementation based on pseudocode found in 
        Cormen et al., 2001, p. 168; Introduction to Algorithms, 2nd Ed.
     Args:
@@ -160,6 +164,10 @@ def counting_sort(arr, k):
     Returns:
         list of integers: The sorted list
     """
+    # On array with n = 10000:
+    # %timeit max(y) 236 µs ± 2.38 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+    if not k:
+        k = max(arr)
 
     # output list and list for counting values; both filled with zeroes
     output = [0] * len(arr)
@@ -175,7 +183,6 @@ def counting_sort(arr, k):
         counter[i] = counter[i] + counter[i-1]
 
     for i in range(len(arr) - 1, -1, -1):
-        print(counter[arr[i]])
         output[counter[arr[i]] - 1 ] = arr[i]
         counter[arr[i]] = counter[arr[i]] - 1
 
@@ -184,48 +191,87 @@ def counting_sort(arr, k):
 
 # https://www.sanfoundry.com/python-program-implement-introsort/
 def introsort(arr):
+
+    def introsort_helper(arr, start, end, maxdepth):
+        if end - start <= 1:
+            return
+
+        # https://aquarchitect.github.io/swift-algorithm-club/Introsort/
+        elif end - start <= 20:
+            insertion_sort(arr[start:end])
+        elif maxdepth == 0:
+            heapsort(arr[start:end])
+        else:
+            p = partition(arr, start, end - 1)
+            introsort_helper(arr, start, p, maxdepth - 1)
+            introsort_helper(arr, p, end, maxdepth - 1)
+
+
     maxdepth = (len(arr).bit_length() - 1)*2
     introsort_helper(arr, 0, len(arr), maxdepth)
  
-def introsort_helper(arr, start, end, maxdepth):
-    if end - start <= 1:
-        return
-
-    # https://aquarchitect.github.io/swift-algorithm-club/Introsort/
-    elif end - start <= 20:
-        insertion_sort(arr[start:end])
-    elif maxdepth == 0:
-        heapsort(arr[start:end])
-    else:
-        p = partition(arr, start, end - 1)
-        introsort_helper(arr, start, p, maxdepth - 1)
-        introsort_helper(arr, p, end, maxdepth - 1)
+    return arr
 
 
+def benchmark(funcs, arr_sizes, reps):
 
+    # Build dict to hold results
+    result = { func.__name__: { "n": { n: [0] * 10 for n in arr_sizes } } for func in funcs }
 
+    table = [[size for size in arr_sizes]]
+    # Generate test arrays
+    sample_arrs = [ [ randint(0, 100) for i in range(n) ] for n in arr_sizes ]
+
+    # Sort
+    for func in funcs:
+
+        results = []
+
+        for i, s in enumerate(sample_arrs):
+
+            times = []
+            
+            for rep in range(reps):
+
+                print(f"{func.__name__}, n={arr_sizes[i]}, iteration {rep}")
+
+                # Copy array so it is unsorted on each run
+                sample_arr = s.copy()
+
+                start_time = time.time()
+                func(sample_arr)
+                end_time = time.time()
+
+                times.append((end_time - start_time) * 1000)
+                #result[func.__name__]["n"][arr_sizes[i]][rep] = end_time - start_time
+
+            results.append(round(sum(times) / len(times), 3))
+
+        table.append(results)
+
+    return table
 
 
 def main():
-    a=[2,8,7,1,3,5,6,4]
-    b=[8,1,9,2,10,16]
-    c=[12,11,13,5,6,7]
-    d=[2,5,3,0,2,3,0,3]
-    #print(heapsort(a))
-    #counting_sort(d, max(d))
-    #print(b)
-    #print(quicksort(a, 0, len(a)-1))
-    np.random.seed(1)
-    e = np.random.choice(500000, 500000, replace=False)
-    print(e[:30])
-    start_time = time.time()
-    introsort(e)
-    end_time = time.time()
-    time_elapsed = end_time  - start_time
-    print(time_elapsed)
-    
-    #print(e[:30])
-    
+
+    funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
+    arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
+    #arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500]
+    funcs = [quicksort, heapsort, counting_sort, introsort]
+    result = benchmark(funcs, arr_sizes, 10)
+
+    row_names = [ func.__name__ for func in funcs ]
+    print(tabulate(result, headers="firstrow", showindex=row_names, tablefmt="latex"))
+ 
+    import matplotlib.pyplot as plt
+    print(result)
+    fig, ax = plt.subplots()  # Create a figure containing a single axes.
+    for p in range(len(result) - 1):
+        print(len(result))
+        plt.plot(result[0],result[p + 1], label=funcs[p].__name__)
+    plt.legend()
+    plt.show()
+
 
 
 if __name__ == "__main__":

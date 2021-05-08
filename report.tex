@@ -110,6 +110,25 @@ Added insertion sort when partition size <= 20
 
 Benchmarking: empirical method for comparing algorithm performance a postiori. Can be used to vaildate a priori / theoretical hypotheses
 
+@max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
+
+https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html -- Tim Peters on timing
+
+
+
+\begin{tabular}{lrrrrrrrrrrrrr}
+    \hline
+                    &   100 &   250 &    500 &    750 &   1000 &    1250 &    2500 &     3750 &     5000 &     6250 &     7500 &     8750 &    10000 \\
+    \hline
+        insertion\_sort & 1.082 & 5.297 & 21.701 & 52.072 & 90.874 & 143.243 & 593.199 & 1318.3   & 2348.3   & 3640.56  & 5350.09  & 7300.5   & 9504.14  \\
+        quicksort      & 0.28  & 0.874 &  1.937 &  3.609 &  4.716 &   6.322 &  17.591 &   32.529 &   53.89  &   76.678 &  104.856 &  133.81  &  175.071 \\
+        heapsort       & 0.565 & 1.647 &  3.55  &  5.921 &  7.931 &  10.315 &  22.512 &   35.915 &   49.244 &   63.411 &   76.997 &   92.16  &  105.975 \\
+        counting\_sort  & 0.091 & 0.174 &  0.335 &  0.477 &  0.663 &   0.805 &   1.642 &    2.311 &    2.971 &    3.712 &    4.384 &    5.001 &    5.772 \\
+        introsort      & 0.295 & 0.797 &  1.476 &  2.577 &  3.029 &   3.487 &  10.094 &   24.093 &   37.677 &   46.581 &   56.788 &   69.493 &   80.566 \\
+    \hline
+\end{tabular}
+        
+
 \bibliography{report}
 \bibliographystyle{ieeetr}
 
