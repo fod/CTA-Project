@@ -8,6 +8,8 @@ import json
 import time
 import os
 import matplotlib.pyplot as plt
+from matplotlib import style
+from matplotlib import cm
 
 
 def insertion_sort(arr):
@@ -56,10 +58,10 @@ def partition(arr, start_idx, pivot_idx):
             # If the current value is less than or equal to the pivot value...
             if arr[i] <= pivot:
                 
-                # move the end index to the right
+                # ...move the end index to the right
                 end_idx += 1
 
-                # the swap the value at the end index and the current value so that 
+                # then swap the value at the end index and the current value so that 
                 # everything to the left of the end index is less than the pivot
                 arr[end_idx], arr[i] = arr[i], arr[end_idx]
 
@@ -73,17 +75,25 @@ def partition(arr, start_idx, pivot_idx):
 
 
 def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
-    """Quicksort. Based on pseudocode found in 
-    Cormen et al., 2001, p. 146; Introduction to Algorithms, 2nd Ed.
+    """Quicksort. Based on pseudocode found in Cormen et al., 2001, p. 146; 
+       Introduction to Algorithms, 2nd Ed.
 
     Args:
-        list of comparables: A list of elements which are 
-                             comparable using <, >, =; i.e.
-                             implement __lt__, __gt__, and __eq__
+        arr ([list]):               The list to be sorted. Elements must be 
+                                    comparable using <, >, =; i.e.
+                                    implement __lt__, __gt__, and __eq__
 
-        int: The index of the start of the first partition
+        start_idx (int, optional):  The index of the start of the first partition. Defaults to 0.
 
-        int: The index of the pivot value
+        pivot_idx (int, optional):  The index of the pivot value. Defaults to 0.
+
+        first_run (bool, optional): Flag indicating the first run in the recursive stack.
+                                    Used to intitalise the pivot index at the last element 
+                                    of the list, arr. Set to False in all recursive calls to
+                                    partition(). Defaults to True.
+
+    Returns:
+        [list]: A reference to the sorted list
     """
 
     # first_run flag allows the default pivot to be the last element in the list
@@ -143,8 +153,8 @@ def heapsort(arr):
         for i in range((len(arr) // 2) -1, -1, -1):
             max_heapify(arr, hs, i)
 
-    # hs = heap size --> keep track of border between sorted and max-heap 
-    # sections of array
+    # hs = heap size --> keep track of border 
+    # between sorted and max-heap sections of array
     hs = len(arr)
     build_max_heap(arr, hs)
 
@@ -269,47 +279,83 @@ def benchmark(funcs, arr_sizes, reps):
         table.append(results)
 
     # Write the raw times to timestamped json file
-    fname_raw = f"bm_output/bm_raw_{time.strftime('%Y%m%d-%H%M%S')}.json"
-    try:
-        os.makedirs(os.path.dirname(fname_raw), exist_ok=True)
-        with open(fname_raw, "w") as f:
-            json.dump(raw_result, f)
-    except IOError:
-        print("Problem writing raw data")
-    
-    # Write table of average times in LaTeX format
-    fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"
-    try:
-        with open(fname_tbl, "w") as f:
-            row_names = [ func.__name__ for func in funcs ]
-            f.write(tabulate(table, headers="firstrow", showindex=row_names, tablefmt="latex"))
-    except IOError:
-        print("Problem writing results table")
-
+    # fname_raw = f"bm_output/bm_raw_{time.strftime('%Y%m%d-%H%M%S')}.json"
+    # try:
+    #     os.makedirs(os.path.dirname(fname_raw), exist_ok=True)
+    #     with open(fname_raw, "w") as f:
+    #         json.dump(raw_result, f)
+    # except IOError:
+    #     print("Problem writing raw data")
+   
     return table
 
 
 def main():
 
+    # Run the benchmark for the specified functions, input sizes, and repetitions
     funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
-    arr_sizes = [100, 250, 500, 750, 1000 ]#, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
+    arr_sizes = [100, 250, 500] #, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000, 20000]
+    #arr_sizes = [ i for i in range(5, 100, 5)]
     result = benchmark(funcs, arr_sizes, 10)
 
-    
- 
-    import matplotlib.pyplot as plt
-    print(result)
-    fig, ax = plt.subplots()  # Create a figure containing a single axes.
-    plt.yscale('log')
-    for p in range(len(result) - 1):
-        print(len(result))
+    # Write table of average times in LaTeX format
+    fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"
+    tabledata = result.copy()
+    tabledata[0] =  ["\\textbf{" + str(t) + "}" for t in tabledata[0]]
+    row_names = [ "\\textbf{" + func.__name__.capitalize().replace('_',' ') + "}" for func in funcs ]            
+    table = tabulate(tabledata, 
+                    headers="firstrow", 
+                    showindex=row_names, 
+                    tablefmt="latex_raw",
+                    stralign="right",
+                    floatfmt=".3f")
+    try:
+        with open(fname_tbl, "w") as f:
+            f.write(table)
+    except IOError:
+        print("Problem writing results table")
 
-        plt.plot(result[0],result[p + 1], label=funcs[p].__name__)
-    plt.legend()
-    plt.show()
+    # Generate plots of the returned time data
+    def write_plot(exclude=0, yscale="linear"):
 
+        # Plot style
+        style.use('seaborn')
+
+        # Create figure and axes
+        fig, ax = plt.subplots()
+
+        # Set y-scale (log or linear)
+        plt.yscale(yscale)
+
+        # Set colours
+        colours = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", 
+                   "tab:brown", "tab:pink", "tab:gray", "tab:olive", "tab:cyan"]
+
+        # Plot each series
+        for p in range(exclude, len(result) - 1):
+            plt.plot(result[0],result[p + 1], 
+            label=funcs[p].__name__.capitalize().replace("_"," "), color=colours[p])
+
+        # Set title, labels, and legend    
+        ax.set_title("Sorting algorithm running times for increasing input sizes")
+        ax.set_xlabel("input size n")
+        ax.set_ylabel(f"running time (ms){' - log scale' if yscale == 'log' else ''}")
+        plt.legend()
+
+        # Save the figure
+        fig.savefig(f"bm_output/plot_{str(exclude)}_{yscale}_{time.strftime('%Y%m%d-%H%M%S')}")
+
+    # Plot of output from all algorithms, linear y-scale
+    write_plot()
+
+    # Exclude insertion sort to get a better 
+    # comparison of the more efficient algorithms
+    write_plot(exclude=1)
    
+    # Include all algorithms but plot on a log scale
+    write_plot(yscale="log")
 
+    
 if __name__ == "__main__":
     main()
 

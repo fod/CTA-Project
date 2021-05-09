@@ -122,6 +122,18 @@ Benchmarking: empirical method for comparing algorithm performance a postiori. C
 
 @max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
 
+\begin{tabular}{rrrrrrrrrrrrrrrrrrrr}
+    \hline
+                             &   \textbf{5} &   \textbf{10} &   \textbf{15} &   \textbf{20} &   \textbf{25} &   \textbf{30} &   \textbf{35} &   \textbf{40} &   \textbf{45} &   \textbf{50} &   \textbf{55} &   \textbf{60} &   \textbf{65} &   \textbf{70} &   \textbf{75} &   \textbf{80} &   \textbf{85} &   \textbf{90} &   \textbf{95} \\
+    \hline
+     \textbf{Insertion sort} &        0.007 &         0.018 &         0.039 &         0.043 &         0.076 &         0.112 &         0.127 &         0.177 &         0.236 &         0.311 &         0.367 &         0.365 &         0.467 &         0.516 &         0.617 &         0.697 &         0.797 &         0.804 &         0.958 \\
+          \textbf{Quicksort} &        0.017 &         0.032 &         0.051 &         0.067 &         0.078 &         0.095 &         0.114 &         0.132 &         0.143 &         0.170 &         0.175 &         0.198 &         0.204 &         0.223 &         0.254 &         0.270 &         0.285 &         0.291 &         0.339 \\
+           \textbf{Heapsort} &        0.019 &         0.037 &         0.059 &         0.088 &         0.109 &         0.145 &         0.173 &         0.213 &         0.242 &         0.262 &         0.301 &         0.342 &         0.382 &         0.406 &         0.456 &         0.466 &         0.526 &         0.531 &         0.563 \\
+      \textbf{Counting sort} &        0.027 &         0.034 &         0.041 &         0.046 &         0.049 &         0.046 &         0.053 &         0.059 &         0.058 &         0.057 &         0.070 &         0.066 &         0.075 &         0.076 &         0.084 &         0.083 &         0.083 &         0.099 &         0.095 \\
+          \textbf{Introsort} &        0.011 &         0.023 &         0.047 &         0.049 &         0.049 &         0.086 &         0.091 &         0.094 &         0.116 &         0.124 &         0.137 &         0.161 &         0.167 &         0.180 &         0.196 &         0.227 &         0.210 &         0.221 &         0.292 \\
+    \hline
+    \end{tabular}
+
 \begin{table}[h]
     \resizebox{\textwidth}{!}{%
 \begin{tabular}{rrrrrrrrrrrrrr}
