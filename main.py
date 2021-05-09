@@ -3,8 +3,12 @@
 # Author: Fiachra O' Donoghue
 
 from random import randint
-import time
 from tabulate import tabulate
+import json
+import time
+import os
+import matplotlib.pyplot as plt
+
 
 def insertion_sort(arr):
     """Insertion sort. 
@@ -82,6 +86,7 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
         int: The index of the pivot value
     """
 
+    # first_run flag allows the default pivot to be the last element in the list
     if first_run:
         pivot_idx = len(arr) - 1
 
@@ -101,7 +106,7 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
 
 def heapsort(arr):
 
-    def max_heapify(arr, hs, i):
+    def max_heapify(arr, heap_size, i):
     # Recursively construct max heaps from sub-arrays
     # Takes a list, a heap-size, which is the index of
     # the end of the current sub-list, and i the index of the current node
@@ -113,14 +118,14 @@ def heapsort(arr):
 
         # If the left child is part of this sub array 
         # check if it is larger than the current node
-        if l < hs and arr[l] > arr[i]:
+        if l < heap_size and arr[l] > arr[i]:
             largest = l
         else:
             largest = i
 
         # If the right hand side is in this sub-array
         # check if it is larger than its parent
-        if r < hs and arr[r] > arr[largest]:
+        if r < heap_size and arr[r] > arr[largest]:
             largest = r
 
         # If one of the current node's children is larger
@@ -128,7 +133,7 @@ def heapsort(arr):
         # node needs to be moved further down the tree
         if largest != i:
             arr[i], arr[largest] = arr[largest], arr[i]
-            max_heapify(arr, hs, largest)
+            max_heapify(arr, heap_size, largest)
             
     def build_max_heap(arr, hs):
     # Rearrange the initial array so that it is a valid max heap
@@ -156,6 +161,7 @@ def heapsort(arr):
 def counting_sort(arr, k=0):
     """Counting sort. Implementation based on pseudocode found in 
        Cormen et al., 2001, p. 168; Introduction to Algorithms, 2nd Ed.
+
     Args:
         arr (list of positive integers: The list to be sorted
         k (int): The maximum value in arr. Intended to be invoked as
@@ -215,39 +221,70 @@ def introsort(arr):
 
 def benchmark(funcs, arr_sizes, reps):
 
-    # Build dict to hold results
-    result = { func.__name__: { "n": { n: [0] * 10 for n in arr_sizes } } for func in funcs }
+    # Build dict to hold raw results
+    raw_result = { func.__name__: { "n": { n: [0] * 10 for n in arr_sizes } } for func in funcs }
 
+    # A list of lists to hold average times for each algorithm and sample size
     table = [[size for size in arr_sizes]]
+
     # Generate test arrays
     sample_arrs = [ [ randint(0, 100) for i in range(n) ] for n in arr_sizes ]
 
-    # Sort
+    # Iterate through the list of functions to be benchmarked -- funcs
     for func in funcs:
 
+        # A list to hold the average times for the current algorithm
         results = []
 
+        # Iterate through the list of lists of random ints
         for i, s in enumerate(sample_arrs):
 
+            # A list to hold the time for each run
             times = []
             
+            # Sort each input list this number of times
             for rep in range(reps):
 
+                # Feedback for the user; prints algorithm, input list size, and iteration number
                 print(f"{func.__name__}, n={arr_sizes[i]}, iteration {rep}")
 
-                # Copy array so it is unsorted on each run
+                # Copy the current list so there's an unsorted list for each run
                 sample_arr = s.copy()
 
+                # Sort the input list, noting the start and end times
                 start_time = time.time()
                 func(sample_arr)
                 end_time = time.time()
 
+                # Save the time taken in ms
                 times.append((end_time - start_time) * 1000)
-                #result[func.__name__]["n"][arr_sizes[i]][rep] = end_time - start_time
+                
+                # Save the raw results for analysis and debugging
+                raw_result[func.__name__]["n"][arr_sizes[i]][rep] = end_time - start_time
 
+            # Add the average run time to the results list
             results.append(round(sum(times) / len(times), 3))
 
+        # Add the row for the current algorithm to the output table
         table.append(results)
+
+    # Write the raw times to timestamped json file
+    fname_raw = f"bm_output/bm_raw_{time.strftime('%Y%m%d-%H%M%S')}.json"
+    try:
+        os.makedirs(os.path.dirname(fname_raw), exist_ok=True)
+        with open(fname_raw, "w") as f:
+            json.dump(raw_result, f)
+    except IOError:
+        print("Problem writing raw data")
+    
+    # Write table of average times in LaTeX format
+    fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"
+    try:
+        with open(fname_tbl, "w") as f:
+            row_names = [ func.__name__ for func in funcs ]
+            f.write(tabulate(table, headers="firstrow", showindex=row_names, tablefmt="latex"))
+    except IOError:
+        print("Problem writing results table")
 
     return table
 
@@ -255,25 +292,25 @@ def benchmark(funcs, arr_sizes, reps):
 def main():
 
     funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
-    arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
-    #arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500]
-    funcs = [quicksort, heapsort, counting_sort, introsort]
+    arr_sizes = [100, 250, 500, 750, 1000 ]#, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
     result = benchmark(funcs, arr_sizes, 10)
 
-    row_names = [ func.__name__ for func in funcs ]
-    print(tabulate(result, headers="firstrow", showindex=row_names, tablefmt="latex"))
+    
  
     import matplotlib.pyplot as plt
     print(result)
     fig, ax = plt.subplots()  # Create a figure containing a single axes.
+    plt.yscale('log')
     for p in range(len(result) - 1):
         print(len(result))
+
         plt.plot(result[0],result[p + 1], label=funcs[p].__name__)
     plt.legend()
     plt.show()
 
-
+   
 
 if __name__ == "__main__":
     main()
+
 
