@@ -422,6 +422,8 @@ INPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.bbl
 INPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.bbl
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1728.tfm
+OUTPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
@@ -433,15 +435,13 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/eccc1200.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
-OUTPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm
 INPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.aux
 INPUT /home/fod/HDip/modules/algorithms/project/CTA-Project/report.run.xml

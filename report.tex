@@ -26,6 +26,52 @@
 
 %%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts suchas complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
 
+Algorithms: input output, finiteness, unambiguous, correctness, feasibility, efficiency.
+
+Time efficiency and space efficiency --- how we compare and rate algorithms
+
+A priori analysis -- theoretical perspective --- independent of implementation details -- compare order of growth between algorithms -- ***measure of complexity.***
+
+A posteriori analysis -- empirical evaluation of implementation of  algorithm -- ***tied to implementation an platform*** -- performance compared --- *** measure of performance ***
+
+External factors affecting time of execution but not connected to complexity:
+Size of intpu, speed of computer, quality of compiler.
+
+To sum up: Performance vs complexity
+Performance: how much memory, time, etc is used when algorithm is run --- depends on external factor as well as code 
+Complexity: How resource requirements scale as input gets larger
+
+Complexity affects performance but performancedoes not affect complexity
+
+Because algorithms are platform independent, empirical analyses cannot necessarily be generalised to all combinations of platform, etc.... so an independent measure of complexity is necessary to compare algorithm performance. This measure can be assigned to a number of orders of magnitude. 
+
+Complexity families:
+    Constant, Logarithmic (log n), Sublinear, linear, n log(n), Polynomial, exponential
+
+To evaluate complexity, most expensive computation should be identified, and the order of that computation will be the order of the complexity of the algorithm.
+
+--- Higher order term will dominate 
+
+In addition to size of input, specific characteristics of the input can affect the performance of an algorithm. For instance, given two sorting algorithms, one may outperform the other on an input with very few inversions, while the other may be more efficient given an input which is less sorted initially. Similarly, one algorithm may perform particularly well on smaller inputs while performing poorly on larger ones. Insertion sort, for example, examined in more detail below, performs extremely well on input sizes up to ~n=20 but performance falls off as n increases giving it by far the worst overall performance of the five algorithms examined here. The differential efficiency depending on input characteristics can be exploited by algorithm designers to make highly efficient adaptive hybrid algorithms which switch strategy to best tackle the particular nayure of the part of the input data on which they are currently working. Timsort, for instance, reduces the number of comparisons made by identifying and merging (using a merge sort) pre-existing runs in its input, and will add to those runs, where they are below a minimum threshold, using insertion sort which is very efficient on small inputs \autocite{enwiki:997404113}. The implementation of introsort used here, described below, uses a recursive partitioning algorithm to divide the sorting task into sublists and switches to heapsort when a maximum recursion depth is reached, as well as to insertion sort when a sublist contains fewer than 20 elements.
+
+It follows from the fact that an algorithm will perform better or worse depending on the nature, as well as on the size of its input, that choice of algorithm does not rest solely on its complexity relative to otehr competing algorithms. It also depends on the nature of the input in terms of its size, degree of sortedness, and the underlying probability distribution of the specific inputs it is likely to encounter.
+
+Worst, Best, and Average cases.
+These are classes of inputs, specific to a particular algorithm, for which that algorithm exhibits its least efficient, most efficient, and most usually efficient performances, respectively. In practice, best and worse cases are uncommon, but algorithms are often compared and chosen based on their worst case performances as this defines the lower bound on the algorithm's efficiency.
+
+Generally speaking, the performance of an algorithm vis-$\acute{a}$-vis the number of operations it must perform or the time it takes to complete its task, can vary significantly over all possible input combinations of size \emph{n}. The worst cases are those instances where the algorithm performs the greatest number of operations or takes the longest time, over of all of those input instances. Worst case offers a guarantee that an algorithm will perform no worese - will take no longer - than it does in that case. 
+
+Therefore, choosing an agorithm 
+
+Complexity can be assessed based on use of whatever resources are scarce and need to be optimised for. Most commonly, algorithms are assessed based on time taken, or number of operations, per input size. 
+Asymptotic Notation
+In algorithm analysis, Big O notation (e.g. O(n$\textsuperscript{2}$)) describes the performance of an algorithm in the worst case scenario. This can be used to classify algorithms by complexity - two algorithms with the same Big O complexity will perfom similarly in their worst cases, and, of two algorithms with different Big O values, the one with the lesser value will perform much more efficiently in its worst case than the other will in its own worst case.
+
+Tightest upper bound should be specified
+
+Omega ($\Omega$) notation represents the complexity of an algorithm in its best case, and Theta ($\Theta$) notation represents its complexity in the average, or most usual case
+
+In describing an algorithm in terms of efficiancy, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of \emph{n}, the number of elements in, or the size of, its input, and \emph{f(n)} - the runtime, or the number of operations it takes to complete its task, given \emph{n}.
 
 Formal definition of sorting and the property of being sorted\dots
 Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.
@@ -122,37 +168,28 @@ Benchmarking: empirical method for comparing algorithm performance a postiori. C
 
 @max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
 
-\begin{tabular}{rrrrrrrrrrrrrrrrrrrr}
-    \hline
-                             &   \textbf{5} &   \textbf{10} &   \textbf{15} &   \textbf{20} &   \textbf{25} &   \textbf{30} &   \textbf{35} &   \textbf{40} &   \textbf{45} &   \textbf{50} &   \textbf{55} &   \textbf{60} &   \textbf{65} &   \textbf{70} &   \textbf{75} &   \textbf{80} &   \textbf{85} &   \textbf{90} &   \textbf{95} \\
-    \hline
-     \textbf{Insertion sort} &        0.007 &         0.018 &         0.039 &         0.043 &         0.076 &         0.112 &         0.127 &         0.177 &         0.236 &         0.311 &         0.367 &         0.365 &         0.467 &         0.516 &         0.617 &         0.697 &         0.797 &         0.804 &         0.958 \\
-          \textbf{Quicksort} &        0.017 &         0.032 &         0.051 &         0.067 &         0.078 &         0.095 &         0.114 &         0.132 &         0.143 &         0.170 &         0.175 &         0.198 &         0.204 &         0.223 &         0.254 &         0.270 &         0.285 &         0.291 &         0.339 \\
-           \textbf{Heapsort} &        0.019 &         0.037 &         0.059 &         0.088 &         0.109 &         0.145 &         0.173 &         0.213 &         0.242 &         0.262 &         0.301 &         0.342 &         0.382 &         0.406 &         0.456 &         0.466 &         0.526 &         0.531 &         0.563 \\
-      \textbf{Counting sort} &        0.027 &         0.034 &         0.041 &         0.046 &         0.049 &         0.046 &         0.053 &         0.059 &         0.058 &         0.057 &         0.070 &         0.066 &         0.075 &         0.076 &         0.084 &         0.083 &         0.083 &         0.099 &         0.095 \\
-          \textbf{Introsort} &        0.011 &         0.023 &         0.047 &         0.049 &         0.049 &         0.086 &         0.091 &         0.094 &         0.116 &         0.124 &         0.137 &         0.161 &         0.167 &         0.180 &         0.196 &         0.227 &         0.210 &         0.221 &         0.292 \\
-    \hline
-    \end{tabular}
+
 
 \begin{table}[h]
     \resizebox{\textwidth}{!}{%
-\begin{tabular}{rrrrrrrrrrrrrr}
-    \hline
-    \textbf{\emph{n}} &   \textbf{100} &   \textbf{250} &    \textbf{500} &    \textbf{750} &   \textbf{1000} &    \textbf{1250} &    \textbf{2500} &     \textbf{3750} &     \textbf{5000} &     \textbf{6250} &     \textbf{7500} &     \textbf{8750} &    \textbf{10000} \\
-    \hline
-        insertion sort & 1.082 & 5.297 & 21.701 & 52.072 & 90.874 & 143.243 & 593.199 & 1318.3   & 2348.3   & 3640.56  & 5350.09  & 7300.5   & 9504.14  \\
-        quicksort      & 0.28  & 0.874 &  1.937 &  3.609 &  4.716 &   6.322 &  17.591 &   32.529 &   53.89  &   76.678 &  104.856 &  133.81  &  175.071 \\
-        heapsort       & 0.565 & 1.647 &  3.55  &  5.921 &  7.931 &  10.315 &  22.512 &   35.915 &   49.244 &   63.411 &   76.997 &   92.16  &  105.975 \\
-        counting sort  & 0.091 & 0.174 &  0.335 &  0.477 &  0.663 &   0.805 &   1.642 &    2.311 &    2.971 &    3.712 &    4.384 &    5.001 &    5.772 \\
-        introsort      & 0.295 & 0.797 &  1.476 &  2.577 &  3.029 &   3.487 &  10.094 &   24.093 &   37.677 &   46.581 &   56.788 &   69.493 &   80.566 \\
-    \hline
-\end{tabular}}
+    \begin{tabular}{rrrrrrrrrrrrrrrrrrrr}
+        \hline
+        \textbf{\emph{n=}}    &   \textbf{5} &   \textbf{10} &   \textbf{15} &   \textbf{20} &   \textbf{25} &   \textbf{30} &   \textbf{35} &   \textbf{40} &   \textbf{45} &   \textbf{50} &   \textbf{55} &   \textbf{60} &   \textbf{65} &   \textbf{70} &   \textbf{75} &   \textbf{80} &   \textbf{85} &   \textbf{90} &   \textbf{95} \\
+        \hline
+         \textbf{Insertion sort} &        0.007 &         0.018 &         0.039 &         0.043 &         0.076 &         0.112 &         0.127 &         0.177 &         0.236 &         0.311 &         0.367 &         0.365 &         0.467 &         0.516 &         0.617 &         0.697 &         0.797 &         0.804 &         0.958 \\
+              \textbf{Quicksort} &        0.017 &         0.032 &         0.051 &         0.067 &         0.078 &         0.095 &         0.114 &         0.132 &         0.143 &         0.170 &         0.175 &         0.198 &         0.204 &         0.223 &         0.254 &         0.270 &         0.285 &         0.291 &         0.339 \\
+               \textbf{Heapsort} &        0.019 &         0.037 &         0.059 &         0.088 &         0.109 &         0.145 &         0.173 &         0.213 &         0.242 &         0.262 &         0.301 &         0.342 &         0.382 &         0.406 &         0.456 &         0.466 &         0.526 &         0.531 &         0.563 \\
+          \textbf{Counting sort} &        0.027 &         0.034 &         0.041 &         0.046 &         0.049 &         0.046 &         0.053 &         0.059 &         0.058 &         0.057 &         0.070 &         0.066 &         0.075 &         0.076 &         0.084 &         0.083 &         0.083 &         0.099 &         0.095 \\
+              \textbf{Introsort} &        0.011 &         0.023 &         0.047 &         0.049 &         0.049 &         0.086 &         0.091 &         0.094 &         0.116 &         0.124 &         0.137 &         0.161 &         0.167 &         0.180 &         0.196 &         0.227 &         0.210 &         0.221 &         0.292 \\
+        \hline
+        \end{tabular}}
 \caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms}
 \end{table}
 
 
-https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html -- Tim Peters on timing
-
+https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html 
+-- Tim Peters on timing \textcite{peters2002}
+"The slowest result is often computed on the first try, because your machine’s caches take extra time to adjust to the new task."
 
 
 
