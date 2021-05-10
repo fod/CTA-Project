@@ -7,6 +7,9 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage[style=apa, backend=biber]{biblatex}
+\usepackage{color}
+\usepackage{wrapfig}
+
 
 \addbibresource{report.bib}
 
@@ -25,6 +28,7 @@
 \section{Introduction}
 
 %%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts suchas complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
+
 
 Algorithms: input output, finiteness, unambiguous, correctness, feasibility, efficiency.
 
@@ -74,7 +78,7 @@ Omega ($\Omega$) notation represents the complexity of an algorithm in its best 
 In describing an algorithm in terms of efficiancy, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of \emph{n}, the number of elements in, or the size of, its input, and \emph{f(n)} - the runtime, or the number of operations it takes to complete its task, given \emph{n}.
 
 Formal definition of sorting and the property of being sorted\dots
-Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.
+Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.enwiki:997404113
 
 
 If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
@@ -140,6 +144,23 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
 
 \subsection{Insertion sort}
 
+Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant.
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+    \centering
+    \includegraphics{insertion_sort.pdf}
+    \caption{\label{fig:insertion_sort}Insertion sort.}
+\end{wrapfigure}
+
+The algorithm consists of two loops, one nested inside the other. The outer loop iterates from the second element in the input list to the end. If the index of the current outer loop value is \emph{i}, the inner loop compares the value at \emph{i} with the value to its left (\emph{i - 1}). If the element at \emph{i - 1} is less than the element at \emph{i}, no action is necessary as the two elements are sorted with respect to one another. However, if the value at \emph{i - 1} is greater than the value at \emph{i} then the two values are swapped and the inner loop continues leftward until either the start of the list is reached or a value smaller than the current iteration's tracked value (the value originally at index \emph{i}) is found.
+
+Figure \ref{fig:insertion_sort} demonstrates the algorithm operating on an unsorted list of six digits. Each row represents an iteration of the outer loop and each grey arrow represents an iteration of the inner loop. Note that the elements to the left of the current target value, or \emph{key}, are always sorted with respect to one another, and the elements to the right of the key, have yet to be inserted into this sorted sub-array. Also note that the inner loop only needs to run once for each inversion of which it is a part, and no more. This is why the algorithm has a running time of $\Omega$(n) for an already sorted list -- because a single run of the outer loop without any iterations at all of the inner loop will confirm that the input is sorted.
+
+To confirm the worst case running time of $O(n\textsuperscript{2}$) we can see that the algorithm will always have to iterate through the full list once, and for each iteration (\emph{i}) it will have to execute the inner loop (\emph{n-1}) $\times$ the number of inversions in which \emph{i} participates. In a worst case -- 
+
+
+
+
 Good for small lists and ones which are almost sorted because the inner loop only needs to iterate until it finds the insertion point. Running time in the case of an already sorted list is $\Omega$(n) because the inner loop will not have to run at all.
 
 Often used in hybrid sorting algotrithms for its efficiency with small inputs.
@@ -163,6 +184,8 @@ Added insertion sort when partition size <= 20
 
 
 \section{Implementation \& Benchmarking}
+
+Re insertion sort slower on value based as opposed to refernce based-- python interns first 255 unsigned? --- so ref based
 
 Benchmarking: empirical method for comparing algorithm performance a postiori. Can be used to vaildate a priori / theoretical hypotheses
 
