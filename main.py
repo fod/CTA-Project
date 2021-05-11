@@ -13,7 +13,8 @@ from matplotlib import cm
 
 
 def insertion_sort(arr):
-    """Insertion sort. 
+    """Insertion sort. Based on pseudocode found in Cormen et al., 2001, p. 17; 
+       Introduction to Algorithms, 2nd Ed.
 
     Args:
         list of comparables: A list of elements which are 
@@ -26,24 +27,30 @@ def insertion_sort(arr):
 
     # Iterate through list starting at second element
     # The value at arr[i] is the key
-    for i in range(1, len(arr)):
+    for j in range(1, len(arr)):
         
-        # Keep doing this until the key is at the leftmost position of
-        # the list, or the value to the left of the key is less than the key
-        while i > 0 and arr[i] < arr[i - 1]:
+        # The key and its neighbour to the left
+        key = arr[j]
+        i = j - 1
+
+        # Until the start of the list is reached 
+        # or an element greater than the key is found:
+        while i > 0 and arr[i] > key:
 
             # Swap the key value with the value to its left
-            arr[i], arr[i - 1] = arr[i - 1], arr[i]
+            arr[i + 1] = arr[i]
 
             # Decrement the index variable so that it tracks the position of the key
             i -= 1
+
+        arr[i + 1] = key
 
     # return a reference to the sorted array
     return arr
 
 
 def partition(arr, start_idx, pivot_idx):
-    # Performs the list partitioning for quicksort and introsort
+# Performs the list partitioning for quicksort and introsort
 
         # The pivot value
         pivot = arr[pivot_idx]
@@ -70,7 +77,8 @@ def partition(arr, start_idx, pivot_idx):
         # and the sublist of values greater than it
         arr[end_idx + 1], arr[pivot_idx] = arr[pivot_idx], arr[end_idx + 1]
 
-        # The value to the right of the end index will be the pivot for that sublist
+        # The value to the right of the end index is the pivot 
+        # just used and is the border between the two new partitions
         return end_idx + 1
 
 
@@ -105,11 +113,11 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
     if start_idx <= pivot_idx:
 
         # The partition function returns the pivot for the new sublist
-        new_pivot_idx = partition(arr, start_idx, pivot_idx)
+        partition_border = partition(arr, start_idx, pivot_idx)
 
         # Recursively call quicksort on the two sublists produced from the last partition
-        quicksort(arr, start_idx, new_pivot_idx - 1, first_run=False)
-        quicksort(arr, new_pivot_idx + 1, pivot_idx, first_run=False)
+        quicksort(arr, start_idx, partition_border - 1, first_run=False)
+        quicksort(arr, partition_border + 1, pivot_idx, first_run=False)
         
     return arr
 
@@ -294,7 +302,7 @@ def main():
 
     # Run the benchmark for the specified functions, input sizes, and repetitions
     funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
-    arr_sizes = [100, 250, 500] #, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000, 20000]
+    arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
     #arr_sizes = [ i for i in range(5, 100, 5)]
     result = benchmark(funcs, arr_sizes, 10)
 

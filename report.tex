@@ -75,7 +75,11 @@ Tightest upper bound should be specified
 
 Omega ($\Omega$) notation represents the complexity of an algorithm in its best case, and Theta ($\Theta$) notation represents its complexity in the average, or most usual case
 
-In describing an algorithm in terms of efficiancy, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of \emph{n}, the number of elements in, or the size of, its input, and \emph{f(n)} - the runtime, or the number of operations it takes to complete its task, given \emph{n}.
+In describing an algorithm in terms of efficiancy, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of \emph{n}, the number of elements in, or the size of, its input, and \emph{f(n)} - the runtime, or the number of operations it takes to complete its task, given \emph{n}. All elementary operations are assumed to take the same amount of time.
+
+
+
+
 
 Formal definition of sorting and the property of being sorted\dots
 Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.enwiki:997404113
@@ -144,7 +148,7 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
 
 \subsection{Insertion sort}
 
-Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant.
+Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant. It is efficient when sorting small or almost sorted inputs, and where there are many duplicate elements \autocite[p. 60]{heineman2016algorithms}.
 
 \begin{wrapfigure}{R}{0.3\textwidth}
     \centering
@@ -152,29 +156,44 @@ Insertion sort is a comparison sort algorithm which works in linear time in best
     \caption{\label{fig:insertion_sort}Insertion sort.}
 \end{wrapfigure}
 
-The algorithm consists of two loops, one nested inside the other. The outer loop iterates from the second element in the input list to the end. If the index of the current outer loop value is \emph{i}, the inner loop compares the value at \emph{i} with the value to its left (\emph{i - 1}). If the element at \emph{i - 1} is less than the element at \emph{i}, no action is necessary as the two elements are sorted with respect to one another. However, if the value at \emph{i - 1} is greater than the value at \emph{i} then the two values are swapped and the inner loop continues leftward until either the start of the list is reached or a value smaller than the current iteration's tracked value (the value originally at index \emph{i}) is found.
+The algorithm consists of two loops, one nested inside the other. The outer loop iterates from the second element in the input list to the end. If the index of the current outer loop value is \emph{i}, the inner loop compares the value at \emph{i}, known as the \emph{key} with the value to its left (\emph{i - 1}). If the element at \emph{i - 1} is less than, or equal to, the key, no action is necessary as the two elements are sorted with respect to one another. However, if the value at \emph{i - 1} is greater than the key then the value at \emph{i - 2} is compared with the key, and the inner loop continues leftward until either the beginning of the list is reached or a value smaller than the key is found. When this occurs, the key is inserted into the appropriate slot in the list and all of the elements that were compared with it and found to be larger are shifted one position to the right.
 
-Figure \ref{fig:insertion_sort} demonstrates the algorithm operating on an unsorted list of six digits. Each row represents an iteration of the outer loop and each grey arrow represents an iteration of the inner loop. Note that the elements to the left of the current target value, or \emph{key}, are always sorted with respect to one another, and the elements to the right of the key, have yet to be inserted into this sorted sub-array. Also note that the inner loop only needs to run once for each inversion of which it is a part, and no more. This is why the algorithm has a running time of $\Omega$(n) for an already sorted list -- because a single run of the outer loop without any iterations at all of the inner loop will confirm that the input is sorted.
+Figure \ref{fig:insertion_sort} demonstrates the insertion sort operating on an unsorted list of six digits. Each row represents an iteration of the outer loop. The key in each iteration is represented by the grey box. The red arrow denotes the insertion of the key into its new position, and the grey arrows represent the shifting of all of the intervening, larger, values one position to the right. Note that the elements to the left of the key are always sorted with respect to one another, while the elements to the right of the key have yet to be inserted into this sorted sub-array. Note also that each grey arrow represents one iteration of the inner loop. The inner loop needs to run once only for each inversion of which the current key is a part. This is why the algorithm has a running time of $\Omega$(n) for an already sorted list -- because a single run of the outer loop -- \emph{n} - 1 iterations -- with one comparison per iteration, and without any iterations at all of the inner loop, will confirm that the input is sorted.
 
-To confirm the worst case running time of $O(n\textsuperscript{2}$) we can see that the algorithm will always have to iterate through the full list once, and for each iteration (\emph{i}) it will have to execute the inner loop (\emph{n-1}) $\times$ the number of inversions in which \emph{i} participates. In a worst case -- 
+The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \frac{n\textsuperscript{2} - n}{2}$ and the average case time is  $n \times (n - 1) \times \frac{1}{4} = \frac{n\textsuperscript{2} - n}{4}$ \autocite{woltmann20}. Taking only the highest order term into account as this will be the dominant term as \emph{n} grows, this gives us a average and worst case performances of $\theta$(n$\textsuperscript{2}$ and $O(n\textsuperscript{2}$). Finally, the algorithm is stable, as if the algorithm encounters a value equal to the key to the key's left, it will simply move back to the outer loop and onto the next element, leaving the two equal elements where they are.
 
-
-
-
-Good for small lists and ones which are almost sorted because the inner loop only needs to iterate until it finds the insertion point. Running time in the case of an already sorted list is $\Omega$(n) because the inner loop will not have to run at all.
-
-Often used in hybrid sorting algotrithms for its efficiency with small inputs.
-
-\subsection{Heapsort}
-
-A heap structure is a nearly complete binary tree \autocite[p. 128]{cormen01}. The indices of the parent, left child, and right chaild can be calculated as parent = i/2, left child = 2i, and right child = 2i+1, where i is the index of the element. These can quickly be calculated by shifting bits \autocite[p. 128]{cormen01}
-
-Uses max heap -- at most a node is the value of its parent
 \subsection{Quicksort}
+
+\begin{wrapfigure}{R}{0.4\textwidth}
+    \centering
+    \includegraphics{quicksort.pdf}
+    \caption{\label{fig:quicksort_1}Quicksort partitioning.}
+\end{wrapfigure}
+
+Quicksort is a comparison sorting algorithm which recursively partitions the input data based on whether each element is higher or lower than a (often arbitrarily chosen) \emph{pivot} value. The algorithm runs in $n (log(n))$ time in the best and average cases, and $n^{2}$
+
+Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue.
+
+
 
 Can perform badly if pivot consistently chosen which puts all or almost all elements in one or other of the sub arrays. For instance if 1st or last ais chosen and array is already nearly sorted. Median mgiht be better because best case is if the two sublists are roughly equal at each iteration.
 
+\begin{wrapfigure}{R}{0.4\textwidth}
+    \centering
+    \includegraphics{quicksort_2.pdf}
+    \caption{\label{fig:quicksort_2}Quicksort sorting.}
+\end{wrapfigure}
+
 Usual options: first, last, random, median
+
+
+\subsection{Heapsort}
+
+Heapsort is a sorting algorithm that 
+A heap structure is a nearly complete binary tree \autocite[p. 128]{cormen01}. The indices of the parent, left child, and right chaild can be calculated as parent = i/2, left child = 2i, and right child = 2i+1, where i is the index of the element. These can quickly be calculated by shifting bits \autocite[p. 128]{cormen01}
+
+Uses max heap -- at most a node is the value of its parent
+
 
 \subsection{Counting sort}
 
@@ -195,19 +214,16 @@ Benchmarking: empirical method for comparing algorithm performance a postiori. C
 
 \begin{table}[h]
     \resizebox{\textwidth}{!}{%
-    \begin{tabular}{rrrrrrrrrrrrrrrrrrrr}
-        \hline
-        \textbf{\emph{n=}}    &   \textbf{5} &   \textbf{10} &   \textbf{15} &   \textbf{20} &   \textbf{25} &   \textbf{30} &   \textbf{35} &   \textbf{40} &   \textbf{45} &   \textbf{50} &   \textbf{55} &   \textbf{60} &   \textbf{65} &   \textbf{70} &   \textbf{75} &   \textbf{80} &   \textbf{85} &   \textbf{90} &   \textbf{95} \\
-        \hline
-         \textbf{Insertion sort} &        0.007 &         0.018 &         0.039 &         0.043 &         0.076 &         0.112 &         0.127 &         0.177 &         0.236 &         0.311 &         0.367 &         0.365 &         0.467 &         0.516 &         0.617 &         0.697 &         0.797 &         0.804 &         0.958 \\
-              \textbf{Quicksort} &        0.017 &         0.032 &         0.051 &         0.067 &         0.078 &         0.095 &         0.114 &         0.132 &         0.143 &         0.170 &         0.175 &         0.198 &         0.204 &         0.223 &         0.254 &         0.270 &         0.285 &         0.291 &         0.339 \\
-               \textbf{Heapsort} &        0.019 &         0.037 &         0.059 &         0.088 &         0.109 &         0.145 &         0.173 &         0.213 &         0.242 &         0.262 &         0.301 &         0.342 &         0.382 &         0.406 &         0.456 &         0.466 &         0.526 &         0.531 &         0.563 \\
-          \textbf{Counting sort} &        0.027 &         0.034 &         0.041 &         0.046 &         0.049 &         0.046 &         0.053 &         0.059 &         0.058 &         0.057 &         0.070 &         0.066 &         0.075 &         0.076 &         0.084 &         0.083 &         0.083 &         0.099 &         0.095 \\
-              \textbf{Introsort} &        0.011 &         0.023 &         0.047 &         0.049 &         0.049 &         0.086 &         0.091 &         0.094 &         0.116 &         0.124 &         0.137 &         0.161 &         0.167 &         0.180 &         0.196 &         0.227 &         0.210 &         0.221 &         0.292 \\
-        \hline
-        \end{tabular}}
+    \input{bm_output/bm_table_20210510-153504.tex}
+    }
 \caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms}
 \end{table}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210510-153504.png}
+    \caption{Relative performance of algorithms using a log y-scale.}
+    \label{fig:log-perf}
+  \end{figure}
 
 
 https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html 

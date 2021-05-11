@@ -72,6 +72,54 @@
       \field{year}{2001}
       \keyw{aks algorithm clrs gadget no.pdf np-hardness quicksort shellsort sorting sorting.network textbook}
     \endentry
+    \entry{heineman2016algorithms}{book}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=9af51d7a053fe92e76835875d3f9e188}{%
+           family={Heineman},
+           familyi={H\bibinitperiod},
+           given={G.T.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c484a012285ea0a5f07d0db60566da14}{%
+           family={Pollice},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4fe4944c834b7df1e652c3457457413}{%
+           family={Selkow},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{c6d7ca638951e6edbe47757ee11cde48}
+      \strng{fullhash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{bibnamehash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{authorbibnamehash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{authornamehash}{c6d7ca638951e6edbe47757ee11cde48}
+      \strng{authorfullhash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781491948927}
+      \field{series}{In a nutshell}
+      \field{title}{Algorithms in a Nutshell}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://books.google.ie/books?id=95zVsgEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.ie/books?id=95zVsgEACAAJ
+      \endverb
+    \endentry
     \entry{peters2002}{suppbook}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=e3aa619a4412763613574bb6b6fc1510}{%
@@ -141,6 +189,41 @@
       \endverb
       \verb{url}
       \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
+      \endverb
+    \endentry
+    \entry{woltmann20}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
+           family={Woltmann},
+           familyi={W\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{fullhash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{bibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorbibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authornamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorfullhash}{0a322c1fe1b86534ba258725f994e451}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Insertion Sort - Algorithm, Source Code, Time Complexity}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.happycoders.eu/algorithms/insertion-sort/
+      \endverb
+      \verb{url}
+      \verb https://www.happycoders.eu/algorithms/insertion-sort/
       \endverb
     \endentry
   \enddatalist

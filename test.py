@@ -62,3 +62,18 @@ if __name__ == '__main__':
 
         # The value to the right of the end index will be the pivot for that sublist
         return end_idx + 1
+
+
+            # Iterate through list starting at second element
+    # The value at arr[i] is the key
+    for i in range(1, len(arr)):
+        
+        # Keep doing this until the key is at the leftmost position of
+        # the list, or the value to the left of the key is less than the key
+        while i > 0 and arr[i] < arr[i - 1]:
+
+            # Swap the key value with the value to its left
+            arr[i], arr[i - 1] = arr[i - 1], arr[i]
+
+            # Decrement the index variable so that it tracks the position of the key
+            i -= 1
