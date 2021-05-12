@@ -8,11 +8,13 @@
 \usepackage[noend]{algpseudocode}
 \usepackage[style=apa, backend=biber]{biblatex}
 \usepackage{color}
+
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize,labelfont=footnotesize}
 \usepackage{wrapfig}
 
 
 \addbibresource{report.bib}
-
 \makeatletter
 \def\BState{\State\hskip-\ALG@thistlm}
 \makeatother
@@ -148,13 +150,14 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
 
 \subsection{Insertion sort}
 
-Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant. It is efficient when sorting small or almost sorted inputs, and where there are many duplicate elements \autocite[p. 60]{heineman2016algorithms}.
 
-\begin{wrapfigure}{R}{0.3\textwidth}
+\begin{wrapfigure}{r}{0.3\textwidth}
     \centering
     \includegraphics{insertion_sort.pdf}
     \caption{\label{fig:insertion_sort}Insertion sort.}
 \end{wrapfigure}
+
+Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant. It is efficient when sorting small or almost sorted inputs, and where there are many duplicate elements \autocite[p. 60]{heineman2016algorithms}.
 
 The algorithm consists of two loops, one nested inside the other. The outer loop iterates from the second element in the input list to the end. If the index of the current outer loop value is \emph{i}, the inner loop compares the value at \emph{i}, known as the \emph{key} with the value to its left (\emph{i - 1}). If the element at \emph{i - 1} is less than, or equal to, the key, no action is necessary as the two elements are sorted with respect to one another. However, if the value at \emph{i - 1} is greater than the key then the value at \emph{i - 2} is compared with the key, and the inner loop continues leftward until either the beginning of the list is reached or a value smaller than the key is found. When this occurs, the key is inserted into the appropriate slot in the list and all of the elements that were compared with it and found to be larger are shifted one position to the right.
 
@@ -172,36 +175,48 @@ The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \
 
 Quicksort is a comparison sorting algorithm which recursively partitions its input data based on whether each element is higher or lower than a sometimes arbitarily chosen \emph{pivot} value. The algorithm runs in $n\log n$ time in the best and average cases, and $n^{2}$ time in the worst case.
 
+Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array -- represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
+
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
     \includegraphics{quicksort_2.pdf}
     \caption{\label{fig:quicksort_2}Quicksort sorting.}
 \end{wrapfigure}
 
-Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array -- represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
+Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The first two rows shoe the original array to be sorted and the result of the call to the partition algorithm shown in figure \ref{fig:quicksort_1}. After partitioning, the original pivot value, 6, is in its final sorted position. The two sub-arrays on either side of 6, one containing only values less than and one containing only values greater than, 6. The last value in each array is again chosen as the pivot (row 3) and both subarrays are again partitioned (row 4). The two pivot values, 4 and 9, for the sub-arrays partitioned in row 4 are now in their final sorted positions. Of the four sub-arrays produce by the partitioning in row 4, two contain just a single value, meaning that they are now in their final sorted positions; numbers 5 and 10 are now sorted. The remaining two sub-arrays are partitioned, producing two more sorted pivot values, 2 and 8 (row 6), and three single-element arrays (1, 3, and 7), completing the array sort. 
 
-Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The first two rows shoe the original array to be sorted and the result of the call to the partition algorithm shown in figure \ref{fig:quicksort_1}. After partitioning, the orignal pivot value, 6, is in its final sorted position. The two sub-arrays on either side of 6, one containing only values less than and one containing only values greater than, 6. The last value in eacah array is again chosen as the pivot (row 3) and both subarrays are again partitioned (row 4). The two pivot values, 4 and 9, for the sub-arrays partitioned in row 4 are now in their final sorted positions. Of the four sub-arrays produce by the partitioning in row 4, two contain just a single value, meaning that they are now in their final sorted positions; numbers 5 and 10 are now sorted. The remaining two sub-arrays are partitioned, producing two more sorted pivot values, 2 and 8 (row 6), and three single-element arrays (1, 3, and 7), completing the array sort. 
+The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $n\log n$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, however that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
 
-The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $n\log n$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, howver that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
+Poorly chosen pivot values can cause poor performance. Performance is likely to be best — all else being equal — when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values — the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite*[73]{heineman2016algorithms}.
 
-Poorly chosen pivot values can cause poor performance. Performance is likely to be best -- all else being equal -- when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values -- the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite*[73]{heineman2016algorithms}.
-
-One final interesting optimisation, attributed without citation by \textcite[121]{bentley:pearls} to Sedgewick, is the use of inserion sort to sort small sub-arrays for which quicksort would be inefficient. The implementation suggested would entail halting partitioning when array length fell below a certain threshold, and sorting all of those short arrays together when all the larger ones had been mostly sorted by the partitioning algorithm.
+One final interesting optimisation, attributed without citation by \textcite[121]{bentley:pearls} to Sedgewick, is the use of insertion sort to sort small sub-arrays for which quicksort would be inefficient. The suggested implementation would entail halting partitioning when array length fell below a certain threshold, and using insertion sort to complete sorting of the almost-sorted final array. This solution starts to resemble introsort \autocite{musser1997}, which is discussed below in section \ref{sec:heapsort}.
 
 
 \subsection{Heapsort}
 
-Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}
+Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}, taking the top value, then recursively rearranging the remaining elements into a max-heap and taking the top value until the heap is exhausted and the array is sorted. The algorithm runs in $O(n\log n)$ time in the best, average, \emph{and} worst cases. It sorts in-place so its space complexity is $O(1)$ \autocite[129]{cormen01}.
+
+A heap is a binary tree which is completely filled, with the possible exception of the lowest level, which, to the extent it  \emph{is} filled, is populated from left to right, with the rightmost nodes filled last. A max-heap is a heap in which the value of every node, with the exception of the root node, is less than or equal to that of its parent \autocite[127-129]{cormen01}. A max-heap can be stored as 1-based array with the root node at index, \emph{i} = 1 and such that given the index \emph{i} of any node, the parent of that node will be at \emph{i}/2, and its left and right children will be at 2\emph{i} and 2\emph{i} + 1, respectively \autocites[128]{cormen01}[148]{bentley:pearls}. In the implementation used here, however, the root node is stored at \emph{i} = 0, putting a node's parent at (\emph{i}-1)/2, and its left and right children at 2\emph{i} + 1 and 2\emph{i} + 2, respectively. An example of a max-heap can be seen in figure \ref{fig:heap}.
 
 
-A heap structure is a nearly complete binary tree \autocite[p. 128]{cormen01}. The indices of the parent, left child, and right chaild can be calculated as parent = i/2, left child = 2i, and right child = 2i+1, where i is the index of the element. These can quickly be calculated by shifting bits \autocite[p. 128]{cormen01}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \includegraphics{heap.pdf}
+    \caption{\label{fig:heap}A max heap generated from an array holding the numbers 1 to 12. The small number to the left of each node is the index of that node's value in the array below.}
+\end{wrapfigure}
 
-Uses max heap -- at most a node is the value of its parent
+Any array can be seen as a heap. Note the array indices attached to the heap nodes in figure \ref{fig:heap}; the nodes are simply filled from top to bottom, and left to right. Rearrangement of the heap, (i.e. rearrangement of the underlying array) so that it complies with the requirement that each parent node be greater than or equal to both of its child nodes, will produce a max-heap. The heapsort algorithm sorts an array, A, by repeatedly forming a max heap and removing the top node — which, by definition, is the greatest value in the array, and which will be located at position A[0]. The removed maximum value is swapped with the value at the end of the array. From this point the array is split into a heap sub-array and a sorted sub array. At each iteration of the algorithm, the greatest remaining value in the heap sub-array is identified by rearrangement of that sub-array into a max-heap, and is swapped with the last value in the heap sub-array. Thus, the sorted sub-array grows larger and the heap sub-array grows smaller, until the array is fully sorted. Figure \ref{fig:heapsort} illustrates the process.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{heap_sort2.pdf}
+    \caption{\label{fig:heapsort}The process of sorting a 6 element array using heapsort: (1) the original array viewed as an array and as a heap; (2) the array rearranged as a max-heap; (3) the in the max-heap is swapped with the last value in the array. A new max heap is formed; (4-6) max heaps are formed, top value is swapped into last position of heap sub-array, heap-size is decremented; (7) max-heap of 1 node is   ``swapped'' into the sorted subarray; (8) the sorted array.}
+\end{figure}
 
 \subsection{Counting sort}
 
-\subsection{Introsort}
+
+\subsection{Introsort}\label{sec:introsort}
 
 Added insertion sort when partition size <= 20 
 

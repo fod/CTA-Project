@@ -164,16 +164,22 @@ def heapsort(arr):
 
     # hs = heap size --> keep track of border 
     # between sorted and max-heap sections of array
-    hs = len(arr)
-    build_max_heap(arr, hs)
+    heap_size = len(arr)
+    build_max_heap(arr, heap_size)
 
-    # Iterate through unsorted section of array 
-    for i in range(hs - 1, -1, -1):
-
+    # Iterate from right to left through unsorted section of array 
+    for i in range(heap_size - 1, -1, -1):
+        print(arr, heap_size)
+        # The top value in the heap will be the max so swap it to the end
         arr[0], arr[i] = arr[i], arr[0]
-        hs -= 1
-        max_heapify(arr, hs, 0)
+        
+        # Move the border between the heap sub-array and the 
+        # sorted sub array to the left
+        heap_size -= 1
+        # Call max_heapify again on the new smaller heap
+        max_heapify(arr, heap_size, 0)
 
+    # return the sorted array
     return(arr)
 
 
@@ -301,7 +307,7 @@ def benchmark(funcs, arr_sizes, reps):
 
 def main():
 
-    print(quicksort([9,5,8,1,3,2,10,7,4,6]))
+    print(heapsort([5,1,3,4,6,2]))
 
     # # Run the benchmark for the specified functions, input sizes, and repetitions
     # funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]

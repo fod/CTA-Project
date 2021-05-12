@@ -77,3 +77,12 @@ if __name__ == '__main__':
 
             # Decrement the index variable so that it tracks the position of the key
             i -= 1
+
+
+def build_max_heap(arr, hs):
+# Rearrange the initial array so that it is a valid max heap
+
+    # Elements in arr[len(arr)/2 .. arr[len(arr)-1]] are leaves 
+    # so are 1-element heaps already so just rearrange the other half:
+    for i in range((len(arr) // 2) -1, -1, -1):
+        max_heapify(arr, hs, i)

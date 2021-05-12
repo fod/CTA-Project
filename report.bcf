@@ -2828,10 +2828,13 @@
     <bcf:citekey order="9">heineman2016algorithms</bcf:citekey>
     <bcf:citekey order="10">bentley:pearls</bcf:citekey>
     <bcf:citekey order="11">bentley:pearls</bcf:citekey>
-    <bcf:citekey order="12">cormen01</bcf:citekey>
+    <bcf:citekey order="12">musser1997</bcf:citekey>
     <bcf:citekey order="13">cormen01</bcf:citekey>
-    <bcf:citekey order="14">peters2002</bcf:citekey>
-    <bcf:citekey order="15">peters2002</bcf:citekey>
+    <bcf:citekey order="14">cormen01</bcf:citekey>
+    <bcf:citekey order="15">cormen01</bcf:citekey>
+    <bcf:citekey order="16">bentley:pearls</bcf:citekey>
+    <bcf:citekey order="17">peters2002</bcf:citekey>
+    <bcf:citekey order="18">peters2002</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

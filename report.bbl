@@ -152,6 +152,50 @@
       \verb https://books.google.ie/books?id=95zVsgEACAAJ
       \endverb
     \endentry
+    \entry{musser1997}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=275cfd8ff6a2299f5e96b34576b5832f}{%
+           family={Musser},
+           familyi={M\bibinitperiod},
+           given={David\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{fullhash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{bibnamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authorbibnamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authornamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authorfullhash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Quicksort is the preferred in-place sorting algorithm in many contexts, since its average computing time on uniformly distributed inputs is Θ(N log N), and it is in fact faster than most other sorting algorithms on most inputs. Its drawback is that its worst-case time bound is Θ(N2). Previous attempts to protect against the worst case by improving the way quicksort chooses pivot elements for partitioning have increased the average computing time too much – one might as well use heapsort, which has a Θ(N log N) worst-case time bound, but is on the average 2–5 times slower than quicksort. A similar dilemma exists with selection algorithms (for finding the i-th largest element) based on partitioning. This paper describes a simple solution to this dilemma: limit the depth of partitioning, and for subproblems that exceed the limit switch to another algorithm with a better worst-case bound. Using heapsort as the ‘stopper’ yields a sorting algorithm that is just as fast as quicksort in the average case, but also has an Θ(N log N) worst case time bound. For selection, a hybrid of Hoare's FIND algorithm, which is linear on average but quadratic in the worst case, and the Blum–Floyd–Pratt–Rivest–Tarjan algorithm is as fast as Hoare's algorithm in practice, yet has a linear worst-case time bound. Also discussed are issues of implementing the new algorithms as generic algorithms, and accurately measuring their performance in the framework of the C+:+ Standard Template Library. ©1997 by John Wiley \& Sons, Ltd.}
+      \field{journaltitle}{Software: Practice and Experience}
+      \field{number}{8}
+      \field{title}{Introspective Sorting and Selection Algorithms}
+      \field{volume}{27}
+      \field{year}{1997}
+      \field{pages}{983\bibrangedash 993}
+      \range{pages}{11}
+      \verb{doi}
+      \verb https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-\#
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \keyw{quicksort,heapsort,sorting algorithms,introspective algorithms,hybrid algorithms,generic algorithms,STL}
+    \endentry
     \entry{peters2002}{suppbook}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=e3aa619a4412763613574bb6b6fc1510}{%
