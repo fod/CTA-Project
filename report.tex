@@ -170,13 +170,7 @@ The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \
     \caption{\label{fig:quicksort_1}Quicksort partitioning.}
 \end{wrapfigure}
 
-Quicksort is a comparison sorting algorithm which recursively partitions the input data based on whether each element is higher or lower than a (often arbitrarily chosen) \emph{pivot} value. The algorithm runs in $n (log(n))$ time in the best and average cases, and $n^{2}$
-
-Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue.
-
-
-
-Can perform badly if pivot consistently chosen which puts all or almost all elements in one or other of the sub arrays. For instance if 1st or last ais chosen and array is already nearly sorted. Median mgiht be better because best case is if the two sublists are roughly equal at each iteration.
+Quicksort is a comparison sorting algorithm which recursively partitions its input data based on whether each element is higher or lower than a sometimes arbitarily chosen \emph{pivot} value. The algorithm runs in $n\log n$ time in the best and average cases, and $n^{2}$ time in the worst case.
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
@@ -184,12 +178,22 @@ Can perform badly if pivot consistently chosen which puts all or almost all elem
     \caption{\label{fig:quicksort_2}Quicksort sorting.}
 \end{wrapfigure}
 
-Usual options: first, last, random, median
+Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array -- represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
+
+Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The first two rows shoe the original array to be sorted and the result of the call to the partition algorithm shown in figure \ref{fig:quicksort_1}. After partitioning, the orignal pivot value, 6, is in its final sorted position. The two sub-arrays on either side of 6, one containing only values less than and one containing only values greater than, 6. The last value in eacah array is again chosen as the pivot (row 3) and both subarrays are again partitioned (row 4). The two pivot values, 4 and 9, for the sub-arrays partitioned in row 4 are now in their final sorted positions. Of the four sub-arrays produce by the partitioning in row 4, two contain just a single value, meaning that they are now in their final sorted positions; numbers 5 and 10 are now sorted. The remaining two sub-arrays are partitioned, producing two more sorted pivot values, 2 and 8 (row 6), and three single-element arrays (1, 3, and 7), completing the array sort. 
+
+The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $n\log n$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, howver that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
+
+Poorly chosen pivot values can cause poor performance. Performance is likely to be best -- all else being equal -- when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values -- the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite*[73]{heineman2016algorithms}.
+
+One final interesting optimisation, attributed without citation by \textcite[121]{bentley:pearls} to Sedgewick, is the use of inserion sort to sort small sub-arrays for which quicksort would be inefficient. The implementation suggested would entail halting partitioning when array length fell below a certain threshold, and sorting all of those short arrays together when all the larger ones had been mostly sorted by the partitioning algorithm.
 
 
 \subsection{Heapsort}
 
-Heapsort is a sorting algorithm that 
+Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}
+
+
 A heap structure is a nearly complete binary tree \autocite[p. 128]{cormen01}. The indices of the parent, left child, and right chaild can be calculated as parent = i/2, left child = 2i, and right child = 2i+1, where i is the index of the element. These can quickly be calculated by shifting bits \autocite[p. 128]{cormen01}
 
 Uses max heap -- at most a node is the value of its parent

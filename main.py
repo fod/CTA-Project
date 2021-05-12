@@ -112,6 +112,7 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
     # only be one element long
     if start_idx <= pivot_idx:
 
+        print(arr)
         # The partition function returns the pivot for the new sublist
         partition_border = partition(arr, start_idx, pivot_idx)
 
@@ -300,68 +301,70 @@ def benchmark(funcs, arr_sizes, reps):
 
 def main():
 
-    # Run the benchmark for the specified functions, input sizes, and repetitions
-    funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
-    arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
-    #arr_sizes = [ i for i in range(5, 100, 5)]
-    result = benchmark(funcs, arr_sizes, 10)
+    print(quicksort([9,5,8,1,3,2,10,7,4,6]))
 
-    # Write table of average times in LaTeX format
-    fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"
-    tabledata = result.copy()
-    tabledata[0] =  ["\\textbf{" + str(t) + "}" for t in tabledata[0]]
-    row_names = [ "\\textbf{" + func.__name__.capitalize().replace('_',' ') + "}" for func in funcs ]            
-    table = tabulate(tabledata, 
-                    headers="firstrow", 
-                    showindex=row_names, 
-                    tablefmt="latex_raw",
-                    stralign="right",
-                    floatfmt=".3f")
-    try:
-        with open(fname_tbl, "w") as f:
-            f.write(table)
-    except IOError:
-        print("Problem writing results table")
+    # # Run the benchmark for the specified functions, input sizes, and repetitions
+    # funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
+    # arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
+    # #arr_sizes = [ i for i in range(5, 100, 5)]
+    # result = benchmark(funcs, arr_sizes, 10)
 
-    # Generate plots of the returned time data
-    def write_plot(exclude=0, yscale="linear"):
+    # # Write latex table of average times
+    # fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"
+    # tabledata = result.copy()
+    # tabledata[0] =  ["\\textbf{" + str(t) + "}" for t in tabledata[0]]
+    # row_names = [ "\\textbf{" + func.__name__.capitalize().replace('_',' ') + "}" for func in funcs ]            
+    # table = tabulate(tabledata, 
+    #                 headers="firstrow", 
+    #                 showindex=row_names, 
+    #                 tablefmt="latex_raw",
+    #                 stralign="right",
+    #                 floatfmt=".3f")
+    # try:
+    #     with open(fname_tbl, "w") as f:
+    #         f.write(table)
+    # except IOError:
+    #     print("Problem writing results table")
 
-        # Plot style
-        style.use('seaborn')
+    # # Generate plots of the returned time data
+    # def write_plot(exclude=0, yscale="linear"):
 
-        # Create figure and axes
-        fig, ax = plt.subplots()
+    #     # Plot style
+    #     style.use('seaborn')
 
-        # Set y-scale (log or linear)
-        plt.yscale(yscale)
+    #     # Create figure and axes
+    #     fig, ax = plt.subplots()
 
-        # Set colours
-        colours = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", 
-                   "tab:brown", "tab:pink", "tab:gray", "tab:olive", "tab:cyan"]
+    #     # Set y-scale (log or linear)
+    #     plt.yscale(yscale)
 
-        # Plot each series
-        for p in range(exclude, len(result) - 1):
-            plt.plot(result[0],result[p + 1], 
-            label=funcs[p].__name__.capitalize().replace("_"," "), color=colours[p])
+    #     # Set colours
+    #     colours = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", 
+    #                "tab:brown", "tab:pink", "tab:gray", "tab:olive", "tab:cyan"]
 
-        # Set title, labels, and legend    
-        ax.set_title("Sorting algorithm running times for increasing input sizes")
-        ax.set_xlabel("input size n")
-        ax.set_ylabel(f"running time (ms){' - log scale' if yscale == 'log' else ''}")
-        plt.legend()
+    #     # Plot each series
+    #     for p in range(exclude, len(result) - 1):
+    #         plt.plot(result[0],result[p + 1], 
+    #         label=funcs[p].__name__.capitalize().replace("_"," "), color=colours[p])
 
-        # Save the figure
-        fig.savefig(f"bm_output/plot_{str(exclude)}_{yscale}_{time.strftime('%Y%m%d-%H%M%S')}")
+    #     # Set title, labels, and legend    
+    #     ax.set_title("Sorting algorithm running times for increasing input sizes")
+    #     ax.set_xlabel("input size n")
+    #     ax.set_ylabel(f"running time (ms){' - log scale' if yscale == 'log' else ''}")
+    #     plt.legend()
 
-    # Plot of output from all algorithms, linear y-scale
-    write_plot()
+    #     # Save the figure
+    #     fig.savefig(f"bm_output/plot_{str(exclude)}_{yscale}_{time.strftime('%Y%m%d-%H%M%S')}")
 
-    # Exclude insertion sort to get a better 
-    # comparison of the more efficient algorithms
-    write_plot(exclude=1)
+    # # Plot of output from all algorithms, linear y-scale
+    # write_plot()
+
+    # # Exclude insertion sort to get a better 
+    # # comparison of the more efficient algorithms
+    # write_plot(exclude=1)
    
-    # Include all algorithms but plot on a log scale
-    write_plot(yscale="log")
+    # # Include all algorithms but plot on a log scale
+    # write_plot(yscale="log")
 
     
 if __name__ == "__main__":
