@@ -2834,8 +2834,11 @@
     <bcf:citekey order="15">cormen01</bcf:citekey>
     <bcf:citekey order="16">bentley:pearls</bcf:citekey>
     <bcf:citekey order="17">cormen01</bcf:citekey>
-    <bcf:citekey order="18">peters2002</bcf:citekey>
-    <bcf:citekey order="19">peters2002</bcf:citekey>
+    <bcf:citekey order="18">woltmann20:counting</bcf:citekey>
+    <bcf:citekey order="19">musser1997</bcf:citekey>
+    <bcf:citekey order="20">musser1997</bcf:citekey>
+    <bcf:citekey order="21">peters2002</bcf:citekey>
+    <bcf:citekey order="22">peters2002</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

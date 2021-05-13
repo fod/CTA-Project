@@ -310,6 +310,43 @@
       \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
       \endverb
     \endentry
+    \entry{woltmann20:counting}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
+           family={Woltmann},
+           familyi={W\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{fullhash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{bibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorbibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authornamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorfullhash}{0a322c1fe1b86534ba258725f994e451}
+      \field{extraname}{1}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Counting Sort – Algorithm, Source Code, Time Complexity}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.happycoders.eu/algorithms/counting-sort/
+      \endverb
+      \verb{url}
+      \verb https://www.happycoders.eu/algorithms/counting-sort/
+      \endverb
+    \endentry
     \entry{woltmann20:insertion}{misc}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
@@ -325,8 +362,10 @@
       \strng{authorbibnamehash}{0a322c1fe1b86534ba258725f994e451}
       \strng{authornamehash}{0a322c1fe1b86534ba258725f994e451}
       \strng{authorfullhash}{0a322c1fe1b86534ba258725f994e451}
+      \field{extraname}{2}
       \field{sortinit}{W}
       \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradate}{2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{year}
       \true{uniqueprimaryauthor}

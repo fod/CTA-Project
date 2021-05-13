@@ -1,13 +1,13 @@
 # Fdb version 3
-["biber report"] 1620866712 "report.bcf" "report.bbl" "report" 1620866988
-  "report.bcf" 1620866988 125294 13dd09d41dba35e5b354db30a658073c "pdflatex"
+["biber report"] 1620869587 "report.bcf" "report.bbl" "report" 1620869656
+  "report.bcf" 1620869655 125462 4e74e314f9bf4230ecec82c36dacd29c "pdflatex"
   "report.bib" 1620866496 6017 63fd61558820e56a8eb1c4d2e3eba7e0 ""
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1620866986 "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.tex" "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf" "report" 1620866988
-  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.aux" 1620866988 8564 a11b0f99fa37fa39ee3097ebec4bd4de ""
-  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.tex" 1620866985 25607 281e6c0961f67d5629d2b28f573d655a ""
+["pdflatex"] 1620869653 "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.tex" "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf" "report" 1620869656
+  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.aux" 1620869655 8906 9c32c76a6d124ac314341031ebedfbac ""
+  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.tex" 1620869651 27138 2b24ec9dc8efc85cb1fb45b2efff9175 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1616952564 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1616952564 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1616952564 3072 ccae1a240ab272417e4399fe942df546 ""
@@ -119,15 +119,15 @@
   "insertion_sort.pdf" 1620663306 12398 2680afb95d4d5c46d567ce7e8058a02f ""
   "quicksort.pdf" 1620759094 30893 c266d60bdb7be8a6d98462ee685b8be1 ""
   "quicksort_2.pdf" 1620773308 24192 c32d1aa548bcc5857caf85d97dfd280b ""
-  "report.aux" 1620866988 8564 a11b0f99fa37fa39ee3097ebec4bd4de "pdflatex"
-  "report.bbl" 1620866714 15622 bc79360a38a6d49cf24dd1038728a593 "biber report"
-  "report.run.xml" 1620866988 2475 280abde54ca3265c03b03ea77b4036da "pdflatex"
-  "report.tex" 1620866985 25607 281e6c0961f67d5629d2b28f573d655a ""
+  "report.aux" 1620869655 8906 9c32c76a6d124ac314341031ebedfbac "pdflatex"
+  "report.bbl" 1620869588 17092 7b3acea913aeaac01d733a155924a03d "biber report"
+  "report.run.xml" 1620869655 2475 280abde54ca3265c03b03ea77b4036da "pdflatex"
+  "report.tex" 1620869651 27138 2b24ec9dc8efc85cb1fb45b2efff9175 ""
   (generated)
-  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.log"
-  "report.aux"
-  "report.log"
-  "report.bcf"
-  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf"
-  "report.pdf"
   "report.run.xml"
+  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.pdf"
+  "report.log"
+  "report.aux"
+  "report.pdf"
+  "/home/fod/HDip/modules/algorithms/project/CTA-Project/report.log"
+  "report.bcf"
