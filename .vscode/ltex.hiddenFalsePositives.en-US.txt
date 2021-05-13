@@ -1,2 +1,4 @@
 {"rule":"WITH_THE_EXCEPTION_OF","sentence":"^\\QA max-heap is a heap in which the value of every node, with the exception of the root node, is less than or equal to that of its parent \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QA max-heap can be stored as 1-based array with the root node at index, i = 1 and such that given the index i of any node, the parent of that node will be at i/2, and its left and right children will be at 2i and 2i + 1, respectively [128]cormen01[148]bentley:pearls.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe five algorithms described above are implemented in main.py as insertionsort(), quicksort(), heapsort(), countingsort(), and introsort().\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QAll take as input a Python list of comparables, i.e. anything that implements the lt, gt, and eq methods.\\E$"}

@@ -1,0 +1,390 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{bentley:pearls}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a2ea6a4e7fe1b839acb38db376905df8}{%
+           family={Bentley},
+           familyi={B\bibinitperiod},
+           given={Jon},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {ACM Press/Addison-Wesley Publishing Co.}%
+      }
+      \strng{namehash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \strng{fullhash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \strng{bibnamehash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \strng{authorbibnamehash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \strng{authornamehash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \strng{authorfullhash}{a2ea6a4e7fe1b839acb38db376905df8}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0201657880}
+      \field{title}{Programming Pearls (2nd Ed.)}
+      \field{year}{1999}
+    \endentry
+    \entry{cormen01}{book}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=835b8c52757d98c15859b416316d9820}{%
+           family={Cormen},
+           familyi={C\bibinitperiod},
+           given={Thomas\bibnamedelima H.},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a389dea91a76366c4b4af5f52a928a76}{%
+           family={Leiserson},
+           familyi={L\bibinitperiod},
+           given={Charles\bibnamedelima E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3a964821f97ee17f8bb285bc61c52899}{%
+           family={Rivest},
+           familyi={R\bibinitperiod},
+           given={Ronald\bibnamedelima L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bc78426660400760f77758aec45e71a8}{%
+           family={Stein},
+           familyi={S\bibinitperiod},
+           given={Clifford},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{fullhash}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{bibnamehash}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{authorbibnamehash}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{authornamehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{authorfullhash}{10f004e08c7c03d98be0da1231a869ce}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The book covers a broad range of algorithms in depth, yet makes their design and analysis acessible to all levels of readers. Each chapter is relatively self-contained and can be used as a unit of study. The algorithms are described in English and in a pseudocode designed to be readable by anyone who has done a little programming. The explanations have been kept elementary without sacrificing depth of coverage or mathematical rigor.}
+      \field{edition}{Second}
+      \field{isbn}{9780262531962}
+      \field{title}{Introduction to Algorithms}
+      \field{year}{2001}
+      \keyw{aks algorithm clrs gadget no.pdf np-hardness quicksort shellsort sorting sorting.network textbook}
+    \endentry
+    \entry{heineman2016algorithms}{book}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=9af51d7a053fe92e76835875d3f9e188}{%
+           family={Heineman},
+           familyi={H\bibinitperiod},
+           given={G.T.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c484a012285ea0a5f07d0db60566da14}{%
+           family={Pollice},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4fe4944c834b7df1e652c3457457413}{%
+           family={Selkow},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{c6d7ca638951e6edbe47757ee11cde48}
+      \strng{fullhash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{bibnamehash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{authorbibnamehash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \strng{authornamehash}{c6d7ca638951e6edbe47757ee11cde48}
+      \strng{authorfullhash}{5b6a8da1227c800131a9a45c4a1c60ed}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781491948927}
+      \field{series}{In a nutshell}
+      \field{title}{Algorithms in a Nutshell}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://books.google.ie/books?id=95zVsgEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.ie/books?id=95zVsgEACAAJ
+      \endverb
+    \endentry
+    \entry{musser1997}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=275cfd8ff6a2299f5e96b34576b5832f}{%
+           family={Musser},
+           familyi={M\bibinitperiod},
+           given={David\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{fullhash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{bibnamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authorbibnamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authornamehash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \strng{authorfullhash}{275cfd8ff6a2299f5e96b34576b5832f}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract Quicksort is the preferred in-place sorting algorithm in many contexts, since its average computing time on uniformly distributed inputs is Θ(N log N), and it is in fact faster than most other sorting algorithms on most inputs. Its drawback is that its worst-case time bound is Θ(N2). Previous attempts to protect against the worst case by improving the way quicksort chooses pivot elements for partitioning have increased the average computing time too much – one might as well use heapsort, which has a Θ(N log N) worst-case time bound, but is on the average 2–5 times slower than quicksort. A similar dilemma exists with selection algorithms (for finding the i-th largest element) based on partitioning. This paper describes a simple solution to this dilemma: limit the depth of partitioning, and for subproblems that exceed the limit switch to another algorithm with a better worst-case bound. Using heapsort as the ‘stopper’ yields a sorting algorithm that is just as fast as quicksort in the average case, but also has an Θ(N log N) worst case time bound. For selection, a hybrid of Hoare's FIND algorithm, which is linear on average but quadratic in the worst case, and the Blum–Floyd–Pratt–Rivest–Tarjan algorithm is as fast as Hoare's algorithm in practice, yet has a linear worst-case time bound. Also discussed are issues of implementing the new algorithms as generic algorithms, and accurately measuring their performance in the framework of the C+:+ Standard Template Library. ©1997 by John Wiley \& Sons, Ltd.}
+      \field{journaltitle}{Software: Practice and Experience}
+      \field{number}{8}
+      \field{title}{Introspective Sorting and Selection Algorithms}
+      \field{volume}{27}
+      \field{year}{1997}
+      \field{pages}{983\bibrangedash 993}
+      \range{pages}{11}
+      \verb{doi}
+      \verb https://doi.org/10.1002/(SICI)1097-024X(199708)27:8
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-024X%28199708%2927%3A8%3C983%3A%3AAID-SPE117%3E3.0.CO%3B2-%23
+      \endverb
+      \keyw{quicksort,heapsort,sorting algorithms,introspective algorithms,hybrid algorithms,generic algorithms,STL}
+    \endentry
+    \entry{peters2002}{suppbook}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e3aa619a4412763613574bb6b6fc1510}{%
+           family={Peters},
+           familyi={P\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{bookauthor}{1}{}{%
+        {{hash=b3d7dccae2063df059213f049bdfa8f0}{%
+           family={Alex\bibnamedelima Martelli},
+           familyi={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={David\bibnamedelima Ascher},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O Reilly}%
+      }
+      \strng{namehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{fullhash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{bibnamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authorbibnamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authornamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authorfullhash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{bookauthorbibnamehash}{b3d7dccae2063df059213f049bdfa8f0}
+      \strng{bookauthornamehash}{b3d7dccae2063df059213f049bdfa8f0}
+      \strng{bookauthorfullhash}{b3d7dccae2063df059213f049bdfa8f0}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Python Cookbook}
+      \field{series}{SF Masterworks}
+      \field{title}{Introduction to Algorithms Chapter}
+      \field{year}{2002}
+      \field{pages}{621\bibrangedash 624}
+      \range{pages}{4}
+    \endentry
+    \entry{Sedgewick-1978}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6a9c16ef79ae932cd7e8bc985da5a937}{%
+           family={Sedgewick},
+           familyi={S\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \strng{fullhash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \strng{bibnamehash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \strng{authorbibnamehash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \strng{authornamehash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \strng{authorfullhash}{6a9c16ef79ae932cd7e8bc985da5a937}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0001-0782}
+      \field{issue}{10}
+      \field{journaltitle}{Communications of the ACM}
+      \field{title}{Implementing Quicksort programs}
+      \field{volume}{21}
+      \field{year}{1978}
+      \field{pages}{847\bibrangedash 857}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1145/359619.359631
+      \endverb
+      \verb{urlraw}
+      \verb http://doi.org/10.1145/359619.359631
+      \endverb
+      \verb{url}
+      \verb http://doi.org/10.1145/359619.359631
+      \endverb
+    \endentry
+    \entry{enwiki:997404113}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b6aea1a416c89509a7df1cbb69249cb6}{%
+           family={{Wikipedia contributors}},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[Online; accessed 9-May-2021]}
+      \field{title}{Timsort --- {Wikipedia}{,} The Free Encyclopedia}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
+      \endverb
+    \endentry
+    \entry{woltmann20:counting}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
+           family={Woltmann},
+           familyi={W\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{fullhash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{bibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorbibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authornamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorfullhash}{0a322c1fe1b86534ba258725f994e451}
+      \field{extraname}{1}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Counting Sort – Algorithm, Source Code, Time Complexity}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.happycoders.eu/algorithms/counting-sort/
+      \endverb
+      \verb{url}
+      \verb https://www.happycoders.eu/algorithms/counting-sort/
+      \endverb
+    \endentry
+    \entry{woltmann20:insertion}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
+           family={Woltmann},
+           familyi={W\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{fullhash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{bibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorbibnamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authornamehash}{0a322c1fe1b86534ba258725f994e451}
+      \strng{authorfullhash}{0a322c1fe1b86534ba258725f994e451}
+      \field{extraname}{2}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Insertion Sort - Algorithm, Source Code, Time Complexity}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.happycoders.eu/algorithms/insertion-sort/
+      \endverb
+      \verb{url}
+      \verb https://www.happycoders.eu/algorithms/insertion-sort/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

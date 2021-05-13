@@ -8,6 +8,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage[style=apa, backend=biber]{biblatex}
 \usepackage{color}
+\usepackage{float}
 
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize,labelfont=footnotesize}
@@ -228,15 +229,17 @@ Any array can be seen as a heap. Note the array indices attached to the heap nod
 
 Counting sort is the first non-comparison sort reviewed here. The algorithm sorts data by counting the number of occurrences of each unique value in the input and then calculating the index in the sorted output of the last incidence of each value. With this information it is able to populate a sorted output list. Counting sort runs in $O(n)$ time when the range of possible values, \emph{k} is $O(n)$ \autocite[168]{cormen01}. It is stable, and it has a space complexity of $O(n + k)$ \autocite{woltmann20:counting}.
 
-Counting sort must know the range of values, \emph{k} in its input data. When it is passed an array for sorting, the algorithm creates two further arrays: a count array, of length \emph{k} and an output array equal in length to the input array. The count array should be initialised with zeroes. The algorithm begins by iterating through the input. For each element it encounters it increments the value in the count array the index of which is equal to the value encountered. For example, if the current element in the input array has a value of 5, then the value in the count array at index 5 is incremented. When the entire input array has been traversed, the values in the count array are converted to a cumulative sum of value counts, by iteratively adding each value to the value that precedes it. This effectively provides a list of positions of the last occurrence of each value in the sorted output array. To make use of this list, the input array is iterated through in reverse and, for each value encountered, the value at the index in the count array that equals that value provides the position for that value in the output array (see the red lines connecting steps 3-5 in figure \ref{fig:counting} for a visual example of this). The value in the count array is then decremented so that when that value is encountered in the input array again it will be place in the next position to the left.
+Counting sort must know the range of values, \emph{k} in its input data. When it is passed an array for sorting, the algorithm creates two further arrays: a count array, of length \emph{k} and an output array equal in length to the input array. The count array should be initialised with zeroes. The algorithm begins by iterating through the input. For each element it encounters it increments the value in the count array the index of which is equal to the value encountered. For example, if the current element in the input array has a value of 5, then the value in the count array at index 5 is incremented. When the entire input array has been traversed, the values in the count array are converted to a cumulative sum of value counts, by iteratively adding each value to the value that precedes it. This effectively provides a list of positions of the last occurrence of each value in the sorted output array. To make use of this list, the input array is iterated through in reverse and, for each value encountered, the value at the index in the count array that equals that value provides the position for that value in the output array (see the red lines connecting steps 3-5 in figure \ref{fig:counting} for a visual example of this). The value in the count array is then decremented so that when that value is encountered in the input array again it will be placed in the next position to the left.
 
-\begin{wrapfigure}{r}{0.4\textwidth}
+
+
+\subsection{Introsort}\label{sec:introsort}
+
+\begin{wrapfigure}{R}{0.4\textwidth}
     \centering
     \includegraphics[width=6cm]{introsort.pdf}
     \caption{\label{fig:introsort}Introsort flow chart}
 \end{wrapfigure}
-
-\subsection{Introsort}\label{sec:introsort}
 
 Introsort is a hybrid sorting algorithm developed to address some shortcomings with quicksort. \textcite[983]{musser1997} points out that while quicksort runs in $O(n\log n)$ time in best and average cases, it degrades to $O(n^{2})$ in the worst case, when recursion depth passes some threshold. Furthermore, while heapsort runs in $O(n\log n)$ in the worst case, it remains between 2 and 5 times slower than quicksort. \textcite{Sedgewick-1978} addresses the issue with quicksort's poor worst case performance, suggesting alternative pivot selection methods, but also suggesting the use of insertion sort on small partitions. \textcite[986]{musser1997} adopts Sedgewick's suggestions, using insertion sort for partitions below a threshold and also using ```median-of-three''' pivot selection, but he also attempts to stave off recursion problems by switching to heap sort when a recursion depth of $\log n$ levels is reached \autocite{heineman2016algorithms}.
 
@@ -245,15 +248,15 @@ The resulting algorithm runs in $O(n\log n)$ in best, worst and average cases. I
 
 \section{Implementation \& Benchmarking}
 
-Re insertion sort slower on value based as opposed to refernce based-- python interns first 255 unsigned? --- so ref based
+The five algorithms described above are implemented in \texttt{main.py} as \texttt{insertion\_sort()}, \texttt{quicksort()}, \texttt{heapsort()}, \texttt{counting\_sort()}, and \texttt{introsort()}. All take as input a Python list of comparables, i.e. anything that implements the \texttt{\_\_lt\_\_}, \texttt{\_\_gt\_\_}, and \texttt{\_\_eq\_\_} methods. Some of the sorting functions require additional input. These functions have been so arranged, using wrapper functions or defaults, as to be callable using only an input list, to simplify automated benchmarking. Where an algorithm, for one reason or another, uses more than one function, the second function is defined as in inner function of the first. This is mainly to keep the code tidy and manageable. An exception to this is the \texttt{partition()} function which comprises the bulk of the quicksort algorithm, and which is defined as a separate top-level function, because it must also be available to \texttt{introsort()}.
 
-Benchmarking: empirical method for comparing algorithm performance a postiori. Can be used to vaildate a priori / theoretical hypotheses
-
-@max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
+Benchmarking is handled by the \texttt{benchmark()} function. This takes a list of function names, a list of integers representing the sizes of the lists of unsorted random integers to be used as test data, and an integer representing the number of times each sort should be repeated
 
 
 
-\begin{table}[h]
+
+
+\begin{table}[H]
     \resizebox{\textwidth}{!}{%
     \input{bm_output/bm_table_20210513-101603.tex}
     }
@@ -282,6 +285,12 @@ https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html
 -- Tim Peters on timing \textcite{peters2002}
 "The slowest result is often computed on the first try, because your machine’s caches take extra time to adjust to the new task."
 
+
+Re insertion sort slower on value based as opposed to refernce based-- python interns first 255 unsigned? --- so ref based
+
+Benchmarking: empirical method for comparing algorithm performance a postiori. Can be used to vaildate a priori / theoretical hypotheses
+
+@max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
 
 
 
