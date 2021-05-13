@@ -195,6 +195,9 @@ def counting_sort(arr, k=0):
     Returns:
         list of integers: The sorted list
     """
+
+    # Set k to the maximum value in the array
+    # The overhead of doing this is:
     # On array with n = 10000:
     # %timeit max(y) 236 µs ± 2.38 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
     if not k:
@@ -209,13 +212,22 @@ def counting_sort(arr, k=0):
     for i in range(len(arr)):
         counter[arr[i]] = counter[arr[i]] + 1
 
-
+    # To each value in the counter list, add the previous value
+    # This gives a count of how many elements are equal to or less than
+    # each value in the original array i.e. a -1-based position of the last
+    # incidence of each value in the sorted output
     for i in range(1, k + 1):
         counter[i] = counter[i] + counter[i-1]
 
+    # Working backwards through the original array...
     for i in range(len(arr) - 1, -1, -1):
+        # ...place each value from the orignal array in the 
+        # output array at the position held for that value
+        # in the counter array
         output[counter[arr[i]] - 1 ] = arr[i]
-        counter[arr[i]] = counter[arr[i]] - 1
+        # Decrement the counter for that value so that the position held
+        # is correct for th next instance of that value that's encountered
+        counter[arr[i]] = counter[arr[i]] - 1  
 
     return output
 
@@ -307,7 +319,7 @@ def benchmark(funcs, arr_sizes, reps):
 
 def main():
 
-    print(heapsort([5,1,3,4,6,2]))
+    print(counting_sort([5,1,3,4,6,2,4,6,7,9,4,3,4,5,2,6,7,8,2,9]))
 
     # # Run the benchmark for the specified functions, input sizes, and repetitions
     # funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]

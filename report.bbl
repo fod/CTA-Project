@@ -310,7 +310,7 @@
       \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
       \endverb
     \endentry
-    \entry{woltmann20}{misc}{}
+    \entry{woltmann20:insertion}{misc}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=0a322c1fe1b86534ba258725f994e451}{%
            family={Woltmann},
