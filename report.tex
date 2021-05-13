@@ -233,7 +233,9 @@ Counting sort must know the range of values, \emph{k} in its input data. When it
 
 \subsection{Introsort}\label{sec:introsort}
 
-Introsort is a hybrid sorting algorithm developed to address some shortcomings with some of the more popular sorting algorithms. \textcite[983]{musser1997} points out that while quicksort runs in $O(n\log n)$ time in best and average cases, it degrades to $O(n^{2})$ in the worst case, when recursion depth passes some threshold. Furthermore, while heapsort 
+Introsort is a hybrid sorting algorithm developed to address some shortcomings with some of the more popular sorting algorithms. \textcite[983]{musser1997} points out that while quicksort runs in $O(n\log n)$ time in best and average cases, it degrades to $O(n^{2})$ in the worst case, when recursion depth passes some threshold. Furthermore, while heapsort runs in $O(n\log n)$ in the worst case, it remains between 2 and 5 times slower than quicksort.
+
+
 Added insertion sort when partition size <= 20 
 
 

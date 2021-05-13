@@ -112,7 +112,6 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
     # only be one element long
     if start_idx <= pivot_idx:
 
-        print(arr)
         # The partition function returns the pivot for the new sublist
         partition_border = partition(arr, start_idx, pivot_idx)
 
@@ -169,7 +168,7 @@ def heapsort(arr):
 
     # Iterate from right to left through unsorted section of array 
     for i in range(heap_size - 1, -1, -1):
-        print(arr, heap_size)
+
         # The top value in the heap will be the max so swap it to the end
         arr[0], arr[i] = arr[i], arr[0]
         
@@ -341,7 +340,7 @@ def benchmark(funcs, arr_sizes, reps):
 
 
 # Generate plots of the returned time data
-def write_plot(result, exclude=0, yscale="linear"):
+def write_plot(result, funcs, exclude=0, yscale="linear"):
 
     # Plot style
     style.use('seaborn')
@@ -400,14 +399,14 @@ def main():
 
    
     # Plot of output from all algorithms, linear y-scale
-    write_plot(result)
+    write_plot(result, funcs)
 
     # Exclude insertion sort to get a better 
     # comparison of the more efficient algorithms
-    write_plot(result, exclude=1)
+    write_plot(result, funcs, exclude=1)
    
     # Include all algorithms but plot on a log scale
-    write_plot(result, yscale="log")
+    write_plot(result, funcs, yscale="log")
 
     
 if __name__ == "__main__":
