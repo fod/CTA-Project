@@ -255,17 +255,28 @@ Benchmarking: empirical method for comparing algorithm performance a postiori. C
 
 \begin{table}[h]
     \resizebox{\textwidth}{!}{%
-    \input{bm_output/bm_table_20210510-153504.tex}
+    \input{bm_output/bm_table_20210513-101603.tex}
     }
 \caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms}
 \end{table}
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210510-153504.png}
-    \caption{Relative performance of algorithms using a log y-scale.}
-    \label{fig:log-perf}
-  \end{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_0_linear_20210513-101604.png}
+    \caption{Relative performance of five algorithms}
+    \label{fig:linear5}
+\end{figure}
 
+\begin{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_1_linear_20210513-101605.png}
+    \caption{Relative performance of four algorithms — insertion sort has been excluded}
+    \label{fig:linear4}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210513-101605.png}
+    \caption{Relative performance of five algorithms using a log y-scale}
+    \label{fig:log}
+\end{figure}
 
 https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html 
 -- Tim Peters on timing \textcite{peters2002}

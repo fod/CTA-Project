@@ -2822,12 +2822,9 @@
     <bcf:citekey order="3">heineman2016algorithms</bcf:citekey>
     <bcf:citekey order="4">woltmann20:insertion</bcf:citekey>
     <bcf:citekey order="5">bentley:pearls</bcf:citekey>
-    <bcf:citekey order="6">bentley:pearls</bcf:citekey>
     <bcf:citekey order="7">Sedgewick-1978</bcf:citekey>
-    <bcf:citekey order="8">Sedgewick-1978</bcf:citekey>
     <bcf:citekey order="9">heineman2016algorithms</bcf:citekey>
     <bcf:citekey order="10">bentley:pearls</bcf:citekey>
-    <bcf:citekey order="11">bentley:pearls</bcf:citekey>
     <bcf:citekey order="12">musser1997</bcf:citekey>
     <bcf:citekey order="13">cormen01</bcf:citekey>
     <bcf:citekey order="14">cormen01</bcf:citekey>
@@ -2836,14 +2833,10 @@
     <bcf:citekey order="17">cormen01</bcf:citekey>
     <bcf:citekey order="18">woltmann20:counting</bcf:citekey>
     <bcf:citekey order="19">musser1997</bcf:citekey>
-    <bcf:citekey order="20">musser1997</bcf:citekey>
     <bcf:citekey order="21">Sedgewick-1978</bcf:citekey>
-    <bcf:citekey order="22">Sedgewick-1978</bcf:citekey>
     <bcf:citekey order="23">musser1997</bcf:citekey>
-    <bcf:citekey order="24">musser1997</bcf:citekey>
     <bcf:citekey order="25">heineman2016algorithms</bcf:citekey>
     <bcf:citekey order="26">peters2002</bcf:citekey>
-    <bcf:citekey order="27">peters2002</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
