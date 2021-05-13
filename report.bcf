@@ -2837,8 +2837,13 @@
     <bcf:citekey order="18">woltmann20:counting</bcf:citekey>
     <bcf:citekey order="19">musser1997</bcf:citekey>
     <bcf:citekey order="20">musser1997</bcf:citekey>
-    <bcf:citekey order="21">peters2002</bcf:citekey>
-    <bcf:citekey order="22">peters2002</bcf:citekey>
+    <bcf:citekey order="21">Sedgewick-1978</bcf:citekey>
+    <bcf:citekey order="22">Sedgewick-1978</bcf:citekey>
+    <bcf:citekey order="23">musser1997</bcf:citekey>
+    <bcf:citekey order="24">musser1997</bcf:citekey>
+    <bcf:citekey order="25">heineman2016algorithms</bcf:citekey>
+    <bcf:citekey order="26">peters2002</bcf:citekey>
+    <bcf:citekey order="27">peters2002</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

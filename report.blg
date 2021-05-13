@@ -1,15 +1,15 @@
-[1] Config.pm:312> INFO - This is Biber 2.15
+[0] Config.pm:312> INFO - This is Biber 2.15
 [1] Config.pm:315> INFO - Logfile is 'report.blg'
-[223] biber:330> INFO - === Thu May 13, 2021, 03:15:55
-[268] Biber.pm:415> INFO - Reading 'report.bcf'
-[516] Biber.pm:952> INFO - Found 9 citekeys in bib section 0
-[563] Biber.pm:4334> INFO - Processing section 0
-[590] Biber.pm:4523> INFO - Looking for bibtex format file 'report.bib' for section 0
-[593] bibtex.pm:1682> INFO - LaTeX decoding ...
-[631] bibtex.pm:1494> INFO - Found BibTeX data source 'report.bib'
-[1090] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1091] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1091] Biber.pm:4162> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
-[1091] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
-[1140] bbl.pm:651> INFO - Writing 'report.bbl' with encoding 'UTF-8'
-[1155] bbl.pm:754> INFO - Output to report.bbl
+[174] biber:330> INFO - === Thu May 13, 2021, 03:35:21
+[204] Biber.pm:415> INFO - Reading 'report.bcf'
+[398] Biber.pm:952> INFO - Found 9 citekeys in bib section 0
+[432] Biber.pm:4334> INFO - Processing section 0
+[450] Biber.pm:4523> INFO - Looking for bibtex format file 'report.bib' for section 0
+[452] bibtex.pm:1682> INFO - LaTeX decoding ...
+[478] bibtex.pm:1494> INFO - Found BibTeX data source 'report.bib'
+[714] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[714] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[714] Biber.pm:4162> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[714] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[744] bbl.pm:651> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[757] bbl.pm:754> INFO - Output to report.bbl
