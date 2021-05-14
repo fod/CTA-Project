@@ -414,7 +414,7 @@ def main():
     # Set up function and test size lists
     funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
     arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
-    #arr_sizes = [5, 10 , 15, 20, 25, 30, 35, 40, 45, 50]
+
     # Run the benchmarks
     result = benchmark(funcs, arr_sizes)
 

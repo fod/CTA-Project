@@ -250,6 +250,41 @@
       \endverb
       \keyw{quicksort,heapsort,sorting algorithms,introspective algorithms,hybrid algorithms,generic algorithms,STL}
     \endentry
+    \entry{peters:timsort}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e3aa619a4412763613574bb6b6fc1510}{%
+           family={Peters},
+           familyi={P\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{fullhash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{bibnamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authorbibnamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authornamehash}{e3aa619a4412763613574bb6b6fc1510}
+      \strng{authorfullhash}{e3aa619a4412763613574bb6b6fc1510}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{[Python-Dev] Sorting}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://mail.python.org/pipermail/python-dev/2002-July/026837.html
+      \endverb
+      \verb{url}
+      \verb https://mail.python.org/pipermail/python-dev/2002-July/026837.html
+      \endverb
+    \endentry
     \entry{Sedgewick-1978}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=6a9c16ef79ae932cd7e8bc985da5a937}{%
@@ -291,35 +326,6 @@
       \endverb
       \verb{url}
       \verb http://doi.org/10.1145/359619.359631
-      \endverb
-    \endentry
-    \entry{enwiki:997404113}{misc}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=b6aea1a416c89509a7df1cbb69249cb6}{%
-           family={{Wikipedia contributors}},
-           familyi={W\bibinitperiod}}}%
-      }
-      \strng{namehash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \strng{fullhash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \strng{bibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \strng{authorbibnamehash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \strng{authornamehash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \strng{authorfullhash}{b6aea1a416c89509a7df1cbb69249cb6}
-      \field{sortinit}{W}
-      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{[Online; accessed 9-May-2021]}
-      \field{title}{Timsort --- {Wikipedia}{,} The Free Encyclopedia}
-      \field{year}{2020}
-      \verb{urlraw}
-      \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
-      \endverb
-      \verb{url}
-      \verb https://en.wikipedia.org/w/index.php?title=Timsort&oldid=997404113
       \endverb
     \endentry
     \entry{woltmann20:counting}{misc}{}

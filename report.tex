@@ -14,36 +14,37 @@
 \usepackage{wrapfig}
 \usepackage{microtype}
 %\usepackage[htt]{hyphenat}
+\usepackage{flafter}
 
 \addbibresource{report.bib}
-\makeatletter
-%\def\BState{\State\hskip-\ALG@thistlm}
-\makeatother
+
 
 \parindent=0pt % disables indentation
 \parskip=12pt  % adds vertical space between paragraphs
-
-\title{CTA Project}
-\author{Fiachra O'Donoghue}
+% \makeatletter
+% %\def\BState{\State\hskip-\ALG@thistlm}
+% \makeatother
+\title{Benchmarking sorting algorithms}
+\author{Fiachra O' Donoghue}
 
 \begin{document}
-    
+\maketitle
+
 \section{Introduction}
 
-%%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts such as complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
 \subsection{Sorting}
 
-Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to the member to its right, and equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all values of \emph{i} and \emph{j}
-; if A\textsubscript{i} < A\textsubscript{j} then i < j and if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}. A sorted collection $A'$ must also be a permutation of the original collection $A$, that is, all of the members in $A$ must appear in $A'$ \autocite[15]{cormen01}.
+Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to that of the member to its right, and that equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all values of \emph{i} and \emph{j}
+; if A\textsubscript{i} < A\textsubscript{j} then i < j; and, if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}. A sorted collection $A'$ must also be a permutation of the original collection $A$, that is, all of the members in $A$ must appear in $A'$ \autocite[15]{cormen01}.
 
 \subsubsection{Comparators}
 
 If the members of a collection to be sorted are, for instance, integers, then it is clearly and intuitively understood what is meant by the relations `<', `>', `=', `$\ne$', etc. For other kinds of object however, it may not be obvious how they are to be compared. The definition of the relation is not the job of the sorting algorithm, which should be able to operate independently of the details of the relationship between the objects it is sorting. The job of defining the relationship should fall to a comparator function. The comparator, or ``ordering relation'' defined on a collection, must satisfy the conditions that, given any three items, $a, b$, and $c$ from the collection, only one of ($a < b$), ($a > b$), ($a = b$) may be true; and if ($a < b$) and ($b < c$), then $(a < c$) \autocite[5]{knuth1968art}.
 
-In general, when a sorting algorithm is implemented, it is assumed that the user has access to, implicitly or explicitly, a comparator function, which, when passed two values \emph{a} an \emph{b}, will return 0 if $a = b$, -1 if $a < b$, and 1 if $a > b$ \autocite[55]{heineman2016algorithms}. A pseudocode example of a comparator function for comparing numbers is defined below.
+In general, when a sorting algorithm is implemented, it is assumed that the user has access to, implicitly or explicitly, a comparator function, which, when passed two values \emph{a} and \emph{b}, will return 0 if $a = b$, -1 if $a < b$, and 1 if $a > b$ \autocite[55]{heineman2016algorithms}. A pseudocode example of a comparator function for comparing numbers is defined below.
 
-\begin{algorithm}
-    \caption{A function for comparing numerical values}\label{euclid}
+\begin{algorithm}[H]
+    \caption{A function for comparing numerical values}\label{comparator}
     \begin{algorithmic}[1]
     \Procedure{Comparator}{a, b}
     \If {$a < b$} \Return -1
@@ -58,92 +59,72 @@ In general, when a sorting algorithm is implemented, it is assumed that the user
 
 \subsubsection{Inversions}
 
-If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
+In a collection of items, \emph{A}, where \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, if $i < j$ but $A_{i} > A_{j}$, then the pair ($A_{i}$, $A_{j}$) is an inversion \autocite[11]{knuth1968art}. The degree of  ``sortedness'' can be quantified by counting the number of inversions in a collection. For instance, the collection [1,3,4,2,5] is a permutation of the sorted collection [1,2,3,4,5], with  two inversions; (3,2) and (4,2). The degree of sortedness, and therefore the number of inversions, of a collection can be an important consideration when choosing an appropriate sorting algorithm for a problem, as some algorithms perform particularly well, or poorly, on nearly-sorted or maximally unsorted inputs. A reverse-sorted collection will have the maximum possible number of inversions for that collection, and for some algorithms, such as insertion sort (see section \ref{sec:insertion}) this represents the worst possible case in terms of efficiency.
+
+
 \subsection{Properties of sorting algorithms}
+
+In choosing a sorting algorithm, and deciding if it is a good fit for a particular problem, its is useful to consider the following properties.
 
 \subsubsection{Stability}
 
-Stability is the property whereby two equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability is unlikely to be an important consideration when sorting a collection of simple objects such as numbers but, when there is satellite data, it can become important \autocite{cormen01}.
+Stability is the property whereby equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability can be important where satellite data must be moved around with the items being sorted, or where the output of the algorithm is to be used as the input to some other algorithm. Radix sort, for instance is dependent on the stability of counting sort \autocite[170]{cormen01}.
 
-\subsubsection{Time efficiency}
-
-Time efficiency and space efficiency --- how we compare and rate algorithms
+\subsubsection{Efficiency}
 
 
+Efficiency refers to the algorithm's use of resources, in particular, how it scales to increasing input size. Usually it is measured by runtime or memory use as a function of input size. A more detailed discussion of the topic will be found in the section on analysing algorithm complexity (section \ref{sec:analysingcomplexity}). However, an important property of algorithms as they relate to memory usage which it seems appropriate to include here, is whether or not their sorting is conducted \emph{in-place}, meaning that no extra copies of the input data need to be made in the process of sorting. 
 
-\subsubsection{Memory efficiency}
-In-place sorting: Only a fixed amount of memory over the size of n (size of input) required, regardless of size of n. Non-in-place algorithms generally need an amount of memory that increases monotonically with n.
+In-place sorting algorithms might be particularly desirable in low memory environments such as embedded systems, while non in-place algorithms such as merge sort might be desirable for sorting data stored in a file external to the system \autocite[81]{heineman2016algorithms}
+
 
 \subsubsection{Suitability for a particular input}
 
-e.g. Size of input, degree of sorting, domain of input (e.g. integers from 1 to 1000), memory requirements, storage location (e.g. external?)
-
-In addition to size of input, specific characteristics of the input can affect the performance of an algorithm. For instance, given two sorting algorithms, one may outperform the other on an input with very few inversions, while the other may be more efficient given an input which is less sorted initially. Similarly, one algorithm may perform particularly well on smaller inputs while performing poorly on larger ones. Insertion sort, for example, examined in more detail below, performs extremely well on input sizes up to ~n=20 but performance falls off as n increases giving it by far the worst overall performance of the five algorithms examined here. The differential efficiency depending on input characteristics can be exploited by algorithm designers to make highly efficient adaptive hybrid algorithms which switch strategy to best tackle the particular nature of the part of the input data on which they are currently working. Timsort, for instance, reduces the number of comparisons made by identifying and merging (using a merge sort) pre-existing runs in its input, and will add to those runs, where they are below a minimum threshold, using insertion sort which is very efficient on small inputs \autocite{enwiki:997404113}. The implementation of introsort used here, described below, uses a recursive partitioning algorithm to divide the sorting task into sublists and switches to heapsort when a maximum recursion depth is reached, as well as to insertion sort when a sublist contains fewer than 20 elements.
+In addition to size of input, specific characteristics of the input can affect the performance of an algorithm. For instance, given two sorting algorithms, one may outperform the other on an input with very few inversions, while the other may be more efficient given an input which is less sorted initially. Similarly, one algorithm may perform particularly well on smaller inputs while performing poorly on larger ones. Insertion sort, for example, examined in more detail in section \ref{sec:insertion}, performs extremely well on input sizes up to $\sim n$=20 (see figure \ref{fig:fifty} for a demonstration), but performance falls off as \emph{n} increases giving it by far the worst overall performance of the five algorithms examined here. The differential efficiency depending on input characteristics can be exploited by algorithm designers to make highly efficient adaptive hybrid algorithms which switch strategy to best tackle the particular nature of the part of the input data on which they are currently working. Timsort, for instance, identifies and merges pre-existing runs in its input, and will add to those runs, where they are below a minimum threshold, using insertion sort which is very efficient on small inputs \autocite{peters:timsort}. The implementation of introsort used here, described in section \ref{sec:introsort}, uses a recursive partitioning algorithm to divide the sorting task into sublists and switches to heapsort when a maximum recursion depth is reached, as well as to insertion sort when a sublist contains fewer than 20 elements.
 
 It follows from the fact that an algorithm will perform better or worse depending on the nature, as well as on the size of its input, that choice of algorithm does not rest solely on its complexity relative to other competing algorithms. It also depends on the nature of the input in terms of its size, degree of sortedness, and the underlying probability distribution of the specific inputs it is likely to encounter.
 
 \subsection{Classes of sorting algorithms}
 
+Sorting algorithms may be classified in any number of ways, but only one will be examined here; whether the algorithm sorts by comparing items or by some other method.
+
 \subsubsection{Comparison}
 
-Only uses comparison operators to order elements. A comparison based sorting algorithm orders a collection by comparing pairs of elements until the collection is sorted.
-
-No comparison sorting algorithm can perform better than \emph{n log n} in the average or worst cases. Some non-comparison based sorting algorithms can, under certain circumstances, with better worst-case times than \emph{n log n}.
+Comparison-based sorting algorithms, such as insertion sort (section \ref{sec:insertion}) and quicksort (section \ref{sec:quicksort}), order a collection by comparing pairs of elements until the collection is sorted. No comparison sorting algorithm can perform better than $O(n\log n)$ in the average or worst cases. Quicksort and indeed, heapsort; see section \ref{sec:heapsort}, then, at $O(n\log n)$, are ``asymptotically optimal'' \autocite[165-168]{cormen01}, while insertion sort at $O(n^{2})$ is not.
 
 \subsubsection{Non-comparison}
 
+Non-comparison-based sorting algorithms, such as bucket sort, radix sort, and counting sort, bypass the $O(n\log n)$ limit of comparison-based sorting algorithms by leveraging a priori knowledge about the input data to classify and count values, allowing them to sort their inputs in linear time. Counting sort (section \ref{sec:counting}), for instance, must construct an array equal in length to the range of the data. To do this it must have access to that information \autocite[168]{cormen01}. Bucket sort needs a hash function that will uniformly distribute the input space into ``buckets'' \autocite[74]{heineman2016algorithms}. Both counting sort and bucket sort can complete their task in linear time but only under certain conditions. Bucket sort needs an input with a uniform distribution, and an ordered hash function \autocite[75]{heineman2016algorithms}, while counting sort degrades as \emph{n} grows larger. See the plot in figure \ref{fig:range} for an example of this.
 
 \subsubsection{Hybrid}
 
+Hybrid sorting algorithms, such as timsort \autocite{peters:timsort}, and introsort (seciton \ref{sec:introsort}), invoke different sorting algorithms depending on the characteristics of the data they are sorting. Introsort, for instance, defaults to quicksort, which recursively partitions the input, but switches to insertion sort for short subarrays, and heapsort when the recursion depth is likely to cause quicksort's performance to degrade \autocite{musser1997}.
 
+\subsection{Analysing algorithm complexity}\label{sec:analysingcomplexity}
 
-\subsection{Analysing algorithm complexity}
+Efficiency of algorithms can be assessed empirically or theoretically. To assess an algorithm empirically it should be, as described in section \ref{sec:impbench}, executed and the resources of interest monitored. Usually those resources will be time and space, that is the time taken for the algorithm to complete its task, and the amount of memory it requires to do it. The results obtained through empirical analysis are useful, but they are tied to the implementation, the platform on which they are run, the size of their input, and a number of other variables unrelated to the algorithm itself. It is really a measure of performance of that implementation of the algorithm under very specific circumstances.
 
-Worst, Best, and Average cases.
-These are classes of inputs, specific to a particular algorithm, for which that algorithm exhibits its least efficient, most efficient, and most usually efficient performances, respectively. In practice, best and worse cases are uncommon, but algorithms are often compared and chosen based on their worst case performances as this defines the lower bound on the algorithm's efficiency.
+To describe the efficiency of an algorithm in a way which is useful for comparison between algorithms independent of specific circumstances, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of the number of operations it takes to complete its task for a given input size. More specifically it is analysed in terms of how the number of elementary operations scales with increasing values of \emph{n}. For the purposes of these analyses all elementary operations are assumed to take the same amount of time.
 
-Generally speaking, the performance of an algorithm vis-$\acute{a}$-vis the number of operations it must perform or the time it takes to complete its task, can vary significantly over all possible input combinations of size \emph{n}. The worst cases are those instances where the algorithm performs the greatest number of operations or takes the longest time, over of all of those input instances. Worst case offers a guarantee that an algorithm will perform no worese - will take no longer - than it does in that case. 
+If the complexity of an algorithm is described by a function connecting the size of its input to the number of operations it must perform, then we can classify those functions into performance families based on the order of their growth functions \autocite[18]{heineman2016algorithms}. As the size of \emph{n} increases, the highest order terms of which it is a part come to dominate the value of the growth function to the degree that the constants and lower order terms become insignificant. This term allows the function to be assigned to a ``performance family''. Common performance families in algorithm complexity analysis are, in order of decreasing efficiency \autocite[19]{heineman2016algorithms};
 
+\begin{itemize}
+    \item Constant ($f(n)=1$)
+    \item Logarithmic ($f(n) = \log n$)
+    \item Sublinear ($f(n) = n^{d}$ for $d<1$)
+    \item Linear ($f(n) = n$)
+    \item Linearithmic ($f(n) = n\log n$)
+    \item Quadratic ($f(n) = n^{2}$)
+    \item Exponential ($f(n) = 2^{n}$)
+\end{itemize}
 
-Complexity can be assessed based on use of whatever resources are scarce and need to be optimised for. Most commonly, algorithms are assessed based on time taken, or number of operations, per input size. 
-Asymptotic Notation
-In algorithm analysis, Big O notation (e.g. O(n$\textsuperscript{2}$)) describes the performance of an algorithm in the worst case scenario. This can be used to classify algorithms by complexity - two algorithms with the same Big O complexity will perfom similarly in their worst cases, and, of two algorithms with different Big O values, the one with the lesser value will perform much more efficiently in its worst case than the other will in its own worst case.
+Because algorithms may exhibit very different efficiency when applied to inputs with different characteristics, it is not possible to unambiguously define $f(n)$ without knowing what $n$ is, and it is not possible to express a useful $f(n)$ that covers every possible input set the algorithm could possibly encounter. It is, however, possible to predict how the algorithm would perform in best case possible, i.e. when passed an input that allows it to perform the least possible number of operations. Similarly, it is possible to predict its performance in the best and average cases. These functions are known as asymptotic notation, and they express the upper bound of $f(n)$, in the worst case, the lower bound, in the best case, and the lower and upper bounds of the average case. The worst case performance is expressed as $O(f(n))$, the best case is expressed as $\Omega(f(n))$, and the average case is expressed as $\Theta(f(n))$ \autocite[18]{heineman2016algorithms}.
 
-Tightest upper bound should be specified
+The best, worse and average case complexities for the five algorithms examined below are listed in table \ref{table:complexity} in section \ref{bench}.
 
-Omega ($\Omega$) notation represents the complexity of an algorithm in its best case, and Theta ($\Theta$) notation represents its complexity in the average, or most usual case
-
-In describing an algorithm in terms of efficiency, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of \emph{n}, the number of elements in, or the size of, its input, and \emph{f(n)} - the runtime, or the number of operations it takes to complete its task, given \emph{n}. All elementary operations are assumed to take the same amount of time.
-Some algorithms can have good time complexity but are not practical for certain kinds of input data, e.g. insertion sort performs poorly on lage datasets but extemely well on smaller ones.
-
-Where an implementation requires the use of nested loops, in most cases this will indicate O(n\textsuperscript{2}) complexity.
-
-A priori analysis -- theoretical perspective --- independent of implementation details -- compare order of growth between algorithms -- ***measure of complexity.***
-
-A posteriori analysis -- empirical evaluation of implementation of  algorithm -- ***tied to implementation an platform*** -- performance compared --- *** measure of performance ***
-
-External factors affecting time of execution but not connected to complexity:
-Size of intpu, speed of computer, quality of compiler.
-
-To sum up: Performance vs complexity
-Performance: how much memory, time, etc is used when algorithm is run --- depends on external factor as well as code 
-Complexity: How resource requirements scale as input gets larger
-
-Complexity affects performance but performancedoes not affect complexity
-
-Because algorithms are platform independent, empirical analyses cannot necessarily be generalised to all combinations of platform, etc.... so an independent measure of complexity is necessary to compare algorithm performance. This measure can be assigned to a number of orders of magnitude. 
-
-Complexity families:
-    Constant, Logarithmic (log n), Sublinear, linear, n log(n), Polynomial, exponential
-
-To evaluate complexity, most expensive computation should be identified, and the order of that computation will be the order of the complexity of the algorithm.
-
---- Higher order term will dominate 
 \section{Sorting Algorithms}
 
-%%%Introduce  each  of  your  chosen  algorithms in  turn,  discuss their  space  andtime complexity, and explain how each algorithm works using your own bespoke diagrams and different example input instances.  If you diagrams are not original creationsyou will get zero.%%%
-
-\subsection{Insertion sort}
+\subsection{Insertion sort}\label{sec:insertion}
 
 
 \begin{wrapfigure}{r}{0.3\textwidth}
@@ -160,7 +141,7 @@ Figure \ref{fig:insertion_sort} demonstrates the insertion sort operating on an 
 
 The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \frac{n\textsuperscript{2} - n}{2}$ and the average case time is  $n \times (n - 1) \times \frac{1}{4} = \frac{n\textsuperscript{2} - n}{4}$ \autocite{woltmann20:insertion}. Taking only the highest order term into account as this will be the dominant term as \emph{n} grows, this gives us average and worst case performances of $\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$). Finally, the algorithm is stable, as, if the algorithm encounters a value equal to the key to the key's left, it will simply move back to the outer loop and onto the next element, leaving the two equal elements where they are.
 
-\subsection{Quicksort}
+\subsection{Quicksort}\label{sec:quicksort}
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
@@ -172,7 +153,7 @@ Quicksort is a comparison-based sorting algorithm which recursively partitions i
 
 Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array — represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
 
-\begin{wrapfigure}{r}{0.4\textwidth}
+\begin{wrapfigure}{R}{0.4\textwidth}
     \centering
     \includegraphics{quicksort_2.pdf}
     \caption{\label{fig:quicksort_2}Quicksort sorting.}
@@ -187,7 +168,7 @@ Poorly chosen pivot values can cause poor performance. Performance is likely to 
 One final interesting optimisation, attributed without citation by \textcite[121]{bentley:pearls} to Sedgewick, is the use of insertion sort to sort small sub-arrays for which quicksort would be inefficient. The suggested implementation would entail halting partitioning when array length fell below a certain threshold, and using insertion sort to complete sorting of the almost-sorted final array. This solution starts to resemble introsort \autocite{musser1997}, which is discussed below in section \ref{sec:introsort}.
 
 
-\subsection{Heapsort}
+\subsection{Heapsort}\label{sec:heapsort}
 
 Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}, then taking the top value, and recursively rearranging the remaining elements into a max-heap, then taking the new top value, and so on, until the heap is exhausted and the array is sorted. The algorithm runs in $O(n\log n)$ time in the best, average, \emph{and} worst cases. It sorts in-place so its space complexity is $O(1)$ \autocite[129]{cormen01}.
 
@@ -212,7 +193,7 @@ Any array can be seen as a heap. Note the array indices attached to the heap nod
 
 
 
-\subsection{Counting sort}
+\subsection{Counting sort}\label{sec:counting}
 
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
@@ -239,7 +220,7 @@ Introsort is a hybrid sorting algorithm developed to address some shortcomings w
 The resulting algorithm runs in $O(n\log n)$ in best, worst and average cases. Its space complexity is $O(\log n)$ as its constituent algorithms all sort in-place and the only extra requirement is quicksort's stack space.
 
 
-\section{Implementation \& Benchmarking}
+\section{Implementation \& Benchmarking}\label{sec:impbench}
 
 \subsection{Implementation}
 
@@ -255,7 +236,7 @@ The \texttt{main()} function in \texttt{main.py} initialises the list of algorit
 
 Finally, some plots are produced using the mean time data and saved to the working directory with timestamped filenames. The plots are generated, using \texttt{matplotlib}, by the \texttt{write\_plot()} function, also defined in \texttt{main.py}.
 
-\subsection{Benchmarking}
+\subsection{Benchmarking}\label{bench}
 
 
 \begin{table}[H]
