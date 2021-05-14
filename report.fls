@@ -490,6 +490,8 @@ INPUT /usr/share/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT /usr/share/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1728.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
@@ -504,8 +506,6 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecti0800.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/eccc1200.tfm

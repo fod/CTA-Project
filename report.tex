@@ -31,55 +31,42 @@
 \section{Introduction}
 
 %%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts such as complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
+\subsection{Sorting}
 
-Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to the member to its right, and equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all pairs of members of \emph{A},
-; if A\textsubscript{i} < A\textsubscript{j} then i < j and if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}.
+Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to the member to its right, and equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all values of \emph{i} and \emph{j}
+; if A\textsubscript{i} < A\textsubscript{j} then i < j and if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}. A sorted collection $A'$ must also be a permutation of the original collection $A$, that is, all of the members in $A$ must appear in $A'$ \autocite[15]{cormen01}.
 
-If the members of a collection to be sorted are, for instance, integers, then it is clearly and intuitively understood what is meant by the relations `<', `>', `=', `$\ne$', etc. For other kinds of object however, it may not be obvious how they are to be compared. The definition of the relation is not the job of a sorting algorithm, which should be able to operate independently of the details of the relationship between the objects it is sorting. An ordering relation, or comparator, defined on a collection, must satisfy the conditions that, given any three items, $a, b$, and $c$ from the collection, only one of ($a < b$), ($a > b$), ($a = b$) may be true; and if ($a < b$) and ($b < c$), then $(a < c$) \autocite[5]{knuth1968art}.
+\subsubsection{Comparators}
 
-In general, if a comparator for the type of object being sorted is not defined or implicit in the language in which a sorting algroithm is implemented, then it is necessary to define a comparator function which complies to the conditions outlined above, if a valid sort is to be executed.
+If the members of a collection to be sorted are, for instance, integers, then it is clearly and intuitively understood what is meant by the relations `<', `>', `=', `$\ne$', etc. For other kinds of object however, it may not be obvious how they are to be compared. The definition of the relation is not the job of the sorting algorithm, which should be able to operate independently of the details of the relationship between the objects it is sorting. The job of defining the relationship should fall to a comparator function. The comparator, or ``ordering relation'' defined on a collection, must satisfy the conditions that, given any three items, $a, b$, and $c$ from the collection, only one of ($a < b$), ($a > b$), ($a = b$) may be true; and if ($a < b$) and ($b < c$), then $(a < c$) \autocite[5]{knuth1968art}.
 
-\subsection{stability}
-
-
-The contents of a collection, A, must be the same before and after sorting; i.e. the sorted collection A must be a permuattion fo the pre-sorted collection A.
-
-
-
-If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
-
-The particular problem's definition of equivalence is encoded in the comparator function and the precise nature of the comparator function is irrelevant to the sorting algorithm which merely requires a black box through which it can pass two values and which returns a codification of the equivalence of those values.
-
-More concretely; the following pseudocode demonstrates a comparator function which for comparing numerical values.
+In general, when a sorting algorithm is implemented, it is assumed that the user has access to, implicitly or explicitly, a comparator function, which, when passed two values \emph{a} an \emph{b}, will return 0 if $a = b$, -1 if $a < b$, and 1 if $a > b$ \autocite[55]{heineman2016algorithms}. A pseudocode example of a comparator function for comparing numbers is defined below.
 
 \begin{algorithm}
-\caption{A function for comparing numerical values}\label{euclid}
-\begin{algorithmic}[1]
-\Procedure{Comparator}{a, b}
-\If {$a < b$} \Return -1
-\EndIf
-\If {$a = b$} \Return 0
-\EndIf
-\If {$a > b$} \Return 1
-\EndIf
-\EndProcedure
-\end{algorithmic}
+    \caption{A function for comparing numerical values}\label{euclid}
+    \begin{algorithmic}[1]
+    \Procedure{Comparator}{a, b}
+    \If {$a < b$} \Return -1
+    \EndIf
+    \If {$a = b$} \Return 0
+    \EndIf
+    \If {$a > b$} \Return 1
+    \EndIf
+    \EndProcedure
+    \end{algorithmic}
 \end{algorithm}
 
+\subsubsection{Inversions}
 
-
-
-
-
-
-
-\subsection{Sorting algorithm properties}
+If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
+\subsection{Properties of sorting algorithms}
 
 \subsubsection{Stability}
 
 Stability is the property whereby two equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability is unlikely to be an important consideration when sorting a collection of simple objects such as numbers but, when there is satellite data, it can become important \autocite{cormen01}.
 
 \subsubsection{Time efficiency}
+
 Time efficiency and space efficiency --- how we compare and rate algorithms
 
 
@@ -95,13 +82,20 @@ In addition to size of input, specific characteristics of the input can affect t
 
 It follows from the fact that an algorithm will perform better or worse depending on the nature, as well as on the size of its input, that choice of algorithm does not rest solely on its complexity relative to other competing algorithms. It also depends on the nature of the input in terms of its size, degree of sortedness, and the underlying probability distribution of the specific inputs it is likely to encounter.
 
-\subsection{Comparison Sorts}
+\subsection{Classes of sorting algorithms}
+
+\subsubsection{Comparison}
 
 Only uses comparison operators to order elements. A comparison based sorting algorithm orders a collection by comparing pairs of elements until the collection is sorted.
 
 No comparison sorting algorithm can perform better than \emph{n log n} in the average or worst cases. Some non-comparison based sorting algorithms can, under certain circumstances, with better worst-case times than \emph{n log n}.
 
-\subsection{Non-comparison Sorts}
+\subsubsection{Non-comparison}
+
+
+\subsubsection{Hybrid}
+
+
 
 \subsection{Analysing algorithm complexity}
 
@@ -178,7 +172,7 @@ Quicksort is a comparison-based sorting algorithm which recursively partitions i
 
 Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array — represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
 
-\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{wrapfigure}{r}{0.4\textwidth}
     \centering
     \includegraphics{quicksort_2.pdf}
     \caption{\label{fig:quicksort_2}Quicksort sorting.}

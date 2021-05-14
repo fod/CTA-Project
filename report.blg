@@ -1,15 +1,15 @@
 [0] Config.pm:312> INFO - This is Biber 2.15
 [1] Config.pm:315> INFO - Logfile is 'report.blg'
-[156] biber:330> INFO - === Fri May 14, 2021, 11:14:29
-[186] Biber.pm:415> INFO - Reading 'report.bcf'
-[357] Biber.pm:952> INFO - Found 9 citekeys in bib section 0
-[388] Biber.pm:4334> INFO - Processing section 0
-[408] Biber.pm:4523> INFO - Looking for bibtex format file 'report.bib' for section 0
-[410] bibtex.pm:1682> INFO - LaTeX decoding ...
-[437] bibtex.pm:1494> INFO - Found BibTeX data source 'report.bib'
-[632] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[632] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[632] Biber.pm:4162> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
-[633] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
-[660] bbl.pm:651> INFO - Writing 'report.bbl' with encoding 'UTF-8'
-[672] bbl.pm:754> INFO - Output to report.bbl
+[204] biber:330> INFO - === Fri May 14, 2021, 12:56:54
+[235] Biber.pm:415> INFO - Reading 'report.bcf'
+[435] Biber.pm:952> INFO - Found 9 citekeys in bib section 0
+[471] Biber.pm:4334> INFO - Processing section 0
+[494] Biber.pm:4523> INFO - Looking for bibtex format file 'report.bib' for section 0
+[496] bibtex.pm:1682> INFO - LaTeX decoding ...
+[528] bibtex.pm:1494> INFO - Found BibTeX data source 'report.bib'
+[760] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[761] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[763] Biber.pm:4162> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[763] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[818] bbl.pm:651> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[830] bbl.pm:754> INFO - Output to report.bbl
