@@ -22,7 +22,7 @@ def insertion_sort(arr):
                              implement __lt__, __gt__, and __eq__
 
     Returns:
-        sorted list: The sorted list
+        list: A reference to the sorted list
     """
 
     # Iterate through list starting at second element
@@ -87,7 +87,7 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
        Introduction to Algorithms, 2nd Ed.
 
     Args:
-        arr ([list]):               The list to be sorted. Elements must be 
+        arr (list):                 The list to be sorted. Elements must be 
                                     comparable using <, >, =; i.e.
                                     implement __lt__, __gt__, and __eq__
 
@@ -101,7 +101,7 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
                                     partition(). Defaults to True.
 
     Returns:
-        [list]: A reference to the sorted list
+        list: A reference to the sorted list
     """
 
     # first_run flag allows the default pivot to be the last element in the list
@@ -123,6 +123,18 @@ def quicksort(arr, start_idx=0, pivot_idx=0, first_run=True):
 
 
 def heapsort(arr):
+    """Heapsort. Based on pseudocode found in Cormen et al., 2001, pp. 128-136; 
+       Introduction to Algorithms, 2nd Ed.
+
+    Args:
+        arr (list of comparables): The list to be sorted. Elements must be 
+                                   comparable using <, >, =; i.e.
+                                   implement __lt__, __gt__, and __eq__
+
+    Returns:
+        list: A reference to the sorted list
+    """
+
 
     def max_heapify(arr, heap_size, i):
     # Recursively construct max heaps from sub-arrays
@@ -192,7 +204,7 @@ def counting_sort(arr, k=0):
                  counting_sort(arr, max(arr))
 
     Returns:
-        list of integers: The sorted list
+        list: A reference to the sorted list
     """
 
     # Set k to the maximum value in the array
@@ -243,7 +255,7 @@ def introsort(arr):
 
 
     Returns:
-        list: The sorted list
+        list: A reference to the sorted list
     """
 
     def introsort_helper(arr, start, end, maxdepth):
@@ -277,7 +289,30 @@ def introsort(arr):
     return arr
 
 
-def benchmark(funcs, arr_sizes, reps):
+def benchmark(funcs, arr_sizes, reps=10, intrange=(0, 100), writeraw=False):
+    """Benchmarking for sorting algorithms. Repeatedly sorts random input using passed algorithms
+       and returns mean times taken for each algorithm/input size ccombination. 
+
+    Args:
+        funcs (list of functions):     A list of functions inplementing sorting algorithms
+                                       that are available to the benchmarking function 
+        arr_sizes (list of ints):      For each value, n, in this list, a list of random integers
+                                       of length n will be generated
+        reps (int, optional):          The number of times each algorithm will be run on each sample. 
+                                       Defaults to 10.
+        intrange (tuple, optional):    The range of values to use in the sample lists. Defaults to (0, 100).
+        writeraw (boolean, optional):  If true, a timestamped json file of raw times is written to disk.
+                                       Defaults to False.
+
+    Returns:
+        list of lists of floats:    A table containing the mean times for each algorithm/input size 
+                                    combination
+    """
+
+    # If arr_sizes is created using range() there's a good chance it ocntains a 0
+    if 0 in arr_sizes:
+        print("Warning: there is a 0 in the list of array sizes. A zero-sized list is not permitted")
+        return
 
     # Build dict to hold raw results
     raw_result = { func.__name__: { "n": { n: [0] * 10 for n in arr_sizes } } for func in funcs }
@@ -286,7 +321,7 @@ def benchmark(funcs, arr_sizes, reps):
     table = [[size for size in arr_sizes]]
 
     # Generate test arrays
-    sample_arrs = [ [ randint(0, 100) for i in range(n) ] for n in arr_sizes ]
+    sample_arrs = [ [ randint(intrange[0], intrange[1]) for i in range(n) ] for n in arr_sizes ]
 
     # Iterate through the list of functions to be benchmarked -- funcs
     for func in funcs:
@@ -326,21 +361,24 @@ def benchmark(funcs, arr_sizes, reps):
         # Add the row for the current algorithm to the output table
         table.append(results)
 
-    # Write the raw times to timestamped json file
-    fname_raw = f"bm_output/bm_raw_{time.strftime('%Y%m%d-%H%M%S')}.json"
-    try:
-        os.makedirs(os.path.dirname(fname_raw), exist_ok=True)
-        with open(fname_raw, "w") as f:
-            json.dump(raw_result, f)
-    except IOError:
-        print("Problem writing raw data")
-   
+    # Write the raw times and input arrays to timestamped json file
+    if writeraw:
+        raw_data = {"input": sample_arrs, "times": raw_result }
+        fname = f"bm_output/bm_raw_{time.strftime('%Y%m%d-%H%M%S')}.json"
+        try:
+            # try to create output directory if it doesn't exist already
+            os.makedirs(os.path.dirname(fname), exist_ok=True)
+            with open(fname, "w") as f:
+                json.dump(raw_data, f)
+        except IOError:
+            print("Problem writing raw data")
+    
     # Return benchmark results
     return table
 
 
-# Generate plots of the returned time data
 def write_plot(result, funcs, exclude=0, yscale="linear"):
+# Generate plots of the returned time data
 
     # Plot style
     style.use('seaborn')
@@ -376,9 +414,9 @@ def main():
     # Set up function and test size lists
     funcs = [insertion_sort, quicksort, heapsort, counting_sort, introsort]
     arr_sizes = [100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000]
-    
+    #arr_sizes = [5, 10 , 15, 20, 25, 30, 35, 40, 45, 50]
     # Run the benchmarks
-    result = benchmark(funcs, arr_sizes, 10)
+    result = benchmark(funcs, arr_sizes)
 
     # Write latex table of benchmark results
     fname_tbl = f"bm_output/bm_table_{time.strftime('%Y%m%d-%H%M%S')}.tex"

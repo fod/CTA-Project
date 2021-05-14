@@ -1,0 +1,4 @@
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe main() function in main.py initialises the list of algorithms and a list of input array sizes and passes them to the benchmark() function.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThe plots are generated, using matplotlib, by the writeplot() function, also defined in main.py.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QAs for time complexity, it has already been mentioned that quicksort finishes in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q time for best and average cases.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfirst figure second figure\\E$"}

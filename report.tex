@@ -9,15 +9,15 @@
 \usepackage[style=apa, backend=biber]{biblatex}
 \usepackage{color}
 \usepackage{float}
-
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize,labelfont=footnotesize}
 \usepackage{wrapfig}
-
+\usepackage{microtype}
+%\usepackage[htt]{hyphenat}
 
 \addbibresource{report.bib}
 \makeatletter
-\def\BState{\State\hskip-\ALG@thistlm}
+%\def\BState{\State\hskip-\ALG@thistlm}
 \makeatother
 
 \parindent=0pt % disables indentation
@@ -32,6 +32,7 @@
 
 %%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts such as complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
 
+A sorting problem is one 
 
 
 Formal definition of sorting and the property of being sorted\dots
@@ -159,13 +160,13 @@ No comparison sorting algorithm can perform better than \emph{n log n} in the av
     \caption{\label{fig:insertion_sort}Insertion sort.}
 \end{wrapfigure}
 
-Insertion sort is a comparison sort algorithm which works in linear time in best case ($\Omega$(n)), i.e. an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant. It is efficient when sorting small or almost sorted inputs, and where there are many duplicate elements \autocite[p. 60]{heineman2016algorithms}.
+Insertion sort is a comparison-based sorting algorithm which works in linear time in the best case ($\Omega$(n)), i.e. given an already sorted input, and quadratic time in the average and worst cases ($\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$)). The algorithm sorts in-place so space complexity is constant. It is efficient when sorting small or almost sorted inputs, and where there are many duplicate elements \autocite[p. 60]{heineman2016algorithms}.
 
 The algorithm consists of two loops, one nested inside the other. The outer loop iterates from the second element in the input list to the end. If the index of the current outer loop value is \emph{i}, the inner loop compares the value at \emph{i}, known as the \emph{key} with the value to its left (\emph{i - 1}). If the element at \emph{i - 1} is less than, or equal to, the key, no action is necessary as the two elements are sorted with respect to one another. However, if the value at \emph{i - 1} is greater than the key then the value at \emph{i - 2} is compared with the key, and the inner loop continues leftward until either the beginning of the list is reached or a value smaller than the key is found. When this occurs, the key is inserted into the appropriate slot in the list and all of the elements that were compared with it and found to be larger are shifted one position to the right.
 
 Figure \ref{fig:insertion_sort} demonstrates the insertion sort operating on an unsorted list of six digits. Each row represents an iteration of the outer loop. The key in each iteration is represented by the grey box. The red arrow denotes the insertion of the key into its new position, and the grey arrows represent the shifting of all of the intervening, larger, values one position to the right. Note that the elements to the left of the key are always sorted with respect to one another, while the elements to the right of the key have yet to be inserted into this sorted sub-array. Note also that each grey arrow represents one iteration of the inner loop. The inner loop needs to run once only for each inversion of which the current key is a part. This is why the algorithm has a running time of $\Omega$(n) for an already sorted list — because a single run of the outer loop — \emph{n} - 1 iterations — with one comparison per iteration, and without any iterations at all of the inner loop, will confirm that the input is sorted.
 
-The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \frac{n\textsuperscript{2} - n}{2}$ and the average case time is  $n \times (n - 1) \times \frac{1}{4} = \frac{n\textsuperscript{2} - n}{4}$ \autocite{woltmann20:insertion}. Taking only the highest order term into account as this will be the dominant term as \emph{n} grows, this gives us average and worst case performances of $\theta$(n$\textsuperscript{2}$ and $O(n\textsuperscript{2}$). Finally, the algorithm is stable, as if the algorithm encounters a value equal to the key to the key's left, it will simply move back to the outer loop and onto the next element, leaving the two equal elements where they are.
+The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \frac{n\textsuperscript{2} - n}{2}$ and the average case time is  $n \times (n - 1) \times \frac{1}{4} = \frac{n\textsuperscript{2} - n}{4}$ \autocite{woltmann20:insertion}. Taking only the highest order term into account as this will be the dominant term as \emph{n} grows, this gives us average and worst case performances of $\theta$(n$\textsuperscript{2}$) and $O(n\textsuperscript{2}$). Finally, the algorithm is stable, as, if the algorithm encounters a value equal to the key to the key's left, it will simply move back to the outer loop and onto the next element, leaving the two equal elements where they are.
 
 \subsection{Quicksort}
 
@@ -175,7 +176,7 @@ The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \
     \caption{\label{fig:quicksort_1}Quicksort partitioning.}
 \end{wrapfigure}
 
-Quicksort is a comparison sorting algorithm which recursively partitions its input data based on whether each element is higher or lower than a sometimes arbitrarily chosen \emph{pivot} value. The algorithm runs in $n\log n$ time in the best and average cases, and $n^{2}$ time in the worst case.
+Quicksort is a comparison-based sorting algorithm which recursively partitions its input data based on whether each element is higher or lower than a sometimes arbitrarily chosen \emph{pivot} value. The algorithm runs in $O(n\log n)$ time in the best and average cases, and $O (n^{2})$ in the worst case.
 
 Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algorithm. First a pivot is chosen. Much can be said on the subject of pivot selection, and the matter is discussed below, but for the purposes of this demonstration, the pivot is taken to be the last element of the input array. The pivot value is highlighted in blue. As the algorithm progresses, each value in the array is compared to the pivot value. If the current value is greater than the pivot value it is assigned to the right-hand sub-array — represented by the dark boxes in figure \ref{fig:quicksort_1}. If the current value is less than the pivot value then it is swapped with the first value of the right-hand sub-array. Finally, when the pivot value, which is located in the last array position, is reached, it is swapped with the first value of the right-hand sub-array. This places it between a sub-array containing only values smaller than it, and a sub-array containing only values that are equal to or exceed it. It also places it in the position it will occupy in the fully sorted array. The partitioning portion of the quicksort algorithm will then return the location of the pivot value so that two recursive calls to quicksort can partition one of the two sub-arrays each.
 
@@ -185,9 +186,9 @@ Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algor
     \caption{\label{fig:quicksort_2}Quicksort sorting.}
 \end{wrapfigure}
 
-Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The first two rows shoe the original array to be sorted and the result of the call to the partition algorithm shown in figure \ref{fig:quicksort_1}. After partitioning, the original pivot value, 6, is in its final sorted position. The two sub-arrays on either side of 6, one containing only values less than and one containing only values greater than, 6. The last value in each array is again chosen as the pivot (row 3) and both subarrays are again partitioned (row 4). The two pivot values, 4 and 9, for the sub-arrays partitioned in row 4 are now in their final sorted positions. Of the four sub-arrays produce by the partitioning in row 4, two contain just a single value, meaning that they are now in their final sorted positions; numbers 5 and 10 are now sorted. The remaining two sub-arrays are partitioned, producing two more sorted pivot values, 2 and 8 (row 6), and three single-element arrays (1, 3, and 7), completing the array sort. 
+Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The first two rows show the original array to be sorted and the result of the call to the partition algorithm shown in figure \ref{fig:quicksort_1}. After partitioning, the original pivot value, 6, is in its final sorted position. The two sub-arrays on either side of 6, one containing only values less than and one containing only values greater than, 6. The last value in each array is again chosen as the pivot (row 3) and both subarrays are again partitioned (row 4). The two pivot values, 4 and 9, for the sub-arrays partitioned in row 4 are now in their final sorted positions. Of the four sub-arrays produced by the partitioning in row 4, two contain just a single value, meaning that they are now in their final sorted positions; numbers 5 and 10 are now sorted. The remaining two sub-arrays are partitioned, producing two more sorted pivot values, 2 and 8 (row 6), and three single-element arrays (1, 3, and 7), completing the array sort. 
 
-The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $n\log n$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, however that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
+The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $O(n\log n)$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, however that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
 
 Poorly chosen pivot values can cause poor performance. Performance is likely to be best — all else being equal — when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values — the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite*[73]{heineman2016algorithms}.
 
@@ -196,7 +197,7 @@ One final interesting optimisation, attributed without citation by \textcite[121
 
 \subsection{Heapsort}
 
-Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}, taking the top value, then recursively rearranging the remaining elements into a max-heap and taking the top value until the heap is exhausted and the array is sorted. The algorithm runs in $O(n\log n)$ time in the best, average, \emph{and} worst cases. It sorts in-place so its space complexity is $O(1)$ \autocite[129]{cormen01}.
+Heapsort is a sorting algorithm that sorts data by first rearranging it so that it forms a \emph{max-heap}, then taking the top value, and recursively rearranging the remaining elements into a max-heap, then taking the new top value, and so on, until the heap is exhausted and the array is sorted. The algorithm runs in $O(n\log n)$ time in the best, average, \emph{and} worst cases. It sorts in-place so its space complexity is $O(1)$ \autocite[129]{cormen01}.
 
 A heap is a binary tree which is completely filled, with the possible exception of the lowest level, which, to the extent it  \emph{is} filled, is populated from left to right, with the rightmost nodes filled last. A max-heap is a heap in which the value of every node, with the exception of the root node, is less than or equal to that of its parent \autocite[127-129]{cormen01}. A max-heap can be stored as 1-based array with the root node at index, \emph{i} = 1 and such that given the index \emph{i} of any node, the parent of that node will be at \emph{i}/2, and its left and right children will be at 2\emph{i} and 2\emph{i} + 1, respectively \autocites[128]{cormen01}[148]{bentley:pearls}. In the implementation used here, however, the root node is stored at \emph{i} = 0, putting a node's parent at (\emph{i}-1)/2, and its left and right children at 2\emph{i} + 1 and 2\emph{i} + 2, respectively. An example of a max-heap can be seen in figure \ref{fig:heap}.
 
@@ -207,12 +208,12 @@ A heap is a binary tree which is completely filled, with the possible exception 
     \caption{\label{fig:heap}A max heap generated from an array holding the numbers 1 to 12. The small number to the left of each node is the index of that node's value in the array below.}
 \end{wrapfigure}
 
-Any array can be seen as a heap. Note the array indices attached to the heap nodes in figure \ref{fig:heap}; the nodes are simply filled from top to bottom, and left to right. Rearrangement of the heap, (i.e. rearrangement of the underlying array) so that it complies with the requirement that each parent node be greater than or equal to both of its child nodes, will produce a max-heap. The heapsort algorithm sorts an array, A, by repeatedly forming a max heap and removing the top node — which, by definition, is the greatest value in the array, and which will be located at position A[0]. The removed maximum value is swapped with the value at the end of the array. From this point the array is split into a heap sub-array and a sorted sub array. At each iteration of the algorithm, the greatest remaining value in the heap sub-array is identified by rearrangement of that sub-array into a max-heap, and is swapped with the last value in the heap sub-array. Thus, the sorted sub-array grows larger and the heap sub-array grows smaller, until the array is fully sorted. Figure \ref{fig:heapsort} illustrates the process.
+Any array can be seen as a heap. Note the array indices attached to the heap nodes in figure \ref{fig:heap}; the nodes are simply filled from top to bottom, and left to right. Rearrangement of the heap, (i.e. rearrangement of the underlying array) so that it complies with the requirement that each parent node be greater than or equal to each of its child nodes, will produce a max-heap. The heapsort algorithm sorts an array, A, by repeatedly forming a max heap and removing the top node — which, by definition, is the greatest value in the array, and which will be located at position A[0]. The removed maximum value is swapped with the value at the end of the array. From this point the array is split into a heap sub-array and a sorted sub array. At each iteration of the algorithm, the greatest remaining value in the heap sub-array is identified by rearrangement of that sub-array into a max-heap, and is swapped with the last value in the heap sub-array. Thus, the sorted sub-array grows larger and the heap sub-array grows smaller, until the array is fully sorted. Figure \ref{fig:heapsort} illustrates the process.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=10cm]{heap_sort2.pdf}
-    \caption{\label{fig:heapsort}The process of sorting a 6 element array using heapsort: (1) the original array viewed as an array and as a heap; (2) the array rearranged as a max-heap; (3) the in the max-heap is swapped with the last value in the array. A new max heap is formed; (4-6) max heaps are formed, top value is swapped into last position of heap sub-array, heap-size is decremented; (7) max-heap of 1 node is   ``swapped'' into the sorted subarray; (8) the sorted array.}
+    \caption{\label{fig:heapsort}The process of sorting a 6 element array using heapsort: (1) the original array viewed as an array and as a heap; (2) the array rearranged as a max-heap; (3) the top value in the max-heap is swapped with the last value in the array. A new max heap is formed; (4-6) max heaps are formed, top value is swapped into last position of heap sub-array, heap-size is decremented; (7) max-heap of 1 node is   ``swapped'' into the sorted subarray; (8) the sorted array.}
 \end{figure}
 
 
@@ -248,20 +249,33 @@ The resulting algorithm runs in $O(n\log n)$ in best, worst and average cases. I
 
 \section{Implementation \& Benchmarking}
 
-The five algorithms described above are implemented in \texttt{main.py} as \texttt{insertion\_sort()}, \texttt{quicksort()}, \texttt{heapsort()}, \texttt{counting\_sort()}, and \texttt{introsort()}. All take as input a Python list of comparables, i.e. anything that implements the \texttt{\_\_lt\_\_}, \texttt{\_\_gt\_\_}, and \texttt{\_\_eq\_\_} methods. Some of the sorting functions require additional input. These functions have been so arranged, using wrapper functions or defaults, as to be callable using only an input list, to simplify automated benchmarking. Where an algorithm, for one reason or another, uses more than one function, the second function is defined as in inner function of the first. This is mainly to keep the code tidy and manageable. An exception to this is the \texttt{partition()} function which comprises the bulk of the quicksort algorithm, and which is defined as a separate top-level function, because it must also be available to \texttt{introsort()}.
+\subsection{Implementation}
 
-Benchmarking is handled by the \texttt{benchmark()} function. This takes a list of function names, a list of integers representing the sizes of the lists of unsorted random integers to be used as test data, and an integer representing the number of times each sort should be repeated
+The five algorithms described above are implemented in \texttt{main.py} as \texttt{insertion\_sort()}, \texttt{quicksort()}, \texttt{heapsort()}, \texttt{counting\_sort()}, and \texttt{introsort()}. All take as input a Python list of comparables, i.e. anything that implements the \texttt{\_\_lt\_\_}, \texttt{\_\_gt\_\_}, and \texttt{\_\_eq\_\_} methods. Some of the sorting functions require additional parameters. These functions have been so arranged, using wrapper functions or defaults, as to be callable using only an input list, simplifying automated benchmarking. Where an algorithm uses a helper function, the second function is defined as in inner function of the first. An exception to this is the \texttt{partition()} function which comprises the bulk of the quicksort algorithm, and which is defined as a separate top-level function, because it must also be available to \texttt{introsort()}.
 
+Benchmarking is handled by the \texttt{benchmark()} function, which expects, at a minimum, a list of functions implementing the algorithms to be benchmarked, and a list of input array sizes to be generated and used as test data.
 
+When \texttt{benchmark()} is executed, a list of lists of random integers is generated according to user specification. The number and length of the lists is provided to \texttt{benchmark} by a parameter called \texttt{arr\_sizes}, and the range of possible values in the lists can be specified in a parameter called \texttt{intrange} which defaults to (0, 100). Following input generation, in a series of nested loops, each function is repeatedly run on each input array. The number of repetitions can be specified in a parameter called \texttt{reps}, but it defaults to 10. As most of the algorithms tested sort in-place, a copy is made before each pass, and it is the copy which is sorted and then discarded. In any one run of the benchmark function, each of the algorithms benchmarked is timed on an identical set of inputs.
 
+Python's \texttt{time.time()} is called immediately before and immediately after each run of each algorithm, and the duration of the run is calculated. Each algorithm's mean runtime on each input list size is recorded. After all benchmarks complete, the list of lists holding mean runtimes per algorithm and input size, is returned to the caller. Optionally, all of the individual times, as well as all the input lists, can be dumped to disk in a timestamped json file for further analysis.
+
+The \texttt{main()} function in \texttt{main.py} initialises the list of algorithms and a list of input array sizes and passes them to the \texttt{benchmark()} function. The resulting table of mean runtime by algorithm and input size is stored in a variable, \texttt{result}. This variable is used to generate a LaTeX-formatted table of results. This table is written to the working directory. 
+
+Finally, some plots are produced using the mean time data and saved to the working directory with timestamped filenames. The plots are generated, using \texttt{matplotlib}, by the \texttt{write\_plot()} function, also defined in \texttt{main.py}.
+
+\subsection{Benchmarking}
 
 
 \begin{table}[H]
     \resizebox{\textwidth}{!}{%
-    \input{bm_output/bm_table_20210513-101603.tex}
+    \input{complexitytable.tex}
     }
-\caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms}
+\caption{Complexity of each of the five algorithms.}
+\label{table:complexity}
 \end{table}
+
+
+Table \ref{table:complexity} shows the time and space complexity for each of the five algorithms. Assuming the random integer list generated by \texttt{benchmark} represented somewhat average cases for these algorithms to sort, and based on the orders of time complexity in the average case associated with each of the algorithms, the algorithms might be expected to be ordered as follows in terms of runtime (from slowest to fastest):
 
 \begin{figure}
     \includegraphics[width=\linewidth]{bm_output/plot_0_linear_20210513-101604.png}
@@ -269,11 +283,33 @@ Benchmarking is handled by the \texttt{benchmark()} function. This takes a list 
     \label{fig:linear5}
 \end{figure}
 
+\begin{enumerate}
+    \itemsep0em 
+    \item Insertion sort ($n^{2}$)
+    \item Quicksort, Heapsort, and Introsort (all $n\log n$)
+    \item Counting sort ($n$)
+\end{enumerate}
+
+Figure \ref{fig:linear5} shows a chart of mean times per algorithm for different values of \emph{n}. Insertion sort is clearly the slowest sorter, by far, at least on the data it was given. Looking more closely at the performance of the remaining algorithms (by removing insertion sort), in figure \ref{fig:linear4}, quicksort, heapsort, and introsort are clumped together, as the complexity table predicts, and counting sort performs best of all, as expected. The relative performances of all five algorithms is probably best illustrated in figure \ref{fig:log} which shows all five on a log y-scale. Table \ref{table:results} holds the data from which these charts were generated.
+
+Of course, different algorithms perform differently on different \emph{types} of input too. If that wasn't the case, based on the benchmarks here, no-one would use anything but counting sort. To illustrate this we can observe what happen if the benchmark is run with exactly the same parameters as before but with a range of (0, 1000000) rather than (0, 100) (figure \ref{fig:range}). Counting sort fails to perform efficiently because its sensitive to \emph{k}, the maximum value of the input array.
+
+Similarly, insertion sort excels at short and nearly-sorted arrays, as can be seen from \ref{fig:fifty} where, up until about 25 elements, it outperforms all the other algorithms. It is because of these different suitabilities that so many sorting algorithms exist and that hybrid algorithms, such as introsort and timsort are so successful.
+
 \begin{figure}
     \includegraphics[width=\linewidth]{bm_output/plot_1_linear_20210513-101605.png}
     \caption{Relative performance of four algorithms — insertion sort has been excluded}
     \label{fig:linear4}
 \end{figure}
+
+
+\begin{table}[H]
+    \resizebox{\textwidth}{!}{%
+    \input{bm_output/bm_table_20210513-101603.tex}
+    }
+\caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms.}
+\label{table:results}
+\end{table}
 
 \begin{figure}
     \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210513-101605.png}
@@ -281,18 +317,22 @@ Benchmarking is handled by the \texttt{benchmark()} function. This takes a list 
     \label{fig:log}
 \end{figure}
 
-https://www.oreilly.com/library/view/python-cookbook/0596001673/ch17.html 
--- Tim Peters on timing \textcite{peters2002}
-"The slowest result is often computed on the first try, because your machine’s caches take extra time to adjust to the new task."
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210514-033420.png}
+    \caption{Relative performance of five algorithms using a log y-scale, and input range (0, 1000000)}
+    \label{fig:range}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{bm_output/plot_0_linear_20210513-234313.png}
+    \caption{Relative performance of five algorithms with maximum 50-element input}
+    \label{fig:fifty}
+\end{figure}
 
 
-Re insertion sort slower on value based as opposed to refernce based-- python interns first 255 unsigned? --- so ref based
 
-Benchmarking: empirical method for comparing algorithm performance a postiori. Can be used to vaildate a priori / theoretical hypotheses
-
-@max Use the min() rather than the average of the timings. That is a recommendation from me, from Tim Peters, and from Guido van Rossum. The fastest time represents the best an algorithm can perform when the caches are loaded and the system isn't busy with other tasks. All the timings are noisy -- the fastest time is the least noisy. It is easy to show that the fastest timings are the most reproducible and therefore the most useful when timing two different implementations.
-
-
+\clearpage
 
 \printbibliography
 \end{document}

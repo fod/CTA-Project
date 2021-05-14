@@ -196,48 +196,6 @@
       \endverb
       \keyw{quicksort,heapsort,sorting algorithms,introspective algorithms,hybrid algorithms,generic algorithms,STL}
     \endentry
-    \entry{peters2002}{suppbook}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=e3aa619a4412763613574bb6b6fc1510}{%
-           family={Peters},
-           familyi={P\bibinitperiod},
-           given={Tim},
-           giveni={T\bibinitperiod},
-           givenun=0}}%
-      }
-      \name{bookauthor}{1}{}{%
-        {{hash=b3d7dccae2063df059213f049bdfa8f0}{%
-           family={Alex\bibnamedelima Martelli},
-           familyi={A\bibinitperiod\bibinitdelim M\bibinitperiod},
-           given={David\bibnamedelima Ascher},
-           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {O Reilly}%
-      }
-      \strng{namehash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{fullhash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{bibnamehash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{authorbibnamehash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{authornamehash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{authorfullhash}{e3aa619a4412763613574bb6b6fc1510}
-      \strng{bookauthorbibnamehash}{b3d7dccae2063df059213f049bdfa8f0}
-      \strng{bookauthornamehash}{b3d7dccae2063df059213f049bdfa8f0}
-      \strng{bookauthorfullhash}{b3d7dccae2063df059213f049bdfa8f0}
-      \field{sortinit}{P}
-      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Python Cookbook}
-      \field{series}{SF Masterworks}
-      \field{title}{Introduction to Algorithms Chapter}
-      \field{year}{2002}
-      \field{pages}{621\bibrangedash 624}
-      \range{pages}{4}
-    \endentry
     \entry{Sedgewick-1978}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=6a9c16ef79ae932cd7e8bc985da5a937}{%
