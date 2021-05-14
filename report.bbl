@@ -152,6 +152,60 @@
       \verb https://books.google.ie/books?id=95zVsgEACAAJ
       \endverb
     \endentry
+    \entry{knuth1968art}{book}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=1bbb81c9109c205aef431c34d95a6385}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={E.K.},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=41f8fc8934611319cdff8e904460b7b7}{%
+           family={Varga},
+           familyi={V\bibinitperiod},
+           given={R.S.},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7986b8f9a74e8a99dd8346c98b35f3e}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={D.E.},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=798cce9d250db16f6c6325279112fc42}{%
+           family={Harrison},
+           familyi={H\bibinitperiod},
+           given={M.A.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley Publishing Company}%
+      }
+      \strng{namehash}{6c2c09bb60887fb364c47dd1e9fad5c3}
+      \strng{fullhash}{2cecd0d60aca6df3efe97f96bb83e06f}
+      \strng{bibnamehash}{2cecd0d60aca6df3efe97f96bb83e06f}
+      \strng{authorbibnamehash}{2cecd0d60aca6df3efe97f96bb83e06f}
+      \strng{authornamehash}{6c2c09bb60887fb364c47dd1e9fad5c3}
+      \strng{authorfullhash}{2cecd0d60aca6df3efe97f96bb83e06f}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780201038033}
+      \field{series}{Addison-Wesley series in computer science and information processing}
+      \field{title}{The Art of Computer Programming: Sorting and searching}
+      \field{year}{1968}
+      \verb{urlraw}
+      \verb https://books.google.ie/books?id=ZQu9mgEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.ie/books?id=ZQu9mgEACAAJ
+      \endverb
+    \endentry
     \entry{musser1997}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=275cfd8ff6a2299f5e96b34576b5832f}{%

@@ -32,24 +32,21 @@
 
 %%%Introduction (10%):  Introduce the concept of sorting and sorting algorithms, discuss the relevance of concepts such as complexity (time and space), performance, in-place sorting, stable sorting, comparator functions, comparison-basedand non-comparison-based sorts, etc.%%%
 
-A sorting problem is one 
+Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to the member to its right, and equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all pairs of members of \emph{A},
+; if A\textsubscript{i} < A\textsubscript{j} then i < j and if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}.
+
+If the members of a collection to be sorted are, for instance, integers, then it is clearly and intuitively understood what is meant by the relations `<', `>', `=', `$\ne$', etc. For other kinds of object however, it may not be obvious how they are to be compared. The definition of the relation is not the job of a sorting algorithm, which should be able to operate independently of the details of the relationship between the objects it is sorting. An ordering relation, or comparator, defined on a collection, must satisfy the conditions that, given any three items, $a, b$, and $c$ from the collection, only one of ($a < b$), ($a > b$), ($a = b$) may be true; and if ($a < b$) and ($b < c$), then $(a < c$) \autocite[5]{knuth1968art}.
+
+In general, if a comparator for the type of object being sorted is not defined or implicit in the language in which a sorting algroithm is implemented, then it is necessary to define a comparator function which complies to the conditions outlined above, if a valid sort is to be executed.
+
+\subsection{stability}
 
 
-Formal definition of sorting and the property of being sorted\dots
-Sorting: reorganising a list, A,such that if A\textsubscript{i} < A\textsubscript{j} then i < j must be true.enwiki:997404113
+The contents of a collection, A, must be the same before and after sorting; i.e. the sorted collection A must be a permuattion fo the pre-sorted collection A.
+
 
 
 If there exists any pair of elements in a collection A, at positions \emph{i} and \emph{j}, such that \emph{i} < \emph{j} but A\textsubscript{i} > A\textsubscript{j} -- with respect to whatever comparator function is relevant -- that pair of elements is known as an inversion. The degree of disorder or "unsortedness" of a collection of elemetns is measured by the number of inversions present.
-
-To be sorted: Each item in the collection is less than or equal to its successor.
-
-Equal-valued elements must be contiguous; i.e. if A\textsubscript{i} = A\textsubscript{j} then there must be no k such that i < j < k and A\textsubscript{i} $\ne$ A\textsubscript{k}
-
-The contents of a collection, A, must be the same before and after searching; i.e. the sorted collection A must be a permuattion fo the pre-sorted collection A.
-
-<, =, $\ne$, and > can be interpreted in terms of mathematical equality or any othey arbtrary but well defined system of ordering. It should be possible to define a \emph{comparator function} which can take two elements, say \emph{a} and \emph{b}, and return a value based on whether \emph{a} < \emph{b}, \emph{a} > \emph{b}, or \emph{a} = \emph{b}.
-
-Sorting algorithms, in general, operate independently of the precise definitions of \emph{less than}, \emph{greater than}, and \emph{equal to} differing instead in how they go about making comparisons between pairs of elements with the goal of a completely sorted collection.
 
 The particular problem's definition of equivalence is encoded in the comparator function and the precise nature of the comparator function is irrelevant to the sorting algorithm which merely requires a black box through which it can pass two values and which returns a codification of the equivalence of those values.
 
@@ -73,6 +70,38 @@ More concretely; the following pseudocode demonstrates a comparator function whi
 
 
 
+
+
+
+\subsection{Sorting algorithm properties}
+
+\subsubsection{Stability}
+
+Stability is the property whereby two equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability is unlikely to be an important consideration when sorting a collection of simple objects such as numbers but, when there is satellite data, it can become important \autocite{cormen01}.
+
+\subsubsection{Time efficiency}
+Time efficiency and space efficiency --- how we compare and rate algorithms
+
+
+
+\subsubsection{Memory efficiency}
+In-place sorting: Only a fixed amount of memory over the size of n (size of input) required, regardless of size of n. Non-in-place algorithms generally need an amount of memory that increases monotonically with n.
+
+\subsubsection{Suitability for a particular input}
+
+e.g. Size of input, degree of sorting, domain of input (e.g. integers from 1 to 1000), memory requirements, storage location (e.g. external?)
+
+In addition to size of input, specific characteristics of the input can affect the performance of an algorithm. For instance, given two sorting algorithms, one may outperform the other on an input with very few inversions, while the other may be more efficient given an input which is less sorted initially. Similarly, one algorithm may perform particularly well on smaller inputs while performing poorly on larger ones. Insertion sort, for example, examined in more detail below, performs extremely well on input sizes up to ~n=20 but performance falls off as n increases giving it by far the worst overall performance of the five algorithms examined here. The differential efficiency depending on input characteristics can be exploited by algorithm designers to make highly efficient adaptive hybrid algorithms which switch strategy to best tackle the particular nature of the part of the input data on which they are currently working. Timsort, for instance, reduces the number of comparisons made by identifying and merging (using a merge sort) pre-existing runs in its input, and will add to those runs, where they are below a minimum threshold, using insertion sort which is very efficient on small inputs \autocite{enwiki:997404113}. The implementation of introsort used here, described below, uses a recursive partitioning algorithm to divide the sorting task into sublists and switches to heapsort when a maximum recursion depth is reached, as well as to insertion sort when a sublist contains fewer than 20 elements.
+
+It follows from the fact that an algorithm will perform better or worse depending on the nature, as well as on the size of its input, that choice of algorithm does not rest solely on its complexity relative to other competing algorithms. It also depends on the nature of the input in terms of its size, degree of sortedness, and the underlying probability distribution of the specific inputs it is likely to encounter.
+
+\subsection{Comparison Sorts}
+
+Only uses comparison operators to order elements. A comparison based sorting algorithm orders a collection by comparing pairs of elements until the collection is sorted.
+
+No comparison sorting algorithm can perform better than \emph{n log n} in the average or worst cases. Some non-comparison based sorting algorithms can, under certain circumstances, with better worst-case times than \emph{n log n}.
+
+\subsection{Non-comparison Sorts}
 
 \subsection{Analysing algorithm complexity}
 
@@ -116,37 +145,6 @@ Complexity families:
 To evaluate complexity, most expensive computation should be identified, and the order of that computation will be the order of the complexity of the algorithm.
 
 --- Higher order term will dominate 
-
-\subsection{Sorting algorithm properties}
-
-\subsubsection{Stability}
-
-Stability is the property whereby two equally valued elements in the input collection maintain their positions with respect to one another in the output (sorted) collection. Stability is unlikely to be an important consideration when sorting a collection of simple objects such as numbers but, when there is satellite data, it can become important \autocite{cormen01}.
-
-\subsubsection{Time efficiency}
-Time efficiency and space efficiency --- how we compare and rate algorithms
-
-
-
-\subsubsection{Memory efficiency}
-In-place sorting: Only a fixed amount of memory over the size of n (size of input) required, regardless of size of n. Non-in-place algorithms generally need an amount of memory that increases monotonically with n.
-
-\subsubsection{Suitability for a particular input}
-
-e.g. Size of input, degree of sorting, domain of input (e.g. integers from 1 to 1000), memory requirements, storage location (e.g. external?)
-
-In addition to size of input, specific characteristics of the input can affect the performance of an algorithm. For instance, given two sorting algorithms, one may outperform the other on an input with very few inversions, while the other may be more efficient given an input which is less sorted initially. Similarly, one algorithm may perform particularly well on smaller inputs while performing poorly on larger ones. Insertion sort, for example, examined in more detail below, performs extremely well on input sizes up to ~n=20 but performance falls off as n increases giving it by far the worst overall performance of the five algorithms examined here. The differential efficiency depending on input characteristics can be exploited by algorithm designers to make highly efficient adaptive hybrid algorithms which switch strategy to best tackle the particular nature of the part of the input data on which they are currently working. Timsort, for instance, reduces the number of comparisons made by identifying and merging (using a merge sort) pre-existing runs in its input, and will add to those runs, where they are below a minimum threshold, using insertion sort which is very efficient on small inputs \autocite{enwiki:997404113}. The implementation of introsort used here, described below, uses a recursive partitioning algorithm to divide the sorting task into sublists and switches to heapsort when a maximum recursion depth is reached, as well as to insertion sort when a sublist contains fewer than 20 elements.
-
-It follows from the fact that an algorithm will perform better or worse depending on the nature, as well as on the size of its input, that choice of algorithm does not rest solely on its complexity relative to other competing algorithms. It also depends on the nature of the input in terms of its size, degree of sortedness, and the underlying probability distribution of the specific inputs it is likely to encounter.
-
-\subsection{Comparison Sorts}
-
-Only uses comparison operators to order elements. A comparison based sorting algorithm orders a collection by comparing pairs of elements until the collection is sorted.
-
-No comparison sorting algorithm can perform better than \emph{n log n} in the average or worst cases. Some non-comparison based sorting algorithms can, under certain circumstances, with better worst-case times than \emph{n log n}.
-
-\subsection{Non-comparison Sorts}
-
 \section{Sorting Algorithms}
 
 %%%Introduce  each  of  your  chosen  algorithms in  turn,  discuss their  space  andtime complexity, and explain how each algorithm works using your own bespoke diagrams and different example input instances.  If you diagrams are not original creationsyou will get zero.%%%
