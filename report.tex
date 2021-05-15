@@ -27,6 +27,10 @@
 \title{Benchmarking sorting algorithms}
 \author{Fiachra O' Donoghue}
 
+\date{%
+    G00398776\\%
+}
+
 \begin{document}
 \maketitle
 
@@ -34,8 +38,7 @@
 
 \subsection{Sorting}
 
-Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to that of the member to its right, and that equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all values of \emph{i} and \emph{j}
-; if A\textsubscript{i} < A\textsubscript{j} then i < j; and, if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}. A sorted collection $A'$ must also be a permutation of the original collection $A$, that is, all of the members in $A$ must appear in $A'$ \autocite[15]{cormen01}.
+Sorting is the process of rearranging the members of a collection such that each member has a value less than or equal to that of the member to its right, and that equal values are contiguous. More formally, if \emph{A} is a collection, and \emph{A\textsubscript{i}} and \emph{A\textsubscript{j}} are the \emph{i}\textsubscript{th}  and \emph{j}\textsubscript{th} members of that collection, then in order for that collection to be sorted the following condition must be satisfied for all values of \emph{i} and \emph{j}; if A\textsubscript{i} < A\textsubscript{j} then i < j; and, if \emph{A\textsubscript{i}} = \emph{A\textsubscript{j}} then there must be no \emph{k} such that \emph{i} < \emph{k} < \emph{j} and \emph{A\textsubscript{i}} $\ne$ \emph{A\textsubscript{k}} \autocite[53]{heineman2016algorithms}. A sorted collection $A'$ must also be a permutation of the original collection $A$, that is, all of the members in $A$ must appear in $A'$ \autocite[15]{cormen01}.
 
 \subsubsection{Comparators}
 
@@ -102,7 +105,7 @@ Hybrid sorting algorithms, such as timsort \autocite{peters:timsort}, and intros
 
 \subsection{Analysing algorithm complexity}\label{sec:analysingcomplexity}
 
-Efficiency of algorithms can be assessed empirically or theoretically. To assess an algorithm empirically it should be, as described in section \ref{sec:impbench}, executed and the resources of interest monitored. Usually those resources will be time and space, that is the time taken for the algorithm to complete its task, and the amount of memory it requires to do it. The results obtained through empirical analysis are useful, but they are tied to the implementation, the platform on which they are run, the size of their input, and a number of other variables unrelated to the algorithm itself. It is really a measure of performance of that implementation of the algorithm under very specific circumstances.
+Efficiency of algorithms can be assessed empirically or theoretically. To assess an algorithm empirically it should be, as described in section \ref{sec:impbench}, executed and the resources of interest monitored. Usually those resources will be time and space, that is the time taken for the algorithm to complete its task, and the amount of memory it requires to do it. The results obtained through empirical analysis are useful, but they are tied to the implementation, the platform on which they are run, the size of their input, and a number of other variables unrelated to the algorithm itself. It is really a measure of performance of that implementation of the algorithm under very specific conditions.
 
 To describe the efficiency of an algorithm in a way which is useful for comparison between algorithms independent of specific circumstances, it is necessary to isolate its description from its specific implementation. It is therefore analysed in terms of the number of operations it takes to complete its task for a given input size. More specifically it is analysed in terms of how the number of elementary operations scales with increasing values of \emph{n}. For the purposes of these analyses all elementary operations are assumed to take the same amount of time.
 
@@ -118,7 +121,7 @@ If the complexity of an algorithm is described by a function connecting the size
     \item Exponential ($f(n) = 2^{n}$)
 \end{itemize}
 
-Because algorithms may exhibit very different efficiency when applied to inputs with different characteristics, it is not possible to unambiguously define $f(n)$ without knowing what $n$ is, and it is not possible to express a useful $f(n)$ that covers every possible input set the algorithm could possibly encounter. It is, however, possible to predict how the algorithm would perform in best case possible, i.e. when passed an input that allows it to perform the least possible number of operations. Similarly, it is possible to predict its performance in the best and average cases. These functions are known as asymptotic notation, and they express the upper bound of $f(n)$, in the worst case, the lower bound, in the best case, and the lower and upper bounds of the average case. The worst case performance is expressed as $O(f(n))$, the best case is expressed as $\Omega(f(n))$, and the average case is expressed as $\Theta(f(n))$ \autocite[18]{heineman2016algorithms}.
+Because algorithms may exhibit very different efficiency when applied to inputs with different characteristics, it is not possible to unambiguously define $f(n)$ without knowing what $n$ is, and it is not possible to express a useful $f(n)$ that covers every possible input set the algorithm could possibly encounter. It is, however, possible to predict how the algorithm would perform in best case possible, i.e. when passed an input that allows it to perform the least possible number of operations. Similarly, it is possible to predict its performance in the worst and average cases. These functions are called asymptotic, and they express the upper bound of $f(n)$, in the worst case, the lower bound, in the best case, and the lower and upper bounds of the average case. The worst case performance is expressed as $O(f(n))$, the best case is expressed as $\Omega(f(n))$, and the average case is expressed as $\Theta(f(n))$ \autocite[18]{heineman2016algorithms}.
 
 The best, worse and average case complexities for the five algorithms examined below are listed in table \ref{table:complexity} in section \ref{bench}.
 
@@ -163,7 +166,7 @@ Figure \ref{fig:quicksort_2} illustrates the overall operation of quicksort. The
 
 The array has been sorted in-place, without any overhead, giving a space complexity of \emph{n}. As for time complexity, it has already been mentioned that quicksort finishes in $O(n\log n)$ time for best and average cases. \textcite[119]{bentley:pearls} makes the point that as comparison algorithms, such as quicksort, are provably limited to $O(n\log n)$, quicksort's performance is ``close to optimal.''  He goes on to say, however that the algorithm's performance degrades to $O(n^{2})$ given some common inputs such as an array with long runs of identical elements.
 
-Poorly chosen pivot values can cause poor performance. Performance is likely to be best — all else being equal — when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values — the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite*[73]{heineman2016algorithms}.
+Poorly chosen pivot values can cause poor performance. Performance is likely to be best — all else being equal — when the pivot, for the most part, is located near the middle of the data, so that the two partitioned sub-arrays are of roughly size. This being the case, suggests \textcite[851]{Sedgewick-1978}, the median may be an optimal value for the pivot, and he goes on to outline a method for sampling three values — the first, the last, and the middle, from each array or sub-array to be partitioned, and setting the pivot value to the median of those three. Other frequently used values are the first value in the array, the last value, or a random value \autocite[73]{heineman2016algorithms}.
 
 One final interesting optimisation, attributed without citation by \textcite[121]{bentley:pearls} to Sedgewick, is the use of insertion sort to sort small sub-arrays for which quicksort would be inefficient. The suggested implementation would entail halting partitioning when array length fell below a certain threshold, and using insertion sort to complete sorting of the almost-sorted final array. This solution starts to resemble introsort \autocite{musser1997}, which is discussed below in section \ref{sec:introsort}.
 
@@ -181,7 +184,7 @@ A heap is a binary tree which is completely filled, with the possible exception 
     \caption{\label{fig:heap}A max heap generated from an array holding the numbers 1 to 12. The small number to the left of each node is the index of that node's value in the array below.}
 \end{wrapfigure}
 
-Any array can be seen as a heap. Note the array indices attached to the heap nodes in figure \ref{fig:heap}; the nodes are simply filled from top to bottom, and left to right. Rearrangement of the heap, (i.e. rearrangement of the underlying array) so that it complies with the requirement that each parent node be greater than or equal to each of its child nodes, will produce a max-heap. The heapsort algorithm sorts an array, A, by repeatedly forming a max heap and removing the top node — which, by definition, is the greatest value in the array, and which will be located at position A[0]. The removed maximum value is swapped with the value at the end of the array. From this point the array is split into a heap sub-array and a sorted sub array. At each iteration of the algorithm, the greatest remaining value in the heap sub-array is identified by rearrangement of that sub-array into a max-heap, and is swapped with the last value in the heap sub-array. Thus, the sorted sub-array grows larger and the heap sub-array grows smaller, until the array is fully sorted. Figure \ref{fig:heapsort} illustrates the process.
+Any array can be seen as a heap. Note the array indices attached to the heap nodes in figure \ref{fig:heap}; the nodes are simply filled from left to right, and top to bottom. Rearrangement of the heap, (i.e. rearrangement of the underlying array) so that it complies with the requirement that each parent node be greater than or equal to each of its child nodes, will produce a max-heap. The heapsort algorithm sorts an array, A, by repeatedly forming a max heap and removing the top node — which, by definition, is the greatest value in the array, and which will be located at position A[0]. The removed maximum value is swapped with the value at the end of the array. From this point the array is split into a heap sub-array and a sorted sub array. At each iteration of the algorithm, the greatest remaining value in the heap sub-array is identified by rearrangement of that sub-array into a max-heap, and is swapped with the last value in the heap sub-array. Thus, the sorted sub-array grows larger and the heap sub-array grows smaller, until the array is fully sorted. Figure \ref{fig:heapsort} illustrates the process.
 
 \begin{figure}[H]
     \centering
@@ -191,7 +194,7 @@ Any array can be seen as a heap. Note the array indices attached to the heap nod
 
 
 
-
+\newpage
 
 \subsection{Counting sort}\label{sec:counting}
 
@@ -206,18 +209,19 @@ Counting sort is the first non-comparison sort reviewed here. The algorithm sort
 Counting sort must know the range of values, \emph{k} in its input data. When it is passed an array for sorting, the algorithm creates two further arrays: a count array, of length \emph{k} and an output array equal in length to the input array. The count array should be initialised with zeroes. The algorithm begins by iterating through the input. For each element it encounters it increments the value in the count array the index of which is equal to the value encountered. For example, if the current element in the input array has a value of 5, then the value in the count array at index 5 is incremented. When the entire input array has been traversed, the values in the count array are converted to a cumulative sum of value counts, by iteratively adding each value to the value that precedes it. This effectively provides a list of positions of the last occurrence of each value in the sorted output array. To make use of this list, the input array is iterated through in reverse and, for each value encountered, the value at the index in the count array that equals that value provides the position for that value in the output array (see the red lines connecting steps 3-5 in figure \ref{fig:counting} for a visual example of this). The value in the count array is then decremented so that when that value is encountered in the input array again it will be placed in the next position to the left.
 
 
-
+\newpage
 \subsection{Introsort}\label{sec:introsort}
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
-    \includegraphics[width=6cm]{introsort.pdf}
+    \includegraphics[width=5cm]{introsort.pdf}
     \caption{\label{fig:introsort}Introsort flow chart}
 \end{wrapfigure}
 
 Introsort is a hybrid sorting algorithm developed to address some shortcomings with quicksort. \textcite[983]{musser1997} points out that while quicksort runs in $O(n\log n)$ time in best and average cases, it degrades to $O(n^{2})$ in the worst case, when recursion depth passes some threshold. Furthermore, while heapsort runs in $O(n\log n)$ in the worst case, it remains between 2 and 5 times slower than quicksort. \textcite{Sedgewick-1978} addresses the issue with quicksort's poor worst case performance, suggesting alternative pivot selection methods, but also suggesting the use of insertion sort on small partitions. \textcite[986]{musser1997} adopts Sedgewick's suggestions, using insertion sort for partitions below a threshold and also using ```median-of-three''' pivot selection, but he also attempts to stave off recursion problems by switching to heap sort when a recursion depth of $\log n$ levels is reached \autocite{heineman2016algorithms}.
 
 The resulting algorithm runs in $O(n\log n)$ in best, worst and average cases. Its space complexity is $O(\log n)$ as its constituent algorithms all sort in-place and the only extra requirement is quicksort's stack space.
+
 
 
 \section{Implementation \& Benchmarking}\label{sec:impbench}
@@ -267,7 +271,7 @@ Figure \ref{fig:linear5} shows a chart of mean times per algorithm for different
 
 Of course, different algorithms perform differently on different \emph{types} of input too. If that wasn't the case, based on the benchmarks here, no-one would use anything but counting sort. To illustrate this we can observe what happen if the benchmark is run with exactly the same parameters as before but with a range of (0, 1000000) rather than (0, 100) (figure \ref{fig:range}). Counting sort fails to perform efficiently because its sensitive to \emph{k}, the maximum value of the input array.
 
-Similarly, insertion sort excels at short and nearly-sorted arrays, as can be seen from \ref{fig:fifty} where, up until about 25 elements, it outperforms all the other algorithms. It is because of these different suitabilities that so many sorting algorithms exist and that hybrid algorithms, such as introsort and timsort are so successful.
+Similarly, insertion sort excels at short and nearly-sorted arrays, as can be seen in figure \ref{fig:fifty} where, up until about 25 elements, it outperforms all the other algorithms. It is because of these different suitabilities that so many sorting algorithms exist and that hybrid algorithms, such as introsort and timsort are so successful.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{bm_output/plot_1_linear_20210513-101605.png}
