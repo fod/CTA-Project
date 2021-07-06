@@ -1,4 +1,0 @@
-quicksort
-heapsort
-sortedness
-Linearithmic
