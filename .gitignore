@@ -1,3 +1,7 @@
+.vscode/
+bm_output/
+venv-pypy3/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
