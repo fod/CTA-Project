@@ -132,7 +132,7 @@ The best, worse and average case complexities for the five algorithms examined b
 
 \begin{wrapfigure}{r}{0.3\textwidth}
     \centering
-    \includegraphics{insertion_sort.pdf}
+    \includegraphics{figures/insertion_sort.pdf}
     \caption{\label{fig:insertion_sort}Insertion sort.}
 \end{wrapfigure}
 
@@ -148,7 +148,7 @@ The worst case running time is equal to $n \times (n - 1) \times \frac{1}{2} = \
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
-    \includegraphics{quicksort.pdf}
+    \includegraphics{figures/quicksort.pdf}
     \caption{\label{fig:quicksort_1}Quicksort partitioning.}
 \end{wrapfigure}
 
@@ -158,7 +158,7 @@ Figure \ref{fig:quicksort_1} illustrates the partitioning mechanism of the algor
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
-    \includegraphics{quicksort_2.pdf}
+    \includegraphics{figures/quicksort_2.pdf}
     \caption{\label{fig:quicksort_2}Quicksort sorting.}
 \end{wrapfigure}
 
@@ -180,7 +180,7 @@ A heap is a binary tree which is completely filled, with the possible exception 
 
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
-    \includegraphics{heap.pdf}
+    \includegraphics{figures/heap.pdf}
     \caption{\label{fig:heap}A max heap generated from an array holding the numbers 1 to 12. The small number to the left of each node is the index of that node's value in the array below.}
 \end{wrapfigure}
 
@@ -188,7 +188,7 @@ Any array can be seen as a heap. Note the array indices attached to the heap nod
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=10cm]{heap_sort2.pdf}
+    \includegraphics[height=10cm]{figures/heap_sort2.pdf}
     \caption{\label{fig:heapsort}The process of sorting a 6 element array using heapsort: (1) the original array viewed as an array and as a heap; (2) the array rearranged as a max-heap; (3) the top value in the max-heap is swapped with the last value in the array. A new max heap is formed; (4-6) max heaps are formed, top value is swapped into last position of heap sub-array, heap-size is decremented; (7) max-heap of 1 node is   ``swapped'' into the sorted subarray; (8) the sorted array.}
 \end{figure}
 
@@ -200,7 +200,7 @@ Any array can be seen as a heap. Note the array indices attached to the heap nod
 
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
-    \includegraphics{counting.pdf}
+    \includegraphics{figures/counting.pdf}
     \caption{\label{fig:counting}The process of a counting sort algorithm: (1) The array to be sorted; (2) The counter array — the value at index \emph{i} is incremented when the value \emph{i} is encountered in the input array; (3) the input array is iterated through in reverse; (4) the count array now holds a cumulative sum of counts; (5) the output array is populated using the cumulative sum of counts — effectively showing positions of last occurrences of values; (6) cumulative counts are decremented as they are used, and the sorted output array is populated.}
 \end{wrapfigure}
 
@@ -214,7 +214,7 @@ Counting sort must know the range of values, \emph{k} in its input data. When it
 
 \begin{wrapfigure}{R}{0.4\textwidth}
     \centering
-    \includegraphics[width=5cm]{introsort.pdf}
+    \includegraphics[width=5cm]{figures/introsort.pdf}
     \caption{\label{fig:introsort}Introsort flow chart}
 \end{wrapfigure}
 
@@ -228,7 +228,7 @@ The resulting algorithm runs in $O(n\log n)$ in best, worst and average cases. I
 
 \subsection{Implementation}
 
-The five algorithms described above are implemented in \texttt{main.py} as \texttt{insertion\_sort()}, \texttt{quicksort()}, \texttt{heapsort()}, \texttt{counting\_sort()}, and \texttt{introsort()}. All take as input a Python list of comparables, i.e. anything that implements the \texttt{\_\_lt\_\_}, \texttt{\_\_gt\_\_}, and \texttt{\_\_eq\_\_} methods. Some of the sorting functions require additional parameters. These functions have been so arranged, using wrapper functions or defaults, as to be callable using only an input list, simplifying automated benchmarking. Where an algorithm uses a helper function, the second function is defined as in inner function of the first. An exception to this is the \texttt{partition()} function which comprises the bulk of the quicksort algorithm, and which is defined as a separate top-level function, because it must also be available to \texttt{introsort()}.
+The five algorithms described above are implemented in \texttt{benchmark.py} as \texttt{insertion\_sort()}, \texttt{quicksort()}, \texttt{heapsort()}, \texttt{counting\_sort()}, and \texttt{introsort()}. All take as input a Python list of comparables, i.e. anything that implements the \texttt{\_\_lt\_\_}, \texttt{\_\_gt\_\_}, and \texttt{\_\_eq\_\_} methods. Some of the sorting functions require additional parameters. These functions have been so arranged, using wrapper functions or defaults, as to be callable using only an input list, simplifying automated benchmarking. Where an algorithm uses a helper function, the second function is defined as in inner function of the first. An exception to this is the \texttt{partition()} function which comprises the bulk of the quicksort algorithm, and which is defined as a separate top-level function, because it must also be available to \texttt{introsort()}.
 
 Benchmarking is handled by the \texttt{benchmark()} function, which expects, at a minimum, a list of functions implementing the algorithms to be benchmarked, and a list of input array sizes to be generated and used as test data.
 
@@ -236,16 +236,16 @@ When \texttt{benchmark()} is executed, a list of lists of random integers is gen
 
 Python's \texttt{time.time()} is called immediately before and immediately after each run of each algorithm, and the duration of the run is calculated. Each algorithm's mean runtime on each input list size is recorded. After all benchmarks complete, the list of lists holding mean runtimes per algorithm and input size, is returned to the caller. Optionally, all of the individual times, as well as all the input lists, can be dumped to disk in a timestamped json file for further analysis.
 
-The \texttt{main()} function in \texttt{main.py} initialises the list of algorithms and a list of input array sizes and passes them to the \texttt{benchmark()} function. The resulting table of mean runtime by algorithm and input size is stored in a variable, \texttt{result}. This variable is used to generate a LaTeX-formatted table of results. This table is written to the working directory. 
+The \texttt{main()} function in \texttt{benchmark.py} initialises the list of algorithms and a list of input array sizes and passes them to the \texttt{benchmark()} function. The resulting table of mean runtime by algorithm and input size is stored in a variable, \texttt{result}. This variable is used to generate a LaTeX-formatted table of results. This table is written to the working directory. 
 
-Finally, some plots are produced using the mean time data and saved to the working directory with timestamped filenames. The plots are generated, using \texttt{matplotlib}, by the \texttt{write\_plot()} function, also defined in \texttt{main.py}.
+Finally, some plots are produced using the mean time data and saved to the working directory with timestamped filenames. The plots are generated, using \texttt{matplotlib}, by the \texttt{write\_plot()} function, also defined in \texttt{benchmark.py}.
 
 \subsection{Benchmarking}\label{bench}
 
 
 \begin{table}[H]
     \resizebox{\textwidth}{!}{%
-    \input{complexitytable.tex}
+    \input{figures/complexitytable.tex}
     }
 \caption{Complexity of each of the five algorithms.}
 \label{table:complexity}
@@ -255,7 +255,7 @@ Finally, some plots are produced using the mean time data and saved to the worki
 Table \ref{table:complexity} shows the time and space complexity for each of the five algorithms. Assuming the random integer list generated by \texttt{benchmark} represented somewhat average cases for these algorithms to sort, and based on the orders of time complexity in the average case associated with each of the algorithms, the algorithms might be expected to be ordered as follows in terms of runtime (from slowest to fastest):
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_0_linear_20210513-101604.png}
+    \includegraphics[width=\linewidth]{../bm_output/plot_0_linear_20210513-101604.png}
     \caption{Relative performance of five algorithms}
     \label{fig:linear5}
 \end{figure}
@@ -274,7 +274,7 @@ Of course, different algorithms perform differently on different \emph{types} of
 Similarly, insertion sort excels at short and nearly-sorted arrays, as can be seen in figure \ref{fig:fifty} where, up until about 25 elements, it outperforms all the other algorithms. It is because of these different suitabilities that so many sorting algorithms exist and that hybrid algorithms, such as introsort and timsort are so successful.
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_1_linear_20210513-101605.png}
+    \includegraphics[width=\linewidth]{../bm_output/plot_1_linear_20210513-101605.png}
     \caption{Relative performance of four algorithms — insertion sort has been excluded}
     \label{fig:linear4}
 \end{figure}
@@ -282,27 +282,27 @@ Similarly, insertion sort excels at short and nearly-sorted arrays, as can be se
 
 \begin{table}[H]
     \resizebox{\textwidth}{!}{%
-    \input{bm_output/bm_table_20210513-101603.tex}
+    \input{../bm_output/bm_table_20210513-101603.tex}
     }
 \caption{Times in milliseconds to sort arrays of size \emph{n} for each of the algorithms.}
 \label{table:results}
 \end{table}
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210513-101605.png}
+    \includegraphics[width=\linewidth]{../bm_output/plot_0_log_20210513-101605.png}
     \caption{Relative performance of five algorithms using a log y-scale}
     \label{fig:log}
 \end{figure}
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_0_log_20210514-033420.png}
+    \includegraphics[width=\linewidth]{../bm_output/plot_0_log_20210514-033420.png}
     \caption{Relative performance of five algorithms using a log y-scale, and input range (0, 1000000)}
     \label{fig:range}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{bm_output/plot_0_linear_20210513-234313.png}
+    \includegraphics[width=\linewidth]{../bm_output/plot_0_linear_20210513-234313.png}
     \caption{Relative performance of five algorithms with maximum 50-element input}
     \label{fig:fifty}
 \end{figure}
